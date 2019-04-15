@@ -13,6 +13,7 @@ namespace BrickBreaker
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize)
         {
+            //is direction an input from outside?
             x = _x;
             y = _y;
             xSpeed = _xSpeed;
@@ -47,6 +48,7 @@ namespace BrickBreaker
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
+            //make it so that it checks just stuff around it
             if (ballRec.IntersectsWith(paddleRec))
             {
                 if (y + size >= p.y)
@@ -63,6 +65,8 @@ namespace BrickBreaker
 
         public void WallCollision(UserControl UC)
         {
+            //prevent it t get stuck
+
             // Collision with left wall
             if (x <= 0)
             {
@@ -82,6 +86,8 @@ namespace BrickBreaker
 
         public bool BottomCollision(UserControl UC)
         {
+            //do we need this?
+
             Boolean didCollide = false;
 
             if (y >= UC.Height)
