@@ -18,6 +18,8 @@ namespace BrickBreaker
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
             size = _ballSize;
+
+            //this is a small change
                
         }
 
