@@ -89,7 +89,7 @@ namespace BrickBreaker
             // start the game engine loop
             gameTimer.Enabled = true;
         }
-
+         
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //player 1 button presses
