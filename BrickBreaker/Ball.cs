@@ -26,12 +26,48 @@ namespace BrickBreaker
 
         public void Move()
         {
+            /*
             x = x + xSpeed;
             y = y + ySpeed;
+            same function but different code to set up next step
+            my idea is to move pixel by pixel and check every time for collisions
+            in the proximity of the ball to prevent glitches
+            */
+
+            int xFrames = Math.Abs(xSpeed);
+            int yFrames = Math.Abs(ySpeed);
+
+            for (int i = 0; i < xFrames; i++)
+            {
+                if (xSpeed >= 0)
+                {
+                    x++;
+                }
+                else
+                {
+                    x--;
+                }
+                //collide with obj in proximity
+            }
+
+            for (int i = 0; i < yFrames; i++)
+            {
+                if (ySpeed >= 0)
+                {
+                    y++;
+                }
+                else
+                {
+                    y--;
+                }
+                //collide with obj in proximity
+            }
         }
 
         public bool BlockCollision(Block b)
         {
+            //we might not need this method
+
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
             Rectangle ballRec = new Rectangle(x, y, size, size);
 
@@ -45,10 +81,12 @@ namespace BrickBreaker
 
         public void PaddleCollision(Paddle p, bool pMovingLeft, bool pMovingRight)
         {
+            //make sure to develop the physics behind this stuff
+            //so angles and such
+
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
-            //make it so that it checks just stuff around it
             if (ballRec.IntersectsWith(paddleRec))
             {
                 if (y + size >= p.y)
@@ -65,8 +103,6 @@ namespace BrickBreaker
 
         public void WallCollision(UserControl UC)
         {
-            //prevent it t get stuck
-
             // Collision with left wall
             if (x <= 0)
             {
@@ -86,8 +122,6 @@ namespace BrickBreaker
 
         public bool BottomCollision(UserControl UC)
         {
-            //do we need this?
-
             Boolean didCollide = false;
 
             if (y >= UC.Height)
