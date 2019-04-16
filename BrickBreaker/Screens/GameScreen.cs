@@ -24,6 +24,8 @@ namespace BrickBreaker
 
         // Game values
         int lives;
+        int bricksBroken;
+        int score;
 
         // Paddle and Ball objects
         Paddle paddle;
@@ -165,6 +167,7 @@ namespace BrickBreaker
                 if (ball.BlockCollision(b))
                 {
                     blocks.Remove(b);
+                    bricksBroken++;
 
                     if (blocks.Count == 0)
                     {
@@ -182,6 +185,8 @@ namespace BrickBreaker
 
         public void OnEnd()
         {
+            score = bricksBroken * 50;
+            
             // Goes to the game over screen
             Form form = this.FindForm();
             MenuScreen ps = new MenuScreen();
