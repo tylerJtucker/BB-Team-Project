@@ -218,10 +218,14 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
 
-        public void ChangeSpeeds (int Xspeed, int Yspeed, int paddleSpeed)
+        public void ChangeSpeeds (int xSpeed, int ySpeed, int paddleSpeed)
         {
-            ball.xSpeed = Xspeed;
-            ball.ySpeed = Yspeed;
+            if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
+            else { ball.xSpeed += xSpeed; }
+
+            if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
+            else { ball.ySpeed += ySpeed; }
+
             paddle.speed += paddleSpeed;
         }
 
