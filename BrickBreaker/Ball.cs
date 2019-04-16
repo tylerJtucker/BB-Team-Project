@@ -48,6 +48,7 @@ namespace BrickBreaker
                     x--;
                 }
                 //collide with obj in proximity
+                //foreach (Block b in blocList)
             }
 
             for (int i = 0; i < yFrames; i++)
