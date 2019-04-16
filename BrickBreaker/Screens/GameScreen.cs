@@ -27,6 +27,11 @@ namespace BrickBreaker
         int bricksBroken;
         int score;
 
+        // constants
+        const int BALLSPEED = 6;
+        const int PADDLESPEED = 8;
+        const int PADDLEWIDTH = 80;
+
         // Paddle and Ball objects
         Paddle paddle;
         Ball ball;
@@ -211,6 +216,23 @@ namespace BrickBreaker
 
             // Draws ball
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+        }
+
+        public void ChangeSpeeds (int Xspeed, int Yspeed, int paddleSpeed)
+        {
+            ball.xSpeed = Xspeed;
+            ball.ySpeed = Yspeed;
+            paddle.speed += paddleSpeed;
+        }
+
+        public void ChangePaddle (int width)
+        {
+            paddle.width += width;
+        }
+
+        public void ChangeLives (int number)
+        {
+            lives += number;
         }
     }
 }
