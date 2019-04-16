@@ -12,13 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.Xml;
 
 namespace BrickBreaker
 {
     public partial class GameScreen : UserControl
     {
         #region global values
-
         //player1 button control keys - DO NOT CHANGE
         Boolean leftArrowDown, rightArrowDown;
 
@@ -72,19 +72,8 @@ namespace BrickBreaker
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
 
-            #region Creates blocks for generic level. Need to replace with code that loads levels.
-
-            blocks.Clear();
-            int x = 10;
-
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
-
-            #endregion
+            //loads current level
+            LoadLevel(Properties.Resources.level5);
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -206,6 +195,31 @@ namespace BrickBreaker
 
             // Draws ball
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+        }
+
+        public void LoadLevel(string level)
+        {      
+            //creates variables and xml reader needed
+            XmlReader reader = XmlReader.Create(level);
+            int blockX;
+            int blockY;
+            int blockHP;
+
+            //Grabs all the blocks for the current level and adds them to the list
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("brick");
+                reader.ReadToFollowing("x");
+                blockX = Convert.ToInt32();
+                reader.ReadToFollowing("y");
+                blockY = Convert.ToInt32();
+                reader.ReadToFollowing("hp");
+                blockHP = Convert.ToInt32();
+
+                Block b = new Block(blockX, blockY, blockHP);
+
+                blocks.Add(b);
+            }          
         }
     }
 }
