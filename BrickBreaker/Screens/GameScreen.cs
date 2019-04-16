@@ -1,4 +1,4 @@
-﻿/*  Created by: Steven HL
+﻿/*  Created by: Brick Beaker Team 1
  *  Project: Brick Breaker
  *  Date: Tuesday, April 4th
  */ 
