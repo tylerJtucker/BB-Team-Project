@@ -23,7 +23,7 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown;
 
         // Game values
-        int lives;
+        static int lives;
         int bricksBroken;
         int score;
 
@@ -229,12 +229,12 @@ namespace BrickBreaker
             paddle.speed += paddleSpeed;
         }
 
-        public void ChangePaddle (int width)
+        public static void ChangePaddle (int width)
         {
             paddle.width += width;
         }
 
-        public void ChangeLives (int number)
+        public static void ChangeLives (int number)
         { 
             lives += number;
         }
