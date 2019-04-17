@@ -1,7 +1,7 @@
 ﻿/*  Created by: Steven HL
  *  Project: Brick Breaker
  *  Date: Tuesday, April 4th
- */ 
+ */
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -73,12 +73,12 @@ namespace BrickBreaker
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
 
             //loads current level
-            LoadLevel(Properties.Resources.level5);
+            LoadLevel("Resources/level5.xml");
 
             // start the game engine loop
             gameTimer.Enabled = true;
         }
-         
+
         private void GameScreen_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             //player 1 button presses
@@ -174,7 +174,7 @@ namespace BrickBreaker
             // Goes to the game over screen
             Form form = this.FindForm();
             MenuScreen ps = new MenuScreen();
-            
+
             ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
 
             form.Controls.Add(ps);
@@ -198,28 +198,37 @@ namespace BrickBreaker
         }
 
         public void LoadLevel(string level)
-        {      
+        {
             //creates variables and xml reader needed
             XmlReader reader = XmlReader.Create(level);
-            int blockX;
-            int blockY;
-            int blockHP;
+            string blockX;
+            string blockY;
+            string blockHP;
+            int intX;
+            int intY;
+            int intHP;
 
             //Grabs all the blocks for the current level and adds them to the list
             while (reader.Read())
             {
-                reader.ReadToFollowing("brick");
                 reader.ReadToFollowing("x");
-                blockX = Convert.ToInt32();
+                blockX = reader.ReadString();
                 reader.ReadToFollowing("y");
-                blockY = Convert.ToInt32();
+                blockY = reader.ReadString();
                 reader.ReadToFollowing("hp");
-                blockHP = Convert.ToInt32();
+                blockHP = reader.ReadString();
 
-                Block b = new Block(blockX, blockY, blockHP);
+                if (blockX != "")
+                {
+                    intX = Convert.ToInt16(blockX);
+                    intY = Convert.ToInt16(blockY);
+                    intHP = Convert.ToInt16(blockHP);
 
-                blocks.Add(b);
-            }          
+                    Block b = new Block(intX, intY, intHP);
+
+                    blocks.Add(b);
+                }
+            }
         }
     }
 }
