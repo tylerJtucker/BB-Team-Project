@@ -19,7 +19,7 @@ namespace BrickBreaker.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,56 @@ namespace BrickBreaker.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;level&gt;
+        ///
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;500&lt;/x&gt;
+        ///    &lt;y&gt;50&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;400&lt;/x&gt;
+        ///    &lt;y&gt;40&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;300&lt;/x&gt;
+        ///    &lt;y&gt;30&lt;/y&gt;
+        ///    &lt;hp&gt;2&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;200&lt;/x&gt;
+        ///    &lt;y&gt;20&lt;/y&gt;
+        ///    &lt;hp&gt;2&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;100&lt;/x&gt;
+        ///    &lt;y&gt;10&lt;/y&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;50&lt;/x&gt;
+        ///    &lt;y&gt;5&lt;/y&gt;
+        ///    &lt;hp&gt;1&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///
+        ///&lt;/level&gt;
+        ///
+        ///.
+        /// </summary>
+        internal static string level1 {
+            get {
+                return ResourceManager.GetString("level1", resourceCulture);
             }
         }
     }
