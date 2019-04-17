@@ -20,7 +20,7 @@ namespace BrickBreaker
         #region global values
 
         //player1 button control keys - DO NOT CHANGE
-        Boolean leftArrowDown, rightArrowDown;
+        Boolean leftArrowDown, rightArrowDown, pauseArrowDown;
 
         // Game values
         int lives;
@@ -108,6 +108,9 @@ namespace BrickBreaker
                 case Keys.Right:
                     rightArrowDown = true;
                     break;
+                case Keys.P:
+                    pauseArrowDown = true;
+                    break;
                 default:
                     break;
             }
@@ -124,6 +127,9 @@ namespace BrickBreaker
                 case Keys.Right:
                     rightArrowDown = false;
                     break;
+                case Keys.P:
+                    pauseArrowDown = false;
+                    break;
                 default:
                     break;
             }
@@ -139,6 +145,19 @@ namespace BrickBreaker
             if (rightArrowDown && paddle.x < (this.Width - paddle.width))
             {
                 paddle.Move("right");
+            }
+            if (pauseArrowDown)
+            {
+                
+                PauseScreen ps = new PauseScreen();
+                Form form = this.FindForm();
+        
+                gameTimer.Enabled = false;
+
+                form.Controls.Add(ps);
+                form.Controls.Remove(this);
+                
+                ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
             }
 
             // Move ball
