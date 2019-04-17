@@ -33,8 +33,8 @@ namespace BrickBreaker
         const int PADDLEWIDTH = 80;
 
         // Paddle and Ball objects
-        Paddle paddle;
-        Ball ball;
+        static Paddle paddle;
+        static Ball ball;
 
         // list of all blocks for current level
         List<Block> blocks = new List<Block>();
@@ -218,7 +218,7 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
 
-        public void ChangeSpeeds (int xSpeed, int ySpeed, int paddleSpeed)
+        public static void ChangeSpeeds (int xSpeed, int ySpeed, int paddleSpeed)
         {
             if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
             else { ball.xSpeed += xSpeed; }
@@ -235,7 +235,7 @@ namespace BrickBreaker
         }
 
         public void ChangeLives (int number)
-        {
+        { 
             lives += number;
         }
     }
