@@ -101,12 +101,58 @@ namespace BrickBreaker.Properties {
         ///  &lt;/brick&gt;
         ///
         ///&lt;/level&gt;
-        ///
         ///.
         /// </summary>
         internal static string level1 {
             get {
                 return ResourceManager.GetString("level1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;Level&gt;
+        ///  
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;337&lt;/x&gt;
+        ///    &lt;y&gt; 42&lt;/y&gt;
+        ///    &lt;hp&gt;2 &lt;/hp&gt;
+        ///  &lt;/Brick&gt;
+        ///
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;262 &lt;/x&gt;
+        ///    &lt;y&gt; 74&lt;/y&gt;
+        ///    &lt;hp&gt; 2&lt;/hp&gt;
+        ///  &lt;/Brick&gt;
+        ///
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt; 405&lt;/x&gt;
+        ///    &lt;y&gt; 74&lt;/y&gt;
+        ///    &lt;hp&gt; 2&lt;/hp&gt;
+        ///  &lt;/Brick&gt;
+        ///  
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;46 &lt;/x&gt;
+        ///    &lt;y&gt; 125&lt;/y&gt;
+        ///    &lt;hp&gt;1 &lt;/hp&gt;
+        ///  &lt;/Brick&gt;
+        ///  
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt; 157&lt;/x&gt;
+        ///    &lt;y&gt; 125&lt;/y&gt;
+        ///    &lt;hp&gt; 1&lt;/hp&gt;
+        ///  &lt;/Brick&gt;
+        ///  
+        ///  &lt;Brick&gt;
+        ///    &lt;x&gt;262 &lt;/x&gt;
+        ///    &lt;y&gt; 125&lt;/y&gt;
+        ///    &lt;hp&gt; 1&lt;/hp&gt;
+        ///  &lt;/Brick&gt;
+        ///          /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string level2 {
+            get {
+                return ResourceManager.GetString("level2", resourceCulture);
             }
         }
     }
