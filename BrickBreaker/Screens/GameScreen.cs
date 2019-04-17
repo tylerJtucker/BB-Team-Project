@@ -218,6 +218,7 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
 
+        #region change value functions
         public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
         {
             if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
@@ -254,5 +255,6 @@ namespace BrickBreaker
         {
             paddle.width = PADDLESPEED;
         }
+        #endregion
     }
 }
