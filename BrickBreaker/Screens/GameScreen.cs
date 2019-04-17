@@ -23,7 +23,7 @@ namespace BrickBreaker
         Boolean leftArrowDown, rightArrowDown, pauseArrowDown;
 
         // Game values
-        int lives;
+        static int lives;
         int bricksBroken;
         int score;
 
@@ -210,11 +210,11 @@ namespace BrickBreaker
         public void OnEnd()
         {
             score = bricksBroken * 50;
-            
+
             // Goes to the game over screen
             Form form = this.FindForm();
             MenuScreen ps = new MenuScreen();
-            
+
             ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
 
             form.Controls.Add(ps);
@@ -237,7 +237,8 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
 
-        public static void ChangeSpeeds (int xSpeed, int ySpeed, int paddleSpeed)
+        #region change value functions
+        public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
         {
             if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
             else { ball.xSpeed += xSpeed; }
@@ -248,14 +249,31 @@ namespace BrickBreaker
             paddle.speed += paddleSpeed;
         }
 
-        public void ChangePaddle (int width)
+        public static void ChangePaddle(int width)
         {
             paddle.width += width;
         }
 
-        public void ChangeLives (int number)
-        { 
+        public static void ChangeLives(int number)
+        {
             lives += number;
         }
+
+        public void ReturnSpeeds()
+        {
+            if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
+            else { ball.xSpeed = BALLSPEED; }
+
+            if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
+            else { ball.ySpeed = BALLSPEED; }
+
+            paddle.speed = PADDLESPEED;
+        }
+
+        public static void ReturnPaddle()
+        {
+            paddle.width = PADDLESPEED;
+        }
+        #endregion
     }
 }
