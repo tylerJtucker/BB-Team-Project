@@ -235,7 +235,7 @@ namespace BrickBreaker
         }
 
         public void ChangeLives (int number)
-        {
+        { 
             lives += number;
         }
     }
