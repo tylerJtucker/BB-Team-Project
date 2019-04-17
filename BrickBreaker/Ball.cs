@@ -18,22 +18,16 @@ namespace BrickBreaker
             y = _y;
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
-            size = _ballSize;
-
-            //this is a small change
-               
+            size = _ballSize;               
         }
 
         public void Move()
         {
-            /*
+            
             x = x + xSpeed;
             y = y + ySpeed;
-            same function but different code to set up next step
-            my idea is to move pixel by pixel and check every time for collisions
-            in the proximity of the ball to prevent glitches
-            */
-
+           
+            /*
             int xFrames = Math.Abs(xSpeed);
             int yFrames = Math.Abs(ySpeed);
 
@@ -63,11 +57,12 @@ namespace BrickBreaker
                 }
                 //collide with obj in proximity
             }
+            //*/
         }
 
         public bool BlockCollision(Block b)
         {
-            //we might not need this method
+            //manage collision on all sides
 
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
             Rectangle ballRec = new Rectangle(x, y, size, size);
@@ -84,21 +79,36 @@ namespace BrickBreaker
         {
             //make sure to develop the physics behind this stuff
             //so angles and such
+            //this should change the angle at which the ball is travelling
+
+            //manage collision on the sides
 
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (ballRec.IntersectsWith(paddleRec))
             {
+                //get the position using the centre of the objects
+                PointF ballCentre = new PointF(x + size / 2, y + size / 2);
+                PointF paddleCentre = new PointF(p.x + p.width / 2, p.y + p.height / 2);
+
+                //I neeed to do some testing with the deltas and heights so I can tell by how much the are intersecting
+
+                float vertIntersec = (size + p.height) / 2 - Math.Abs(ballCentre.Y - paddleCentre.Y);
+
+
+                /*
                 if (y + size >= p.y)
                 {
                     ySpeed *= -1;
                 }
 
+
                 if (pMovingLeft)
                     xSpeed = -Math.Abs(xSpeed);
                 else if (pMovingRight)
                     xSpeed = Math.Abs(xSpeed);
+                //*/
             }
         }
 
@@ -107,17 +117,17 @@ namespace BrickBreaker
             // Collision with left wall
             if (x <= 0)
             {
-                xSpeed *= -1;
+                xSpeed = Math.Abs(xSpeed);
             }
             // Collision with right wall
             if (x >= (UC.Width - size))
             {
-                xSpeed *= -1;
+                xSpeed = Math.Abs(xSpeed) * -1;
             }
             // Collision with top wall
             if (y <= 2)
             {
-                ySpeed *= -1;
+                ySpeed = Math.Abs(ySpeed);
             }
         }
 
