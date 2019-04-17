@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//Nathan Hood Branch
+
 namespace BrickBreaker
 {
     public partial class Form1 : Form
