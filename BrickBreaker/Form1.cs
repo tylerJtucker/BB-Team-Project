@@ -12,7 +12,7 @@ namespace BrickBreaker
 {
     public partial class Form1 : Form
     {
-        //Jamal Branch
+        //Jamal's Branch
 
         public Form1()
         {
