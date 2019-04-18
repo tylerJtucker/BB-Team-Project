@@ -1,8 +1,161 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Level>
+<level>
+
   <Brick>
-    <x> </x>
-    <y> </y>
-    <hp> </hp>
+    <x> 238</x>
+    <y>43</y>
+    <hp>1</hp>
   </Brick>
-</Level>
+
+  <Brick>
+    <x>302</x>
+    <y>43</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>358</x>
+    <y>43</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>419</x>
+    <y>43</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>473</x>
+    <y>74</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>502</x>
+    <y>105</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>502</x>
+    <y>149</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>473</x>
+    <y>194</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>419</x>
+    <y>251</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>358</x>
+    <y>304</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>302</x>
+    <y>350</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>238</x>
+    <y>304</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>177</x>
+    <y>251</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>139</x>
+    <y>194</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>108</x>
+    <y>149</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>139</x>
+    <y>105</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>177</x>
+    <y>74</y>
+    <hp>1</hp>
+  </Brick>
+
+  <Brick>
+    <x>238</x>
+    <y>105</y>
+    <hp>2</hp>
+  </Brick>
+
+  <Brick>
+    <x>378</x>
+    <y>105</y>
+    <hp>2</hp>
+  </Brick>
+
+
+  <Brick>
+    <x>378</x>
+    <y>220</y>
+    <hp>2</hp>
+  </Brick>
+
+  <Brick>
+    <x>238</x>
+    <y>221</y>
+    <hp>2</hp>
+  </Brick>
+
+  <Brick>
+    <x>302</x>
+    <y>135</y>
+    <hp>3</hp>
+  </Brick>
+  
+  <Brick>
+    <x>246</x>
+    <y>166</y>
+    <hp>3</hp>
+  </Brick>
+
+  <Brick>
+    <x>302</x>
+    <y>166</y>
+    <hp>3</hp>
+  </Brick>
+  
+  <Brick>
+    <x>358</x>
+    <y>166</y>
+    <hp>3</hp>
+  </Brick>
+
+  <Brick>
+    <x>302</x>
+    <y>197</y>
+    <hp>3</hp>
+  </Brick>
+  
+</level>

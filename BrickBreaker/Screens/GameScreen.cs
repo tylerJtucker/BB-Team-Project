@@ -192,7 +192,6 @@ namespace BrickBreaker
             form.Controls.Remove(this);
         }
 
-
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             // Draws paddle

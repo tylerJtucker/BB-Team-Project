@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Level>
+<level>
   
   <Brick>
     <x>337</x>
@@ -133,4 +133,4 @@
     <hp> 3</hp>
   </Brick>
   
-</Level>
+</level>
