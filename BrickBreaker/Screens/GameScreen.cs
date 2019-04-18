@@ -1,7 +1,7 @@
-﻿/*  Created by: Steven HL
+﻿/*  Created by: Brick Beaker Team 1
  *  Project: Brick Breaker
  *  Date: Tuesday, April 4th
- */ 
+ */
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,15 +12,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Media;
+using System.Xml;
 
 namespace BrickBreaker
 {
     public partial class GameScreen : UserControl
     {
         #region global values
-
         //player1 button control keys - DO NOT CHANGE
-        Boolean leftArrowDown, rightArrowDown;
+        Boolean leftArrowDown, rightArrowDown, pauseArrowDown;
 
         // Game values
         static int lives;
@@ -79,19 +79,8 @@ namespace BrickBreaker
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
 
-            #region Creates blocks for generic level. Need to replace with code that loads levels.
-
-            blocks.Clear();
-            int x = 10;
-
-            while (blocks.Count < 12)
-            {
-                x += 57;
-                Block b1 = new Block(x, 10, 1, Color.White);
-                blocks.Add(b1);
-            }
-
-            #endregion
+            //loads current level
+            LoadLevel("Resources/level5.xml");
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -107,6 +96,9 @@ namespace BrickBreaker
                     break;
                 case Keys.Right:
                     rightArrowDown = true;
+                    break;
+                case Keys.P:
+                    pauseArrowDown = true;
                     break;
                 default:
                     break;
@@ -124,6 +116,9 @@ namespace BrickBreaker
                 case Keys.Right:
                     rightArrowDown = false;
                     break;
+                case Keys.P:
+                    pauseArrowDown = false;
+                    break;
                 default:
                     break;
             }
@@ -139,6 +134,19 @@ namespace BrickBreaker
             if (rightArrowDown && paddle.x < (this.Width - paddle.width))
             {
                 paddle.Move("right");
+            }
+            if (pauseArrowDown)
+            {
+                
+                PauseScreen ps = new PauseScreen();
+                Form form = this.FindForm();
+        
+                gameTimer.Enabled = false;
+
+                form.Controls.Add(ps);
+                form.Controls.Remove(this);
+                
+                ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
             }
 
             // Move ball
@@ -218,6 +226,40 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
 
+
+        public void LoadLevel(string level)
+        {
+            //creates variables and xml reader needed
+            XmlReader reader = XmlReader.Create(level);
+            string blockX;
+            string blockY;
+            string blockHP;
+            int intX;
+            int intY;
+            int intHP;
+
+            //Grabs all the blocks for the current level and adds them to the list
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("x");
+                blockX = reader.ReadString();
+                reader.ReadToFollowing("y");
+                blockY = reader.ReadString();
+                reader.ReadToFollowing("hp");
+                blockHP = reader.ReadString();
+
+                if (blockX != "")
+                {
+                    intX = Convert.ToInt16(blockX);
+                    intY = Convert.ToInt16(blockY);
+                    intHP = Convert.ToInt16(blockHP);
+
+                    Block b = new Block(intX, intY, intHP);
+
+                    blocks.Add(b);
+                }
+            }
+   
         #region change value functions
         public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
         {
