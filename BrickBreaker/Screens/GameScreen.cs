@@ -39,6 +39,9 @@ namespace BrickBreaker
         // list of all blocks for current level
         List<Block> blocks = new List<Block>();
 
+        //list for highscores
+        List<int> highscores = new List<int>();
+
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
         SolidBrush ballBrush = new SolidBrush(Color.White);
@@ -137,15 +140,15 @@ namespace BrickBreaker
             }
             if (pauseArrowDown)
             {
-                
+
                 PauseScreen ps = new PauseScreen();
                 Form form = this.FindForm();
-        
+
                 gameTimer.Enabled = false;
 
                 form.Controls.Add(ps);
                 form.Controls.Remove(this);
-                
+
                 ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
             }
 
@@ -208,6 +211,8 @@ namespace BrickBreaker
 
             form.Controls.Add(ps);
             form.Controls.Remove(this);
+
+            saveScore();
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
@@ -259,44 +264,65 @@ namespace BrickBreaker
                     blocks.Add(b);
                 }
             }
-   
-        #region change value functions
-        public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
-        {
-            if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
-            else { ball.xSpeed += xSpeed; }
-
-            if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
-            else { ball.ySpeed += ySpeed; }
-
-            paddle.speed += paddleSpeed;
         }
 
-        public static void ChangePaddle(int width)
+            #region change value functions
+            public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
+            {
+                if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
+                else { ball.xSpeed += xSpeed; }
+
+                if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
+                else { ball.ySpeed += ySpeed; }
+
+                paddle.speed += paddleSpeed;
+            }
+
+            public static void ChangePaddle(int width)
+            {
+                paddle.width += width;
+            }
+
+            public static void ChangeLives(int number)
+            {
+                lives += number;
+            }
+
+            public void ReturnSpeeds()
+            {
+                if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
+                else { ball.xSpeed = BALLSPEED; }
+
+                if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
+                else { ball.ySpeed = BALLSPEED; }
+
+                paddle.speed = PADDLESPEED;
+            }
+
+            public static void ReturnPaddle()
+            {
+                paddle.width = PADDLESPEED;
+            }
+            #endregion      
+
+        public void saveScore()
         {
-            paddle.width += width;
+            highscores.Add(score);
+
+            XmlWriter writer = XmlWriter.Create("Resources/scores.xml", null);
+
+            writer.WriteStartElement("scores");
+
+            for (int i = 0; i < highscores.Count(); i++)
+            {
+                writer.WriteStartElement("score");
+                writer.WriteElementString("s", highscores[i].ToString());
+
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+
+            writer.Close();
         }
-
-        public static void ChangeLives(int number)
-        {
-            lives += number;
-        }
-
-        public void ReturnSpeeds()
-        {
-            if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
-            else { ball.xSpeed = BALLSPEED; }
-
-            if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
-            else { ball.ySpeed = BALLSPEED; }
-
-            paddle.speed = PADDLESPEED;
-        }
-
-        public static void ReturnPaddle()
-        {
-            paddle.width = PADDLESPEED;
-        }
-        #endregion
     }
 }

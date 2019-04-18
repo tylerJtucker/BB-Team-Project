@@ -63,40 +63,6 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;level&gt;
-
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;400&lt;/x&gt;
-        ///    &lt;y&gt;25&lt;/y&gt;
-        ///    &lt;hp&gt;3&lt;/hp&gt;
-        ///    &lt;colour&gt;Green&lt;/colour&gt;
-        ///  &lt;/brick&gt;
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;400&lt;/x&gt;
-        ///    &lt;y&gt;56&lt;/y&gt;
-        ///    &lt;hp&gt;3&lt;/hp&gt;
-        ///    &lt;colour&gt;Green&lt;/colour&gt;
-        ///  &lt;/brick&gt;
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;400&lt;/x&gt;
-        ///    &lt;y&gt;90&lt;/y&gt;
-        ///    &lt;hp&gt;3&lt;/hp&gt;
-        ///    &lt;colour&gt;Green&lt;/colour&gt;
-        ///  &lt;/brick&gt;
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;432&lt;/x&gt;
-        ///    &lt;y&gt;118&lt;/y&gt;
-        ///    &lt;hp&gt;3&lt;/hp&gt;
-        ///    &lt;colour&gt;Green&lt;/colour&gt;
-        ///  &lt;/brick&gt;
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;465&lt;/x&gt;
-        ///    &lt;y&gt;149&lt;/y&gt;
-        ///    &lt;hp&gt;3&lt;/hp&gt;
-        ///    &lt;colou [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string level5 {
-            get {
-                return ResourceManager.GetString("level5", resourceCulture);
         ///
         ///  &lt;brick&gt;
         ///    &lt;x&gt;500&lt;/x&gt;
@@ -135,12 +101,59 @@ namespace BrickBreaker.Properties {
         ///  &lt;/brick&gt;
         ///
         ///&lt;/level&gt;
-        ///
         ///.
         /// </summary>
         internal static string level1 {
             get {
                 return ResourceManager.GetString("level1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+        ///&lt;level&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;400&lt;/x&gt;
+        ///    &lt;y&gt;25&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///    &lt;colour&gt;Green&lt;/colour&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;400&lt;/x&gt;
+        ///    &lt;y&gt;56&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///    &lt;colour&gt;Green&lt;/colour&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;400&lt;/x&gt;
+        ///    &lt;y&gt;90&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///    &lt;colour&gt;Green&lt;/colour&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;432&lt;/x&gt;
+        ///    &lt;y&gt;118&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///    &lt;colour&gt;Green&lt;/colour&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;465&lt;/x&gt;
+        ///    &lt;y&gt;149&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///    &lt;colou [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string level5 {
+            get {
+                return ResourceManager.GetString("level5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;scores&gt;&lt;score&gt;&lt;s&gt;750&lt;/s&gt;&lt;/score&gt;&lt;/scores&gt;.
+        /// </summary>
+        internal static string scores {
+            get {
+                return ResourceManager.GetString("scores", resourceCulture);
             }
         }
     }
