@@ -26,6 +26,8 @@ namespace BrickBreaker
         static int lives;
         int bricksBroken;
         int score;
+        int level = 1;
+        int ballStartX, ballStartY, paddleStartPosition;
 
         // constants
         const int BALLSPEED = 6;
@@ -137,7 +139,6 @@ namespace BrickBreaker
             }
             if (pauseArrowDown)
             {
-
                 PauseScreen ps = new PauseScreen();
                 Form form = this.FindForm();
 
@@ -185,7 +186,7 @@ namespace BrickBreaker
                     if (blocks.Count == 0)
                     {
                         gameTimer.Enabled = false;
-                        OnEnd();
+                        NextLevel();
                     }
 
                     break;
@@ -194,20 +195,6 @@ namespace BrickBreaker
 
             //redraw the screen
             Refresh();
-        }
-
-        public void OnEnd()
-        {
-            score = bricksBroken * 50;
-
-            // Goes to the game over screen
-            Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
-
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
-
-            form.Controls.Add(ps);
-            form.Controls.Remove(this);
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
@@ -226,6 +213,37 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
 
+        public void OnEnd()
+        {
+            score = bricksBroken * 50;
+
+            // Goes to the game over screen
+            Form form = this.FindForm();
+            MenuScreen ps = new MenuScreen();
+
+            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+
+            form.Controls.Add(ps);
+            form.Controls.Remove(this);
+        }
+
+        public void NextLevel()
+        {
+            gameTimer.Enabled = false;
+
+            level++;
+            switch (level)
+            {
+                case 1:
+                    LoadLevel("");
+                    break;
+                default:
+                    OnEnd();
+                    break;
+            }
+
+            //TODO set ball and paddle to starting position
+        }
 
         public void LoadLevel(string level)
         {
