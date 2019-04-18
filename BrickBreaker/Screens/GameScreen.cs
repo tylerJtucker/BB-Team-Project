@@ -261,44 +261,44 @@ namespace BrickBreaker
             }
         }
 
-            #region change value functions
-            public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
-            {
-                if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
-                else { ball.xSpeed += xSpeed; }
+        #region change value functions
+        public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
+        {
+            if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
+            else { ball.xSpeed += xSpeed; }
 
-                if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
-                else { ball.ySpeed += ySpeed; }
+            if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
+            else { ball.ySpeed += ySpeed; }
 
-                paddle.speed += paddleSpeed;
-            }
-
-            public static void ChangePaddle(int width)
-            {
-                paddle.width += width;
-            }
-
-            public static void ChangeLives(int number)
-            {
-                lives += number;
-            }
-
-            public void ReturnSpeeds()
-            {
-                if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
-                else { ball.xSpeed = BALLSPEED; }
-
-                if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
-                else { ball.ySpeed = BALLSPEED; }
-
-                paddle.speed = PADDLESPEED;
-            }
-
-            public static void ReturnPaddle()
-            {
-                paddle.width = PADDLESPEED;
-            }
-            #endregion
+            paddle.speed += paddleSpeed;
         }
+
+        public static void ChangePaddle(int width)
+        {
+            paddle.width += width;
+        }
+
+        public static void ChangeLives(int number)
+        {
+            lives += number;
+        }
+
+        public void ReturnSpeeds()
+        {
+            if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
+            else { ball.xSpeed = BALLSPEED; }
+
+            if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
+            else { ball.ySpeed = BALLSPEED; }
+
+            paddle.speed = PADDLESPEED;
+        }
+
+        public static void ReturnPaddle()
+        {
+            paddle.width = PADDLESPEED;
+        }
+        #endregion
+    }
     
 }
