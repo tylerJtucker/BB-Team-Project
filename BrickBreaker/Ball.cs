@@ -63,13 +63,18 @@ namespace BrickBreaker
         public bool BlockCollision(Block b)
         {
             //manage collision on all sides
+            //get theold position, understand what was going on, change the actual direction
 
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
             Rectangle ballRec = new Rectangle(x, y, size, size);
 
             if (ballRec.IntersectsWith(blockRec))
             {
-                ySpeed *= -1;
+                Ball tempBall = new Ball(x - xSpeed, y - ySpeed, xSpeed, ySpeed, size);
+                if (tempBall.y < b.y && tempBall.x + size < b.x && tempBall.x > b.x + b.width)
+                {
+                    xSpeed *= -1;
+                }
             }
 
             return blockRec.IntersectsWith(ballRec);         
@@ -97,7 +102,7 @@ namespace BrickBreaker
                 float vertIntersec = (size + p.height) / 2 - Math.Abs(ballCentre.Y - paddleCentre.Y);
 
 
-                /*
+                //*
                 if (y + size >= p.y)
                 {
                     ySpeed *= -1;
@@ -112,6 +117,7 @@ namespace BrickBreaker
             }
         }
 
+        //this one works fine
         public void WallCollision(UserControl UC)
         {
             // Collision with left wall
@@ -131,6 +137,7 @@ namespace BrickBreaker
             }
         }
 
+        //this one works fine
         public bool BottomCollision(UserControl UC)
         {
             Boolean didCollide = false;
