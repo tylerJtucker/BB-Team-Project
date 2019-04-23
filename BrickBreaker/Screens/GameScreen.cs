@@ -28,6 +28,7 @@ namespace BrickBreaker
         int score;
         int level = 1;
         int ballStartX, ballStartY, paddleStartPosition;
+        static int bbucks = 0;
 
         // constants
         const int BALLSPEED = 6;
@@ -45,6 +46,8 @@ namespace BrickBreaker
         SolidBrush paddleBrush = new SolidBrush(Color.White);
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
+
+
 
         #endregion
 
@@ -234,7 +237,7 @@ namespace BrickBreaker
             level++;
             switch (level)
             {
-                case 1:
+                case 2:
                     LoadLevel("");
                     break;
                 default:
@@ -315,6 +318,11 @@ namespace BrickBreaker
         public static void ReturnPaddle()
         {
             paddle.width = PADDLESPEED;
+        }
+
+        public static void GiveBBuck (int bigmonies)
+        {
+            bbucks += bigmonies;
         }
         #endregion
     }
