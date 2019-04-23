@@ -22,42 +22,9 @@ namespace BrickBreaker
         }
 
         public void Move()
-        {
-            
+        {            
             x = x + xSpeed;
             y = y + ySpeed;
-           
-            /*
-            int xFrames = Math.Abs(xSpeed);
-            int yFrames = Math.Abs(ySpeed);
-
-            for (int i = 0; i < xFrames; i++)
-            {
-                if (xSpeed >= 0)
-                {
-                    x++;
-                }
-                else
-                {
-                    x--;
-                }
-                //collide with obj in proximity
-                //foreach (Block b in blocList)
-            }
-
-            for (int i = 0; i < yFrames; i++)
-            {
-                if (ySpeed >= 0)
-                {
-                    y++;
-                }
-                else
-                {
-                    y--;
-                }
-                //collide with obj in proximity
-            }
-            //*/
         }
 
         public bool BlockCollision(Block b)
