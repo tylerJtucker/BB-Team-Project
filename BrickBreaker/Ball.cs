@@ -35,11 +35,11 @@ namespace BrickBreaker
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
             Rectangle ballRec = new Rectangle(x, y, size, size);
 
-            Point centerBall = new Point(x + size / 2, y + size / 2);
-            Point centreRect = new Point(b.x + b.width / 2, b.y + b.height / 2);
-
             if (ballRec.IntersectsWith(blockRec))
             {
+                Point centerBall = new Point(x + size / 2, y + size / 2);
+                Point centreRect = new Point(b.x + b.width / 2, b.y + b.height / 2);
+
                 float w = (size + b.width) / 2;
                 float h = (size + b.height) / 2;
 
@@ -86,34 +86,51 @@ namespace BrickBreaker
             //so angles and such
             //this should change the angle at which the ball is travelling
 
-            //manage collision on the sides
-
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (ballRec.IntersectsWith(paddleRec))
             {
-                //get the position using the centre of the objects
-                //PointF ballCentre = new PointF(x + size / 2, y + size / 2);
-                //PointF paddleCentre = new PointF(p.x + p.width / 2, p.y + p.height / 2);
+                Point centerBall = new Point(x + size / 2, y + size / 2);
+                Point centrePad = new Point(p.x + p.width / 2, p.y + p.height / 2);
 
-                //I neeed to do some testing with the deltas and heights so I can tell by how much the are intersecting
+                float w = (size + p.width) / 2;
+                float h = (size + p.height) / 2;
 
-                //float vertIntersec = (size + p.height) / 2 - Math.Abs(ballCentre.Y - paddleCentre.Y);
+                float dX = centrePad.X - centerBall.X;
+                float dY = centrePad.Y - centerBall.Y;
 
+                float wy = w * dY;
+                float hx = h * dX;
 
-                //*
-                if (y + size >= p.y)
+                if (wy > hx)
                 {
-                    ySpeed *= -1;
+                    if (wy > -hx)
+                    // collision at the top 
+                    {
+                        ySpeed *= -1;
+
+                        if (pMovingLeft)
+                            xSpeed = -Math.Abs(xSpeed);
+                        else if (pMovingRight)
+                            xSpeed = Math.Abs(xSpeed);
+                    }
+                    else
+                    // on the left 
+                    {
+                        xSpeed *= -1;
+                        //here, kill the ball
+                    }
                 }
-
-
-                if (pMovingLeft)
-                    xSpeed = -Math.Abs(xSpeed);
-                else if (pMovingRight)
-                    xSpeed = Math.Abs(xSpeed);
-                //*/
+                else
+                {
+                    if (wy > -hx)
+                    // on the right
+                    {
+                        xSpeed *= -1;
+                        //kill the ball as well
+                    }
+                }
             }
         }
 
