@@ -1,6 +1,6 @@
 ﻿/*  Created by: Brick Beaker Team 1
- *  Project: Brick Breaker
- *  Date: Tuesday, April 4th
+ *  Date: Tuesday, April 4th *  Project: Brick Breaker
+
  */ 
 using System;
 using System.Collections.Generic;
