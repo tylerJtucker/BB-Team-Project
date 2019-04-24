@@ -235,6 +235,7 @@ namespace BrickBreaker
             form.Controls.Remove(this);
         }
 
+        public void GameScreen_Paint(object sender, PaintEventArgs e)
         public void NextLevel()
         {
             gameTimer.Enabled = false;

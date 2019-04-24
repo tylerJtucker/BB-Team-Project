@@ -64,6 +64,45 @@ namespace BrickBreaker.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;level&gt;
+
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;4&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;59&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;114&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;169&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;224&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;279&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;334&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string level3 {
+            get {
+                return ResourceManager.GetString("level3", resourceCulture
         ///
         ///  &lt;brick&gt;
         ///    &lt;x&gt;500&lt;/x&gt;
@@ -205,12 +244,53 @@ namespace BrickBreaker.Properties {
         internal static string level4 {
             get {
                 return ResourceManager.GetString("level4", resourceCulture);
+
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
         ///&lt;level&gt;
+
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;17&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;127&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;237&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;347&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;457&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;567&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt;3&lt;/hp&gt;
+        ///  &lt;/brick&gt;
+        ///  &lt;brick&gt;
+        ///    &lt;x&gt;677&lt;/x&gt;
+        ///    &lt;y&gt;4&lt;/y&gt;
+        ///    &lt;hp&gt; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string level7 {
+            get {
+                return ResourceManager.GetString("level7", resourceCulture);
+
         ///
         ///  &lt;Brick&gt;
         ///    &lt;x&gt;3&lt;/x&gt;
@@ -406,6 +486,7 @@ namespace BrickBreaker.Properties {
         internal static string level5 {
             get {
                 return ResourceManager.GetString("level5", resourceCulture);
+
             }
         }
     }
