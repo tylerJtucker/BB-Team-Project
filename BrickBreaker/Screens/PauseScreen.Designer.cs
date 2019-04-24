@@ -1,6 +1,6 @@
 ﻿namespace BrickBreaker
 {
-    partial class MenuScreen
+    partial class PauseScreen
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,25 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.playButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.resumeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // playButton
-            // 
-            this.playButton.BackColor = System.Drawing.Color.White;
-            this.playButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.playButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.playButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playButton.Location = new System.Drawing.Point(207, 193);
-            this.playButton.Name = "playButton";
-            this.playButton.Size = new System.Drawing.Size(181, 78);
-            this.playButton.TabIndex = 0;
-            this.playButton.Text = "Play";
-            this.playButton.UseVisualStyleBackColor = false;
-            this.playButton.Click += new System.EventHandler(this.playButton_Click);
             // 
             // exitButton
             // 
@@ -54,30 +38,45 @@
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(207, 279);
+            this.exitButton.Location = new System.Drawing.Point(273, 264);
+            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(181, 78);
-            this.exitButton.TabIndex = 1;
+            this.exitButton.Size = new System.Drawing.Size(242, 96);
+            this.exitButton.TabIndex = 2;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
-            // MenuScreen
+            // resumeButton
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.resumeButton.BackColor = System.Drawing.Color.White;
+            this.resumeButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.resumeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resumeButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resumeButton.Location = new System.Drawing.Point(273, 136);
+            this.resumeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.resumeButton.Name = "resumeButton";
+            this.resumeButton.Size = new System.Drawing.Size(242, 96);
+            this.resumeButton.TabIndex = 3;
+            this.resumeButton.Text = "Resume";
+            this.resumeButton.UseVisualStyleBackColor = false;
+            this.resumeButton.Click += new System.EventHandler(this.resumeButton_Click);
+            // 
+            // PauseScreen
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.BackColor = System.Drawing.SystemColors.Desktop;
+            this.Controls.Add(this.resumeButton);
             this.Controls.Add(this.exitButton);
-            this.Controls.Add(this.playButton);
-            this.Name = "MenuScreen";
-            this.Size = new System.Drawing.Size(800, 550);
+            this.Name = "PauseScreen";
+            this.Size = new System.Drawing.Size(834, 540);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button resumeButton;
     }
 }
