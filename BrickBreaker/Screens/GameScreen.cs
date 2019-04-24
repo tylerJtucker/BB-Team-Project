@@ -26,7 +26,6 @@ namespace BrickBreaker
         static int lives;
         int bricksBroken;
         int score;
-        int numberoflevels = 6;
 
         // constants
         const int BALLSPEED = 6;
