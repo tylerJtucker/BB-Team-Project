@@ -18,33 +18,66 @@ namespace BrickBreaker
             y = _y;
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
-            size = _ballSize;               
+            size = _ballSize;
         }
 
         public void Move()
-        {            
+        {
             x = x + xSpeed;
             y = y + ySpeed;
         }
 
         public bool BlockCollision(Block b)
         {
+            //this algorothm is also known as the Minkowski sum
             //manage collision on all sides
-            //get theold position, understand what was going on, change the actual direction
 
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
             Rectangle ballRec = new Rectangle(x, y, size, size);
 
+            Point centerBall = new Point(x + size / 2, y + size / 2);
+            Point centreRect = new Point(b.x + b.width / 2, b.y + b.height / 2);
+
             if (ballRec.IntersectsWith(blockRec))
             {
-                Ball tempBall = new Ball(x - xSpeed, y - ySpeed, xSpeed, ySpeed, size);
-                if (tempBall.y < b.y && tempBall.x + size < b.x && tempBall.x > b.x + b.width)
+                float w = (size + b.width) / 2;
+                float h = (size + b.height) / 2;
+
+                float dX = centreRect.X - centerBall.X;
+                float dY = centreRect.Y - centerBall.Y;
+
+                float wy = w * dY;
+                float hx = h * dX;
+
+                if (wy > hx)
                 {
-                    xSpeed *= -1;
+                    if (wy > -hx)
+                    // collision at the top 
+                    {
+                        ySpeed *= -1;
+                    }
+                    else
+                    // on the left 
+                    {
+                        xSpeed *= -1;
+                    }
+                }
+                else
+                {
+                    if (wy > -hx)
+                    // on the right
+                    {
+                        xSpeed *= -1;
+                    }
+                    else
+                    // at the bottom
+                    {
+                        ySpeed *= -1;
+                    }
                 }
             }
 
-            return blockRec.IntersectsWith(ballRec);         
+            return blockRec.IntersectsWith(ballRec);
         }
 
         public void PaddleCollision(Paddle p, bool pMovingLeft, bool pMovingRight)
@@ -61,12 +94,12 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(paddleRec))
             {
                 //get the position using the centre of the objects
-                PointF ballCentre = new PointF(x + size / 2, y + size / 2);
-                PointF paddleCentre = new PointF(p.x + p.width / 2, p.y + p.height / 2);
+                //PointF ballCentre = new PointF(x + size / 2, y + size / 2);
+                //PointF paddleCentre = new PointF(p.x + p.width / 2, p.y + p.height / 2);
 
                 //I neeed to do some testing with the deltas and heights so I can tell by how much the are intersecting
 
-                float vertIntersec = (size + p.height) / 2 - Math.Abs(ballCentre.Y - paddleCentre.Y);
+                //float vertIntersec = (size + p.height) / 2 - Math.Abs(ballCentre.Y - paddleCentre.Y);
 
 
                 //*
