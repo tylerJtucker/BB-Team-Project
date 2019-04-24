@@ -27,7 +27,7 @@ namespace BrickBreaker
         int bricksBroken;
         int score;
         int level = 1;
-        int ballStartX, ballStartY, paddleStartPosition;
+        int ballStartX, ballStartY, paddleStartX, paddleStartY;
         static int bbucks = 0;
 
         // constants
@@ -70,10 +70,10 @@ namespace BrickBreaker
             // setup starting paddle values and create paddle object
             int paddleWidth = 80;
             int paddleHeight = 20;
-            int paddleX = ((this.Width / 2) - (paddleWidth / 2));
-            int paddleY = (this.Height - paddleHeight) - 60;
+            paddleStartX = ((this.Width / 2) - (paddleWidth / 2));
+            paddleStartY = (this.Height - paddleHeight) - 60;
             int paddleSpeed = 8;
-            paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
+            paddle = new Paddle(paddleStartX, paddleStartY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
             // setup starting ball values
             ballStartX = this.Width / 2 - 10;
@@ -84,6 +84,7 @@ namespace BrickBreaker
             int ySpeed = 6;
             int ballSize = 20;
             ball = new Ball(ballStartX, ballStartY, xSpeed, ySpeed, ballSize);
+            balls.Clear();
             balls.Add(ball);
 
             //loads current level
@@ -156,32 +157,42 @@ namespace BrickBreaker
             }
 
             // Move ball
-            foreach (Ball b in balls)
-            {
-                b.Move();
-            }
+            foreach (Ball b in balls) { b.Move(); }
 
             // Check for collision with top and side walls
-            ball.WallCollision(this);
-
-            // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this) && balls.Count() == 1)
+            Ball removeBall = null;
+            foreach (Ball b in balls)
             {
-                lives--;
+                b.WallCollision(this);
 
-                // Moves the ball back to origin
-                ball.x = ((paddle.x - (ball.size / 2)) + (paddle.width / 2));
-                ball.y = (this.Height - paddle.height) - 85;
-
-                if (lives == 0)
+                // Check for ball hitting bottom of screen
+                if (b.BottomCollision(this) && balls.Count == 1)
                 {
-                    gameTimer.Enabled = false;
-                    OnEnd();
+                    lives--;
+
+                    // Moves the ball back to origin
+                    b.x = ((paddle.x - (b.size / 2)) + (paddle.width / 2));
+                    b.y = (this.Height - paddle.height) - 85;
+
+                    if (lives == 0)
+                    {
+                        gameTimer.Enabled = false;
+                        OnEnd();
+                    }
                 }
+                else if (b.BottomCollision(this))
+                {
+                    removeBall = b;
+                }
+            }
+            if (removeBall != null)
+            {
+                balls.Remove(removeBall);
+                removeBall = null;
             }
 
             // Check for collision of ball with paddle, (incl. paddle movement)
-            ball.PaddleCollision(paddle, leftArrowDown, rightArrowDown);
+            foreach (Ball b in balls) { b.PaddleCollision(paddle, leftArrowDown, rightArrowDown); }
 
             // Check if ball has collided with any blocks
             foreach (Block b in blocks)
@@ -217,8 +228,11 @@ namespace BrickBreaker
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
             }
 
-            // Draws ball
-            e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+            // Draws ball(s)
+            foreach (Ball b in balls)
+            {
+                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
+            }
         }
 
         public void OnEnd()
@@ -250,7 +264,11 @@ namespace BrickBreaker
                     break;
             }
 
-            //TODO set ball and paddle to starting position
+            paddle.x = paddleStartX; paddle.y = paddleStartY;
+
+            balls.Clear();
+            ball = new Ball(ballStartX, ballStartY, 6, 6, 20);
+            balls.Add(ball);
         }
 
         public void LoadLevel(string level)
