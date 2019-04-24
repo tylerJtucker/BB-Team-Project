@@ -26,6 +26,9 @@ namespace BrickBreaker
         static int lives;
         int bricksBroken;
         int score;
+        int level = 1;
+        int ballStartX, ballStartY, paddleStartPosition;
+        static int bbucks = 0;
 
         // constants
         const int BALLSPEED = 6;
@@ -38,11 +41,14 @@ namespace BrickBreaker
 
         // list of all blocks for current level
         List<Block> blocks = new List<Block>();
+        static List<Ball> balls = new List<Ball>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
         SolidBrush ballBrush = new SolidBrush(Color.White);
         SolidBrush blockBrush = new SolidBrush(Color.Red);
+
+
 
         #endregion
 
@@ -70,14 +76,15 @@ namespace BrickBreaker
             paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
             // setup starting ball values
-            int ballX = this.Width / 2 - 10;
-            int ballY = this.Height - paddle.height - 80;
+            ballStartX = this.Width / 2 - 10;
+            ballStartY = this.Height - paddle.height - 80;
 
             // Creates a new ball
             int xSpeed = 6;
             int ySpeed = 6;
             int ballSize = 20;
-            ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
+            ball = new Ball(ballStartX, ballStartY, xSpeed, ySpeed, ballSize);
+            balls.Add(ball);
 
             //loads current level
             LoadLevel("Resources/level5.xml");
@@ -137,7 +144,6 @@ namespace BrickBreaker
             }
             if (pauseArrowDown)
             {
-
                 PauseScreen ps = new PauseScreen();
                 Form form = this.FindForm();
 
@@ -150,13 +156,16 @@ namespace BrickBreaker
             }
 
             // Move ball
-            ball.Move();
+            foreach (Ball b in balls)
+            {
+                b.Move();
+            }
 
             // Check for collision with top and side walls
             ball.WallCollision(this);
 
             // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this))
+            if (ball.BottomCollision(this) && balls.Count() == 1)
             {
                 lives--;
 
@@ -185,7 +194,7 @@ namespace BrickBreaker
                     if (blocks.Count == 0)
                     {
                         gameTimer.Enabled = false;
-                        OnEnd();
+                        NextLevel();
                     }
 
                     break;
@@ -194,20 +203,6 @@ namespace BrickBreaker
 
             //redraw the screen
             Refresh();
-        }
-
-        public void OnEnd()
-        {
-            score = bricksBroken * 50;
-
-            // Goes to the game over screen
-            Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
-
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
-
-            form.Controls.Add(ps);
-            form.Controls.Remove(this);
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
@@ -226,6 +221,37 @@ namespace BrickBreaker
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
 
+        public void OnEnd()
+        {
+            score = bricksBroken * 50;
+
+            // Goes to the game over screen
+            Form form = this.FindForm();
+            MenuScreen ps = new MenuScreen();
+
+            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+
+            form.Controls.Add(ps);
+            form.Controls.Remove(this);
+        }
+
+        public void NextLevel()
+        {
+            gameTimer.Enabled = false;
+
+            level++;
+            switch (level)
+            {
+                case 2:
+                    LoadLevel("");
+                    break;
+                default:
+                    OnEnd();
+                    break;
+            }
+
+            //TODO set ball and paddle to starting position
+        }
 
         public void LoadLevel(string level)
         {
@@ -298,7 +324,11 @@ namespace BrickBreaker
         {
             paddle.width = PADDLESPEED;
         }
+
+        public static void GiveBBuck (int bigmonies)
+        {
+            bbucks += bigmonies;
+        }
         #endregion
     }
-    
 }
