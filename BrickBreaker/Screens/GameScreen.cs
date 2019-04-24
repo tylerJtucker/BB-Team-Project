@@ -41,6 +41,7 @@ namespace BrickBreaker
 
         // list of all blocks for current level
         List<Block> blocks = new List<Block>();
+        List<Ball> balls = new List<Ball>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -83,6 +84,7 @@ namespace BrickBreaker
             int ySpeed = 6;
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
+            balls.Add(ball);
 
             //loads current level
             LoadLevel("Resources/level5.xml");
@@ -154,7 +156,10 @@ namespace BrickBreaker
             }
 
             // Move ball
-            ball.Move();
+            foreach (Ball b in balls)
+            {
+                b.Move();
+            }
 
             // Check for collision with top and side walls
             ball.WallCollision(this);
@@ -326,5 +331,4 @@ namespace BrickBreaker
         }
         #endregion
     }
-    
 }
