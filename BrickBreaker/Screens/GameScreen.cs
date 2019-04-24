@@ -26,6 +26,7 @@ namespace BrickBreaker
         static int lives;
         int bricksBroken;
         int score;
+        int numberoflevels = 6;
 
         // constants
         const int BALLSPEED = 6;
@@ -51,12 +52,46 @@ namespace BrickBreaker
             InitializeComponent();
             OnStart();
         }
+        #region 
+        public void LoadLevel(string level)
+        {
+            //creates variables and xml reader needed
+            XmlReader reader = XmlReader.Create(level);
+            string blockX;
+            string blockY;
+            string blockHP;
+            int intX;
+            int intY;
+            int intHP;
 
+            //Grabs all the blocks for the current level and adds them to the list
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("x");
+                blockX = reader.ReadString();
+                reader.ReadToFollowing("y");
+                blockY = reader.ReadString();
+                reader.ReadToFollowing("hp");
+                blockHP = reader.ReadString();
+
+                if (blockX != "")
+                {
+                    intX = Convert.ToInt16(blockX);
+                    intY = Convert.ToInt16(blockY);
+                    intHP = Convert.ToInt16(blockHP);
+
+                    Block b = new Block(intX, intY, intHP);
+
+                    blocks.Add(b);
+                }
+            }
+        }
+        #endregion
 
         public void OnStart()
         {
             //set life counter
-            lives = 3;
+            lives = 10000;
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -80,7 +115,7 @@ namespace BrickBreaker
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
 
             //loads current level
-            LoadLevel("Resources/level5.xml");
+            LoadLevel("Resources/level1.xml");
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -126,6 +161,7 @@ namespace BrickBreaker
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+            
             // Move the paddle
             if (leftArrowDown && paddle.x > 0)
             {
@@ -184,8 +220,9 @@ namespace BrickBreaker
 
                     if (blocks.Count == 0)
                     {
-                        gameTimer.Enabled = false;
-                        OnEnd();
+                        //gameTimer.Enabled = false;
+                        NickDoingStuffCauseHesBored();                       
+                        //OnEnd();
                     }
 
                     break;
@@ -196,6 +233,38 @@ namespace BrickBreaker
             Refresh();
         }
 
+        public void NickDoingStuffCauseHesBored ()
+        {
+            int b = 1;
+            for (int i = 0; i <= blocks.Count; i++)
+            {
+                if (lives > 0  && blocks.Count == 0 )
+                {
+                    b++;
+                    if(b == 2)
+                    {
+                        LoadLevel("Resources/level2.xml");
+                    }
+                    //if (b == 3)
+                    //{
+                    //    LoadLevel("Resources/level3.xml");
+                    //}
+                    if (b == 4)
+                    {
+                        LoadLevel("Resources/level4.xml");
+                    }
+                    if (b == 5)
+                    {
+                        LoadLevel("Resources/level5.xml");
+                    }
+                    if (b == 6)
+                    {
+                        LoadLevel("Resources/level6.xml");
+                    }
+                }
+            }
+
+        }
         public void OnEnd()
         {
             score = bricksBroken * 50;
@@ -227,39 +296,7 @@ namespace BrickBreaker
         }
 
 
-        public void LoadLevel(string level)
-        {
-            //creates variables and xml reader needed
-            XmlReader reader = XmlReader.Create(level);
-            string blockX;
-            string blockY;
-            string blockHP;
-            int intX;
-            int intY;
-            int intHP;
-
-            //Grabs all the blocks for the current level and adds them to the list
-            while (reader.Read())
-            {
-                reader.ReadToFollowing("x");
-                blockX = reader.ReadString();
-                reader.ReadToFollowing("y");
-                blockY = reader.ReadString();
-                reader.ReadToFollowing("hp");
-                blockHP = reader.ReadString();
-
-                if (blockX != "")
-                {
-                    intX = Convert.ToInt16(blockX);
-                    intY = Convert.ToInt16(blockY);
-                    intHP = Convert.ToInt16(blockHP);
-
-                    Block b = new Block(intX, intY, intHP);
-
-                    blocks.Add(b);
-                }
-            }
-        }
+      
 
         #region change value functions
         public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
@@ -300,5 +337,6 @@ namespace BrickBreaker
         }
         #endregion
     }
-    
+   
+
 }
