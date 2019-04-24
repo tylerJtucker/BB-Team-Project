@@ -41,7 +41,7 @@ namespace BrickBreaker
 
         // list of all blocks for current level
         List<Block> blocks = new List<Block>();
-        List<Ball> balls = new List<Ball>();
+        static List<Ball> balls = new List<Ball>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -76,14 +76,14 @@ namespace BrickBreaker
             paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
             // setup starting ball values
-            int ballX = this.Width / 2 - 10;
-            int ballY = this.Height - paddle.height - 80;
+            ballStartX = this.Width / 2 - 10;
+            ballStartY = this.Height - paddle.height - 80;
 
             // Creates a new ball
             int xSpeed = 6;
             int ySpeed = 6;
             int ballSize = 20;
-            ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
+            ball = new Ball(ballStartX, ballStartY, xSpeed, ySpeed, ballSize);
             balls.Add(ball);
 
             //loads current level
@@ -165,7 +165,7 @@ namespace BrickBreaker
             ball.WallCollision(this);
 
             // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this))
+            if (ball.BottomCollision(this) && balls.Count() == 1)
             {
                 lives--;
 
