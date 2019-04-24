@@ -301,12 +301,14 @@ namespace BrickBreaker
         }
 
         public static void ChangePaddle(int width)
+
         {
             paddle.width += width;
         }
 
         public static void ChangeLives(int number)
         {
+
             lives += number;
         }
 
