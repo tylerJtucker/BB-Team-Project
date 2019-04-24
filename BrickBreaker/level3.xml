@@ -6,129 +6,281 @@
     <hp>3</hp>
   </brick>
   <brick>
-    <x>63</x>
+    <x>59</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>122</x>
+    <x>114</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>181</x>
+    <x>169</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>240</x>
+    <x>224</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>299</x>
+    <x>279</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>358</x>
+    <x>334</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>417</x>
+    <x>389</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>476</x>
+    <x>444</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>535</x>
+    <x>499</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>594</x>
+    <x>554</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>653</x>
+    <x>609</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
   <brick>
-    <x>712</x>
+    <x>664</x>
+    <y>4</y>
+    <hp>3</hp>
+  </brick>
+  <brick>
+    <x>719</x>
     <y>4</y>
     <hp>3</hp>
   </brick>
 
   <brick>
+    <x>30</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>85</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>140</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>195</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>250</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>305</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>360</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>415</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>470</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>525</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>580</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>635</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>690</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+  <brick>
+    <x>745</x>
+    <y>34</y>
+    <hp>2</hp>
+  </brick>
+
+  <brick>
     <x>4</x>
-    <y>38</y>
-    <hp>2</hp>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>63</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>59</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>122</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>114</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>181</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>169</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>240</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>224</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>299</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>279</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>358</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>334</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>417</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>389</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>476</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>444</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>535</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>499</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>594</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>554</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>653</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>609</x>
+    <y>64</y>
+    <hp>1</hp>
   </brick>
   <brick>
-    <x>712</x>
-    <y>38</y>
-    <hp>2</hp>
+    <x>664</x>
+    <y>64</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>719</x>
+    <y>64</y>
+    <hp>1</hp>
+  </brick>
+
+  <brick>
+    <x>30</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>85</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>140</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>195</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>250</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>305</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>360</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>415</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>470</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>525</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>580</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>635</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>690</x>
+    <y>94</y>
+    <hp>1</hp>
+  </brick>
+  <brick>
+    <x>745</x>
+    <y>94</y>
+    <hp>1</hp>
   </brick>
 </level>
