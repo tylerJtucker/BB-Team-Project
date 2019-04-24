@@ -1,7 +1,4 @@
-﻿/*  Created by: Brick Beaker Team 1
- *  Project: Brick Breaker
- *  Date: Tuesday, April 4th
- */
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -235,7 +232,7 @@ namespace BrickBreaker
             form.Controls.Remove(this);
         }
 
-        public void GameScreen_Paint(object sender, PaintEventArgs e)
+        
         public void NextLevel()
         {
             gameTimer.Enabled = false;
