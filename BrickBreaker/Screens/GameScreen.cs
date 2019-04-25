@@ -258,7 +258,7 @@ namespace BrickBreaker
             foreach (Block b in blocks)
             {
                 /*
-                e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height);
+                e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height); <---- IDK what is going on here but this doesn't work here
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
                 e.Graphics.FillRectangle(blockBrush2, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
                 */
