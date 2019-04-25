@@ -28,16 +28,12 @@ namespace BrickBreaker
 
         public bool BlockCollision(Block b)
         {
-            //this algorothm is also known as the Minkowski sum
-            //manage collision on all sides
-
             Rectangle blockRec = new Rectangle(b.x, b.y, b.width, b.height);
             Rectangle ballRec = new Rectangle(x, y, size, size);
 
             if (ballRec.IntersectsWith(blockRec))
             {
-                string side = collisionSide(blockRec);
-                //I don't think I could use this string for much here
+                collisionSide(blockRec);
             }
 
             return blockRec.IntersectsWith(ballRec);
@@ -55,7 +51,15 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(paddleRec))
             {
                 string side = collisionSide(paddleRec);
-                //if for collision at the top, change angles
+                if (side == "top")
+                {
+                    if (pMovingLeft)
+                        xSpeed = -Math.Abs(xSpeed);
+                    else if (pMovingRight)
+                        xSpeed = Math.Abs(xSpeed);
+
+                    //but really I should think of how to change the angle that the ball is travelling at
+                }
             }             
         }
 
@@ -96,7 +100,10 @@ namespace BrickBreaker
         /// <param name="r">Colliding rectangle</param>
         /// <returns>Side as a string</returns>
         public string collisionSide(Rectangle r)
-        {
+        {            
+            //this algorothm is also known as the Minkowski sum
+            //manage collision on all sides
+
             string side = null;
 
             Point centreBall = new Point(x + size / 2, y + size / 2);
@@ -144,6 +151,5 @@ namespace BrickBreaker
 
             return side;
         }
-
     }
 }
