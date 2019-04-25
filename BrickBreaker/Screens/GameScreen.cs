@@ -24,7 +24,6 @@ namespace BrickBreaker
 
         // Game values
         static int lives;
-        int bricksBroken;
         int score;
         int level = 1;
         int ballStartX, ballStartY, paddleStartX, paddleStartY;
@@ -44,12 +43,8 @@ namespace BrickBreaker
         static List<Ball> balls = new List<Ball>();
 
         // Brushes
-        SolidBrush paddleBrush = new SolidBrush(Color.White);
-        SolidBrush ballBrush = new SolidBrush(Color.White);
-        SolidBrush blockBrush = new SolidBrush(Color.Red);
-
-
-
+        SolidBrush drawBrush = new SolidBrush(Color.White);
+        Font drawFont = new Font("Arial", 12);
         #endregion
 
         public GameScreen()
@@ -159,10 +154,10 @@ namespace BrickBreaker
             // Move ball
             foreach (Ball b in balls) { b.Move(); }
 
-            // Check for collision with top and side walls
-            Ball removeBall = null;
+            // Check for collision with all walls
             foreach (Ball b in balls)
             {
+                //Check for ball hitting top and side walls
                 b.WallCollision(this);
 
                 // Check for ball hitting bottom of screen
@@ -182,13 +177,9 @@ namespace BrickBreaker
                 }
                 else if (b.BottomCollision(this))
                 {
-                    removeBall = b;
+                    balls.Remove(b);
+                    break;
                 }
-            }
-            if (removeBall != null)
-            {
-                balls.Remove(removeBall);
-                removeBall = null;
             }
 
             // Check for collision of ball with paddle, (incl. paddle movement)
@@ -199,16 +190,20 @@ namespace BrickBreaker
             {
                 if (ball.BlockCollision(b))
                 {
-                    blocks.Remove(b);
-                    bricksBroken++;
-
+                    //removing block logic
+                    b.hp--;
+                    if (b.hp == 0)
+                    {
+                        blocks.Remove(b);
+                        score += 50;
+                        break;
+                    }
+                    //if all blocks are broken go to next level
                     if (blocks.Count == 0)
                     {
                         gameTimer.Enabled = false;
                         NextLevel();
                     }
-
-                    break;
                 }
             }
 
@@ -219,26 +214,38 @@ namespace BrickBreaker
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             // Draws paddle
-            paddleBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            drawBrush.Color = paddle.colour;
+            e.Graphics.FillRectangle(drawBrush, paddle.x, paddle.y, paddle.width, paddle.height);
 
             // Draws blocks
             foreach (Block b in blocks)
             {
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                switch (b.hp)
+                {
+                    case 1:
+                        drawBrush.Color = Color.Red;
+                        break;
+                    case 2:
+                        drawBrush.Color = Color.Yellow;
+                        break;
+                    case 3:
+                        drawBrush.Color = Color.Green;
+                        break;
+                }
+                e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.width, b.height);
             }
 
             // Draws ball(s)
-            foreach (Ball b in balls)
-            {
-                e.Graphics.FillRectangle(ballBrush, b.x, b.y, b.size, b.size);
-            }
+            drawBrush.Color = Color.White;
+            foreach (Ball b in balls) { e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.size, b.size); }
+
+            //draw score and lives
+            e.Graphics.DrawString("Lives: " + lives, drawFont, drawBrush, 100, 85);
+            e.Graphics.DrawString("Score: " + score, drawFont, drawBrush, 100, 100);
         }
 
         public void OnEnd()
         {
-            score = bricksBroken * 50;
-
             // Goes to the game over screen
             Form form = this.FindForm();
             MenuScreen ps = new MenuScreen();
