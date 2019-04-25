@@ -100,9 +100,13 @@ namespace BrickBreaker.Properties {
         ///    &lt;y&gt;4&lt;/y&gt;
         ///    &lt;hp&gt;3&lt; [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string level3 {
-            get {
-                return ResourceManager.GetString("level3", resourceCulture
+        internal static string level3
+        {
+            get
+            {
+                return ResourceManager.GetString("level3", resourceCulture);
+            }
+        }
         ///
         ///  &lt;brick&gt;
         ///    &lt;x&gt;500&lt;/x&gt;
@@ -287,9 +291,22 @@ namespace BrickBreaker.Properties {
         ///    &lt;y&gt;4&lt;/y&gt;
         ///    &lt;hp&gt; [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string level7 {
-            get {
+        internal static string level7
+        {
+            get
+            {
                 return ResourceManager.GetString("level7", resourceCulture);
+            }
+        }
+
+        internal static string level5
+        {
+            get
+            {
+                return ResourceManager.GetString("level5", resourceCulture);
+
+            }
+        }
 
         ///
         ///  &lt;Brick&gt;
@@ -337,6 +354,7 @@ namespace BrickBreaker.Properties {
                 return ResourceManager.GetString("level6", resourceCulture);
             }
         }
+        
     }
 }
 ﻿//------------------------------------------------------------------------------
@@ -360,95 +378,9 @@ namespace BrickBreaker.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-    [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
-        
-        private static global::System.Resources.ResourceManager resourceMan;
-        
-        private static global::System.Globalization.CultureInfo resourceCulture;
-        
-        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
-        }
-        
-        /// <summary>
-        ///   Returns the cached ResourceManager instance used by this class.
+    
         /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BrickBreaker.Properties.Resources", typeof(Resources).Assembly);
-                    resourceMan = temp;
-                }
-                return resourceMan;
-            }
-        }
         
-        /// <summary>
-        ///   Overrides the current thread's CurrentUICulture property for all
-        ///   resource lookups using this strongly typed resource class.
-        /// </summary>
-        [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
-                return resourceCulture;
-            }
-            set {
-                resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
-        ///&lt;level&gt;
-        ///
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;500&lt;/x&gt;
-        ///    &lt;y&gt;50&lt;/y&gt;
-        ///    &lt;hp&gt;3&lt;/hp&gt;
-        ///  &lt;/brick&gt;
-        ///
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;400&lt;/x&gt;
-        ///    &lt;y&gt;40&lt;/y&gt;
-        ///    &lt;hp&gt;3&lt;/hp&gt;
-        ///  &lt;/brick&gt;
-        ///
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;300&lt;/x&gt;
-        ///    &lt;y&gt;30&lt;/y&gt;
-        ///    &lt;hp&gt;2&lt;/hp&gt;
-        ///  &lt;/brick&gt;
-        ///
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;200&lt;/x&gt;
-        ///    &lt;y&gt;20&lt;/y&gt;
-        ///    &lt;hp&gt;2&lt;/hp&gt;
-        ///  &lt;/brick&gt;
-        ///
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;100&lt;/x&gt;
-        ///    &lt;y&gt;10&lt;/y&gt;
-        ///    &lt;hp&gt;1&lt;/hp&gt;
-        ///  &lt;/brick&gt;
-        ///
-        ///  &lt;brick&gt;
-        ///    &lt;x&gt;50&lt;/x&gt;
-        ///    &lt;y&gt;5&lt;/y&gt;
-        ///    &lt;hp&gt;1&lt;/hp&gt;
-        ///  &lt;/brick&gt;
-        ///
-        ///&lt;/level&gt;
-        ///.
-        /// </summary>
-        internal static string level1 {
-            get {
-                return ResourceManager.GetString("level1", resourceCulture);
-            }
-        }
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
@@ -483,11 +415,6 @@ namespace BrickBreaker.Properties {
         ///    &lt;hp&gt;3&lt;/hp&gt;
         ///    &lt;colou [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string level5 {
-            get {
-                return ResourceManager.GetString("level5", resourceCulture);
-
-            }
-        }
-    }
+        
+    
 }
