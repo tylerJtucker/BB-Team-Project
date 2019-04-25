@@ -26,6 +26,7 @@ namespace BrickBreaker
         int lives;
         int bricksBroken;
         int score;
+        
 
         // constants
         const int BALLSPEED = 6;
@@ -42,7 +43,9 @@ namespace BrickBreaker
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
         SolidBrush ballBrush = new SolidBrush(Color.White);
-        SolidBrush blockBrush = new SolidBrush(Color.Red);
+        SolidBrush blockBrush = new SolidBrush(Color.Black);
+        SolidBrush blockBrush2 = new SolidBrush(Color.White);
+        SolidBrush shadowBrush = new SolidBrush(Color.LightGray);
 
         #endregion
 
@@ -50,11 +53,13 @@ namespace BrickBreaker
         {
             InitializeComponent();
             OnStart();
+        
         }
 
 
         public void OnStart()
         {
+          
             //set life counter
             lives = 3;
 
@@ -67,7 +72,7 @@ namespace BrickBreaker
             int paddleX = ((this.Width / 2) - (paddleWidth / 2));
             int paddleY = (this.Height - paddleHeight) - 60;
             int paddleSpeed = 8;
-            paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
+            paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.Black);
 
             // setup starting ball values
             int ballX = this.Width / 2 - 10;
@@ -137,6 +142,8 @@ namespace BrickBreaker
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+           
+           
             // Move the paddle
             if (leftArrowDown && paddle.x > 0)
             {
@@ -223,18 +230,31 @@ namespace BrickBreaker
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
+            var g = e.Graphics;
+            
             // Draws paddle
             paddleBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
+            e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
 
             // Draws blocks
+
             foreach (Block b in blocks)
-            {
+                {
+                e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height);
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+               e.Graphics.FillRectangle(blockBrush2, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
             }
+                
+            
 
             // Draws ball
-            e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
+           e.Graphics.FillEllipse(shadowBrush, ball.x + 3, ball.y + 3, ball.size, ball.size);
+            e.Graphics.FillEllipse(blockBrush, ball.x, ball.y, ball.size, ball.size);
+            e.Graphics.FillEllipse(blockBrush2, ball.x + 1, ball.y + 1, ball.size - 2, ball.size - 2);
+ 
+
         }
 
         public static void ChangeSpeeds (int xSpeed, int ySpeed, int paddleSpeed)
