@@ -13,7 +13,6 @@ namespace BrickBreaker
 
         public Ball(int _x, int _y, int _xSpeed, int _ySpeed, int _ballSize)
         {
-            //is direction an input from outside?
             x = _x;
             y = _y;
             xSpeed = _xSpeed;
@@ -38,6 +37,7 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(blockRec))
             {
                 string side = collisionSide(blockRec);
+                //I don't think I could use this string for much here
             }
 
             return blockRec.IntersectsWith(ballRec);
@@ -55,6 +55,7 @@ namespace BrickBreaker
             if (ballRec.IntersectsWith(paddleRec))
             {
                 string side = collisionSide(paddleRec);
+                //if for collision at the top, change angles
             }             
         }
 
@@ -116,11 +117,13 @@ namespace BrickBreaker
                 // collision at the top 
                 {
                     ySpeed *= -1;
+                    side = "top";
                 }
                 else
                 // on the right
                 {
                     xSpeed *= -1;
+                    side = "right";
                 }
             }
             else
@@ -129,11 +132,13 @@ namespace BrickBreaker
                 // on the left
                 {
                     xSpeed *= -1;
+                    side = "left";
                 }
                 else
                 // at the bottom
                 {
                     ySpeed *= -1;
+                    side = "bottom";
                 }
             }
 
