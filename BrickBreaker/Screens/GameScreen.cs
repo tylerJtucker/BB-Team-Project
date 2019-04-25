@@ -233,6 +233,7 @@ namespace BrickBreaker
             var g = e.Graphics;
             
             // Draws paddle
+            //yeet
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
             e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
