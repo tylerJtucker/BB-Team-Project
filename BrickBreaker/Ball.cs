@@ -37,44 +37,7 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(blockRec))
             {
-                Point centerBall = new Point(x + size / 2, y + size / 2);
-                Point centreRect = new Point(b.x + b.width / 2, b.y + b.height / 2);
-
-                float w = (size + b.width) / 2;
-                float h = (size + b.height) / 2;
-
-                float dX = centreRect.X - centerBall.X;
-                float dY = centreRect.Y - centerBall.Y;
-
-                float wy = w * dY;
-                float hx = h * dX;
-
-                if (wy > hx)
-                {
-                    if (wy > -hx)
-                    // collision at the top 
-                    {
-                        ySpeed *= -1;
-                    }
-                    else
-                    // on the left 
-                    {
-                        xSpeed *= -1;
-                    }
-                }
-                else
-                {
-                    if (wy > -hx)
-                    // on the right
-                    {
-                        xSpeed *= -1;
-                    }
-                    else
-                    // at the bottom
-                    {
-                        ySpeed *= -1;
-                    }
-                }
+                string side = collisionSide(blockRec);
             }
 
             return blockRec.IntersectsWith(ballRec);
@@ -91,50 +54,10 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(paddleRec))
             {
-                Point centerBall = new Point(x + size / 2, y + size / 2);
-                Point centrePad = new Point(p.x + p.width / 2, p.y + p.height / 2);
-
-                float w = (size + p.width) / 2;
-                float h = (size + p.height) / 2;
-
-                float dX = centrePad.X - centerBall.X;
-                float dY = centrePad.Y - centerBall.Y;
-
-                float wy = w * dY;
-                float hx = h * dX;
-
-                if (wy > hx)
-                {
-                    if (wy > -hx)
-                    // collision at the top 
-                    {
-                        ySpeed *= -1;
-
-                        if (pMovingLeft)
-                            xSpeed = -Math.Abs(xSpeed);
-                        else if (pMovingRight)
-                            xSpeed = Math.Abs(xSpeed);
-                    }
-                    else
-                    // on the left 
-                    {
-                        xSpeed *= -1;
-                        //here, kill the ball
-                    }
-                }
-                else
-                {
-                    if (wy > -hx)
-                    // on the right
-                    {
-                        xSpeed *= -1;
-                        //kill the ball as well
-                    }
-                }
-            }
+                string side = collisionSide(paddleRec);
+            }             
         }
 
-        //this one works fine
         public void WallCollision(UserControl UC)
         {
             // Collision with left wall
@@ -154,7 +77,6 @@ namespace BrickBreaker
             }
         }
 
-        //this one works fine
         public bool BottomCollision(UserControl UC)
         {
             Boolean didCollide = false;
@@ -165,6 +87,57 @@ namespace BrickBreaker
             }
 
             return didCollide;
+        }
+
+        /// <summary>
+        /// Given the colliding rectangle finds which sides are colliding
+        /// </summary>
+        /// <param name="r">Colliding rectangle</param>
+        /// <returns>Side as a string</returns>
+        public string collisionSide(Rectangle r)
+        {
+            string side = null;
+
+            Point centreBall = new Point(x + size / 2, y + size / 2);
+            Point centreRect = new Point(r.X + r.Width / 2, r.Y + r.Height / 2);
+
+            float w = (size + r.Width) / 2;
+            float h = (size + r.Height) / 2;
+
+            float dX = centreRect.X - centreBall.X;
+            float dY = centreRect.Y - centreBall.Y;
+
+            float wy = w * dY;
+            float hx = h * dX;
+
+            if (wy > hx)
+            {
+                if (wy > -hx)
+                // collision at the top 
+                {
+                    ySpeed *= -1;
+                }
+                else
+                // on the right
+                {
+                    xSpeed *= -1;
+                }
+            }
+            else
+            {
+                if (wy > -hx)
+                // on the left
+                {
+                    xSpeed *= -1;
+                }
+                else
+                // at the bottom
+                {
+                    ySpeed *= -1;
+                }
+            }
+
+            return side;
         }
 
     }
