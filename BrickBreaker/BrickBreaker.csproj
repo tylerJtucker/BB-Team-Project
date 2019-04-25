@@ -75,7 +75,6 @@
     <Compile Include="Screens\PauseScreen.Designer.cs">
       <DependentUpon>PauseScreen.cs</DependentUpon>
     </Compile>
-
     <Compile Include="PowerUps.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,6 +138,22 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup />
+
+  <ItemGroup>
+    <Content Include="level1.xml" />
+    <None Include="Resources\SMALLBALL.png" />
+    <None Include="Resources\SMALLPADDLE2.png" />
+    <None Include="Resources\SMALLPADDLE.png" />
+    <None Include="Resources\SMALLBRICK2.png" />
+    <None Include="Resources\SMALLBRICK.png" />
+    <None Include="Resources\Background.jpg" />
+    <None Include="Resources\PauseScreen.jpg" />
+    <None Include="Resources\Paddle.png" />
+    <None Include="Resources\MainScreen.jpg" />
+    <None Include="Resources\BrickLvl3.png" />
+    <None Include="Resources\BrickLvl2.png" />
+    <None Include="Resources\BrickLvl1.png" />
+    <None Include="Resources\ball.png" />
   <ItemGroup>
     <None Include="Resources\level5.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -166,6 +181,7 @@
     <Content Include="level7.xml">
       <SubType>Designer</SubType>
     </Content>
+
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -629,6 +629,12 @@
             // GameScreen
             // 
 
+            
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -677,6 +683,7 @@
             this.DoubleBuffered = true;
             this.Name = "GameScreen";
             this.Size = new System.Drawing.Size(800, 550);
+
 
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameScreen_Paint);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameScreen_KeyUp);
