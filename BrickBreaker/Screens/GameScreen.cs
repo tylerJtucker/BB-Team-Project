@@ -82,8 +82,8 @@ namespace BrickBreaker
             ballStartY = this.Height - paddle.height - 80;
 
             // Creates a new ball
-            int xSpeed = 6;
-            int ySpeed = 6;
+            int xSpeed = -6;
+            int ySpeed = -6;
             int ballSize = 20;
             ball = new Ball(ballStartX, ballStartY, xSpeed, ySpeed, ballSize);
             balls.Add(ball);
