@@ -137,8 +137,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
-
   <ItemGroup>
     <Content Include="level1.xml" />
     <None Include="Resources\SMALLBALL.png" />
@@ -154,6 +152,7 @@
     <None Include="Resources\BrickLvl2.png" />
     <None Include="Resources\BrickLvl1.png" />
     <None Include="Resources\ball.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\level5.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -181,7 +180,6 @@
     <Content Include="level7.xml">
       <SubType>Designer</SubType>
     </Content>
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
