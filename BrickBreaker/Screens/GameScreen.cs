@@ -167,7 +167,7 @@ namespace BrickBreaker
 
                     // Moves the ball back to origin
                     b.x = ((paddle.x - (b.size / 2)) + (paddle.width / 2));
-                    b.y = (this.Height - paddle.height) - 85;
+                    b.y = (this.Height - paddle.height) - 90;
 
                     if (lives == 0)
                     {
