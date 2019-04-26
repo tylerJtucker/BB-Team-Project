@@ -20,13 +20,13 @@ namespace BrickBreaker
     {
         #region global values
         //player1 button control keys - DO NOT CHANGE
-        Boolean leftArrowDown, rightArrowDown, pauseArrowDown;
+        Boolean leftArrowDown, rightArrowDown, pauseArrowDown, upArrowDown, onPaddle = true;
 
         // Game values
         static int lives;
         int score;
         int level = 1;
-        int ballStartX, ballStartY, paddleStartX, paddleStartY;
+        int ballStartX, ballStartY, paddleStartX, paddleStartY, ballStartSpeedX = 0, ballStartSpeedY = -10;
         static int bbucks = 0;
 
         // constants
@@ -72,13 +72,11 @@ namespace BrickBreaker
 
             // setup starting ball values
             ballStartX = this.Width / 2 - 10;
-            ballStartY = this.Height - paddle.height - 80;
+            ballStartY = this.Height - paddle.height - 85;
 
             // Creates a new ball
-            int xSpeed = 6;
-            int ySpeed = 6;
             int ballSize = 20;
-            ball = new Ball(ballStartX, ballStartY, xSpeed, ySpeed, ballSize);
+            ball = new Ball(ballStartX, ballStartY, 0, 0, ballSize);
             balls.Clear();
             balls.Add(ball);
 
@@ -103,6 +101,9 @@ namespace BrickBreaker
                 case Keys.P:
                     pauseArrowDown = true;
                     break;
+                case Keys.Up:
+                    upArrowDown = true;
+                    break;
                 default:
                     break;
             }
@@ -122,6 +123,9 @@ namespace BrickBreaker
                 case Keys.P:
                     pauseArrowDown = false;
                     break;
+                case Keys.Up:
+                    upArrowDown = false;
+                    break;
                 default:
                     break;
             }
@@ -130,14 +134,43 @@ namespace BrickBreaker
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             // Move the paddle
-            if (leftArrowDown && paddle.x > 0)
+            if (upArrowDown == true && onPaddle == true)
             {
-                paddle.Move("left");
+                balls[0].xSpeed = ballStartSpeedX;
+                balls[0].ySpeed = ballStartSpeedY;
+                onPaddle = false;
             }
-            if (rightArrowDown && paddle.x < (this.Width - paddle.width))
+
+            if (leftArrowDown && onPaddle)
             {
-                paddle.Move("right");
+                if (ballStartSpeedX > -8 && ballStartX <= 0)
+                {
+                    ballStartSpeedX--;
+                    ballStartSpeedY++;
+                }
+                else if (ballStartSpeedX > -8 && ballStartSpeedX > 0)
+                {
+                    ballStartSpeedX--;
+                    ballStartSpeedY--;
+                }
             }
+            else if (leftArrowDown && paddle.x > 0) { paddle.Move("left"); }
+
+            if (rightArrowDown && onPaddle)
+            {
+                if (ballStartSpeedX < 8 && ballStartX >= 0)
+                {
+                    ballStartSpeedX++;
+                    ballStartSpeedY++;
+                }
+                else if (ballStartSpeedX < 8 && ballStartSpeedX < 0)
+                {
+                    ballStartSpeedX++;
+                    ballStartSpeedY--;
+                }
+            }
+            else if (rightArrowDown && paddle.x < (this.Width - paddle.width)) { paddle.Move("right"); }
+
             if (pauseArrowDown)
             {
                 PauseScreen ps = new PauseScreen();
@@ -150,6 +183,7 @@ namespace BrickBreaker
 
                 ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
             }
+           
 
             // Move ball
             foreach (Ball b in balls) { b.Move(); }
@@ -166,8 +200,11 @@ namespace BrickBreaker
                     lives--;
 
                     // Moves the ball back to origin
+                    onPaddle = true;
+                    balls[0].xSpeed = 0;
+                    balls[0].ySpeed = 0;
                     b.x = ((paddle.x - (b.size / 2)) + (paddle.width / 2));
-                    b.y = (this.Height - paddle.height) - 90;
+                    b.y = (this.Height - paddle.height) - 85;
 
                     if (lives == 0)
                     {
@@ -240,8 +277,8 @@ namespace BrickBreaker
             foreach (Ball b in balls) { e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.size, b.size); }
 
             //draw score and lives
-            e.Graphics.DrawString("Lives: " + lives, drawFont, drawBrush, 100, 85);
-            e.Graphics.DrawString("Score: " + score, drawFont, drawBrush, 100, 100);
+            e.Graphics.DrawString("Lives: " + ballStartSpeedX, drawFont, drawBrush, 100, 85);
+            e.Graphics.DrawString("Score: " + ballStartSpeedY, drawFont, drawBrush, 100, 100);
         }
 
         public void OnEnd()
