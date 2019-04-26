@@ -34,5 +34,17 @@ namespace BrickBreaker
             gs.Location = new Point((form.Width - gs.Width) / 2, (form.Height - gs.Height) / 2);
         }
 
+        private void TwoplayerButton_Click(object sender, EventArgs e)
+        {
+            //Sets 2 Player to true
+            GameScreen.Twoplayer = true;
+            GameScreen gs = new GameScreen();
+            Form form = this.FindForm();
+
+            form.Controls.Add(gs);
+            form.Controls.Remove(this);
+
+            gs.Location = new Point((form.Width - gs.Width) / 2, (form.Height - gs.Height) / 2);
+        }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.playButton = new System.Windows.Forms.Button();
             this.exitButton = new System.Windows.Forms.Button();
+            this.TwoplayerButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // playButton
@@ -40,10 +41,9 @@
             this.playButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.playButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.playButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.playButton.Location = new System.Drawing.Point(310, 297);
-            this.playButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.playButton.Location = new System.Drawing.Point(207, 145);
             this.playButton.Name = "playButton";
-            this.playButton.Size = new System.Drawing.Size(272, 120);
+            this.playButton.Size = new System.Drawing.Size(181, 78);
             this.playButton.TabIndex = 0;
             this.playButton.Text = "Play";
             this.playButton.UseVisualStyleBackColor = false;
@@ -55,25 +55,40 @@
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(310, 429);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.exitButton.Location = new System.Drawing.Point(207, 348);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(272, 120);
+            this.exitButton.Size = new System.Drawing.Size(181, 78);
             this.exitButton.TabIndex = 1;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // TwoplayerButton
+            // 
+            this.TwoplayerButton.BackColor = System.Drawing.Color.White;
+            this.TwoplayerButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.TwoplayerButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.TwoplayerButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.TwoplayerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TwoplayerButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TwoplayerButton.Location = new System.Drawing.Point(207, 246);
+            this.TwoplayerButton.Name = "TwoplayerButton";
+            this.TwoplayerButton.Size = new System.Drawing.Size(181, 78);
+            this.TwoplayerButton.TabIndex = 2;
+            this.TwoplayerButton.Text = "2 Player";
+            this.TwoplayerButton.UseVisualStyleBackColor = false;
+            this.TwoplayerButton.Click += new System.EventHandler(this.TwoplayerButton_Click);
+            // 
             // MenuScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Controls.Add(this.TwoplayerButton);
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.playButton);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MenuScreen";
-            this.Size = new System.Drawing.Size(1200, 846);
+            this.Size = new System.Drawing.Size(800, 550);
             this.ResumeLayout(false);
 
         }
@@ -82,5 +97,6 @@
 
         private System.Windows.Forms.Button playButton;
         private System.Windows.Forms.Button exitButton;
+        private System.Windows.Forms.Button TwoplayerButton;
     }
 }
