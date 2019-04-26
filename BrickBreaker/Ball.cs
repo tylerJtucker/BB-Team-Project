@@ -33,7 +33,7 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(blockRec))
             {
-                CollisionSide(blockRec);
+                string side = CollisionSide(blockRec);
             }
 
             return blockRec.IntersectsWith(ballRec);
@@ -53,10 +53,22 @@ namespace BrickBreaker
                 string side = CollisionSide(paddleRec);
                 if (side == "top")
                 {
+                    //*
                     if (pMovingLeft)
                         xSpeed = -Math.Abs(xSpeed);
                     else if (pMovingRight)
                         xSpeed = Math.Abs(xSpeed);
+                        //*/
+
+                    if (pMovingLeft || pMovingRight == true)
+                    {
+                        int velocity = Convert.ToInt16(Math.Sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
+
+                        xSpeed =  xSpeed - p.speed / 4;
+                        //ySpeed = Convert.ToInt16(xSpeed * tan);
+
+                        //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
+                    }
 
                     //but really I should think of how to change the angle that the ball is travelling at
                     /*
