@@ -201,11 +201,7 @@ namespace BrickBreaker
 
                     // Moves the ball back to origin
                     onPaddle = true;
-                    paddle.x = paddleStartX;
-                    balls[0].xSpeed = 0;
-                    balls[0].ySpeed = 0;
-                    b.x = ((paddle.x - (b.size / 2)) + (paddle.width / 2));
-                    b.y = (this.Height - paddle.height) - 85;
+                    OnDeath();
 
                     if (lives == 0)
                     {
@@ -247,6 +243,15 @@ namespace BrickBreaker
 
             //redraw the screen
             Refresh();
+        }
+
+        public void OnDeath ()
+        {
+            ball.x = ballStartX;
+            ball.y = ballStartY;
+            paddle.x = paddleStartX;
+            balls[0].xSpeed = 0;
+            balls[0].ySpeed = 0;
         }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
