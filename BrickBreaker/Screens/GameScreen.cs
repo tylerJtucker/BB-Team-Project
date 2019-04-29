@@ -82,8 +82,8 @@ namespace BrickBreaker
             ballStartY = this.Height - paddle.height - 80;
 
             // Creates a new ball
-            int xSpeed = 6;
-            int ySpeed = 6;
+            int xSpeed = -6;
+            int ySpeed = -6;
             int ballSize = 20;
             ball = new Ball(ballStartX, ballStartY, xSpeed, ySpeed, ballSize);
             balls.Add(ball);
@@ -219,8 +219,24 @@ namespace BrickBreaker
             foreach (Block b in blocks)
             {
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height); 
+                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                e.Graphics.FillRectangle(blockBrush2, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
             }
+            
+            var g = e.Graphics;
 
+            // Draws paddle
+            //yeet
+
+            paddleBrush.Color = paddle.colour;
+            e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
+            e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
+            
+            // Draws blocks
+
+            
             // Draws ball
             e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
         }
@@ -242,28 +258,8 @@ namespace BrickBreaker
 
         public void NextLevel()
         {
-            /*
-            var g = e.Graphics;
-
-            // Draws paddle
-            //yeet
-
-            paddleBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
-            e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-            e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
-            */
-            // Draws blocks
-
-            foreach (Block b in blocks)
-            {
-                /*
-                e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height); <---- IDK what is going on here but this doesn't work here
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-                e.Graphics.FillRectangle(blockBrush2, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
-                */
+            
                 gameTimer.Enabled = false;
-
                 level++;
                 switch (level)
                 {
@@ -286,7 +282,7 @@ namespace BrickBreaker
                 */
 
                 //TODO set ball and paddle to starting position
-            }
+            
         }
 
         public void LoadLevel(string level)
