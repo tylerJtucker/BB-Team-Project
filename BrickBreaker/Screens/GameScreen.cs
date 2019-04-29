@@ -38,9 +38,9 @@ namespace BrickBreaker
         static Paddle paddle2;
         static Ball ball;
 
-        // list of all blocks for current level
+        // list of all blocks and paddles for current level
         List<Block> blocks = new List<Block>();
-        
+        List<Paddle> paddles = new List<Paddle>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);
@@ -100,13 +100,25 @@ namespace BrickBreaker
 
             // setup starting paddle values and create paddle object
             int paddleWidth = 80;
-           
-            int paddleX = ((this.Width / 2) - (paddleWidth / 2));
-            int paddleY = (this.Height - paddleHeight) - 60;
+            int paddleBoostY = 60;
+            int paddleX = ((this.Width / 2) - (paddleWidth / 2));      
+            //set Diffrent Starting Height for P1 Paddle
+            if (Twoplayer == true)
+            {
+                paddleBoostY= 80;
+            }
+            else
+            {
+                paddleBoostY =  60;
+            }
+            int paddleY = (this.Height - paddleHeight) - paddleBoostY;
             int paddleY2 = (this.Height - this.Height + paddleHeight + 60);
             int paddleSpeed = 8;
+            //creates Paddle and Adds to List
             paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.Purple);
+            paddles.Add(paddle);
             paddle2 = new Paddle(paddleX, paddleY2, paddleWidth, paddleHeight,paddleSpeed, Color.Blue);
+            paddles.Add(paddle2);
             // setup starting ball values
             int ballX = this.Width / 2 - 10;
             int ballY = paddle.y - (paddleWidth / 2);
@@ -117,18 +129,16 @@ namespace BrickBreaker
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
 
-            //loads current level
+            //loads current level based on whether it's one or two player
             if (Twoplayer == false)
-                {
+            {
                 LoadLevel("Resources/level1.xml");
             }
-            else
+            else 
             {
                 LoadLevel("Resources/twoplayerlevel1.xml");
 
             }
-            
-
             // start the game engine loop
             gameTimer.Enabled = true;
         }
@@ -160,7 +170,7 @@ namespace BrickBreaker
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
         {
-            //player 1  and 2 button releases
+            //player 1 and 2 button releases
             switch (e.KeyCode)
             {
                 case Keys.Left:
@@ -186,7 +196,7 @@ namespace BrickBreaker
         private void gameTimer_Tick(object sender, EventArgs e)
         {
           
-            // Move P1 Paddle
+            // move P1 Paddle
             if (leftArrowDown && paddle.x > 0)
             {
                 paddle.Move("left");
@@ -195,7 +205,7 @@ namespace BrickBreaker
             {
                 paddle.Move("right");
             }
-            //Move P2 Paddle
+            //move P2 Paddle
             if (aLetterDown && paddle2.x > 0)
             {
                 paddle2.Move("left");
@@ -204,8 +214,7 @@ namespace BrickBreaker
             {
                 paddle2.Move("right");
             }
-            
-            
+            //pause Screen
             if (pauseArrowDown)
             {
 
@@ -220,14 +229,12 @@ namespace BrickBreaker
                 ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
             }
 
-            // Move ball
+            // move ball
             ball.Move();
 
-            // Check for collision with top and side walls
-            ball.WallCollision(this);
-
+            // check for collision with top and side walls
             // Check for ball hitting bottom of screen
-            if (ball.BottomCollision(this))
+            if (ball.BottomCollision(this) && Twoplayer == false)
             {
                 lives--;
 
@@ -243,27 +250,41 @@ namespace BrickBreaker
                 }
 
             }
+            //Ignores Bottom Wall Collsion from Single Player
+            else
+            {
+                ball.WallCollision(this);
+            }
 
             // Check for collision of ball with paddles, (incl. paddle movement)
-            ball.PaddleCollision(paddle, leftArrowDown, rightArrowDown);
-            ball.PaddleCollision(paddle2, leftArrowDown, rightArrowDown);
+            foreach( Paddle p in paddles)
+            {
+                ball.PaddleCollision(p, leftArrowDown, rightArrowDown);
+            }
+           
             // Check if ball has collided with any blocks
             foreach (Block b in blocks)
-            {
-                if (ball.BlockCollision(b))
+            {// trying to get it where if it's less than 1hp, go oppsite direction
+                 if (b.hp > 1 && ball.BlockCollision(b))
+                {                   
+                    b.hp += -1;                  
+                }
+                    if (ball.BlockCollision(b)&& b.hp <= 1)
                 {
+                    score += b.hp * 100;
                     blocks.Remove(b);
                     bricksBroken++;
 
                     if (blocks.Count == 0)
                     {
-                        if(lives ==0)
+                        if(lives == 0)
                         {
                             gameTimer.Enabled = false;
                             OnEnd();                           
                         }
                         NickDoingStuffCauseHesBored();  
-                    }                  
+                    }   
+                    
                     break;
                 }
             }
@@ -275,8 +296,8 @@ namespace BrickBreaker
 
 
         public void NickDoingStuffCauseHesBored()
-        {
-                if (lives > 0 && blocks.Count == 0)
+        {       // Loads diffrent levels when there are no more blocks and player is alive
+                if (lives > 0 && blocks.Count == 0 && Twoplayer == false)
                 {
                     b++;
                 switch (b)
@@ -297,8 +318,9 @@ namespace BrickBreaker
                     case 6:
                         LoadLevel("Resources/level6.xml");
                         break;
-
-                           
+                    case 7:
+                        //LoadLevel("Resources/level7.xml");
+                        break;
                 }
             }
         }
@@ -320,18 +342,21 @@ namespace BrickBreaker
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
-           // Draws paddle
+           // Draws one paddle in Single Player
            if(Twoplayer == false)
-            {
+            {               
                 paddleBrush.Color = paddle.colour;
                 e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             }
+           //Draws two paddle in two player
             if (Twoplayer == true)
             {
-                paddleBrush.Color = paddle.colour;
-                e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-                paddleBrush.Color = paddle2.colour;
-                e.Graphics.FillRectangle(paddleBrush, paddle2.x, paddle2.y, paddle2.width, paddle2.height);
+                foreach (Paddle p in paddles)
+                {
+                    paddleBrush.Color = p.colour;
+                    e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
+                }
+                
             }
             
             // Draws blocks

@@ -24,7 +24,7 @@ namespace BrickBreaker
 
         private void playButton_Click(object sender, EventArgs e)
         {
-            // Goes to the game screen
+            // Goes to the game screen          
             GameScreen gs = new GameScreen();
             Form form = this.FindForm();
 

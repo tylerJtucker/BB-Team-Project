@@ -67,7 +67,7 @@
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.Controls.Add(this.resumeButton);
             this.Controls.Add(this.exitButton);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PauseScreen";
             this.Size = new System.Drawing.Size(626, 439);
             this.ResumeLayout(false);
