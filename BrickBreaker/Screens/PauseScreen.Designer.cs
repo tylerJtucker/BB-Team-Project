@@ -38,10 +38,9 @@
             this.exitButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.exitButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.exitButton.Location = new System.Drawing.Point(273, 264);
-            this.exitButton.Margin = new System.Windows.Forms.Padding(4);
+            this.exitButton.Location = new System.Drawing.Point(229, 308);
             this.exitButton.Name = "exitButton";
-            this.exitButton.Size = new System.Drawing.Size(242, 96);
+            this.exitButton.Size = new System.Drawing.Size(181, 78);
             this.exitButton.TabIndex = 2;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = false;
@@ -52,10 +51,9 @@
             this.resumeButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.resumeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resumeButton.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resumeButton.Location = new System.Drawing.Point(273, 136);
-            this.resumeButton.Margin = new System.Windows.Forms.Padding(4);
+            this.resumeButton.Location = new System.Drawing.Point(235, 192);
             this.resumeButton.Name = "resumeButton";
-            this.resumeButton.Size = new System.Drawing.Size(242, 96);
+            this.resumeButton.Size = new System.Drawing.Size(181, 78);
             this.resumeButton.TabIndex = 3;
             this.resumeButton.Text = "Resume";
             this.resumeButton.UseVisualStyleBackColor = false;
@@ -63,13 +61,16 @@
             // 
             // PauseScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Desktop;
+            this.BackgroundImage = BrickBreaker.Properties.Resources.PauseScreen;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.resumeButton);
             this.Controls.Add(this.exitButton);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "PauseScreen";
-            this.Size = new System.Drawing.Size(834, 540);
+            this.Size = new System.Drawing.Size(625, 439);
             this.ResumeLayout(false);
 
         }
