@@ -39,7 +39,7 @@ namespace BrickBreaker
 
         // list of all blocks for current level
         List<Block> blocks = new List<Block>();
-        static List<Ball> balls = new List<Ball>();
+        public static List<Ball> balls = new List<Ball>();
 
         // Brushes
         SolidBrush paddleBrush = new SolidBrush(Color.White);

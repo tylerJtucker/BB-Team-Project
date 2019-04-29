@@ -21,8 +21,15 @@ namespace BrickBreaker
         public void tick(Paddle p)
         {
             //move
+
+
             //check if colliding with paddle p
+            
+
+
             //if colliding call collide method
+
+
         }
         public void collide(Paddle p)
         {
@@ -34,7 +41,8 @@ namespace BrickBreaker
                     break;
 
                 case "multiBoi":
-                   // GameScreen.Ball
+                    GameScreen.balls.Add(new Ball(GameScreen.balls[0].x + 10, GameScreen.balls[0].y, Math.Abs(GameScreen.balls[0].xSpeed), Math.Abs(GameScreen.balls[0].ySpeed), GameScreen.balls[0].size));
+                    GameScreen.balls.Add(new Ball(GameScreen.balls[0].x - 10, GameScreen.balls[0].y, Math.Abs(GameScreen.balls[0].xSpeed), Math.Abs(GameScreen.balls[0].ySpeed), GameScreen.balls[0].size));
                     break;
 
                 case "lifeBoi":
