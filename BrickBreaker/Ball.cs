@@ -60,16 +60,26 @@ namespace BrickBreaker
                         xSpeed = Math.Abs(xSpeed);
                         //*/
 
-                    if (pMovingLeft || pMovingRight == true && Math.Abs(xSpeed) < 10)
+                    if (pMovingLeft || pMovingRight == true)
                     {
-                        //int velocity = Convert.ToInt16(Math.Sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
+                        int tempSpeed = xSpeed;
 
-                        //xSpeed =  xSpeed - p.speed / 4;
+                        if (Math.Abs(xSpeed) < 10)
+                        {
+                            xSpeed = xSpeed - p.speed / 4;
+                        }
+                        else
+                        {
+                            xSpeed = tempSpeed;
+                        }
+
+
                         //ySpeed = Convert.ToInt16(xSpeed * tan);
 
                         //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
 
                         //I have to develop the logic here
+                        /*
                         if (Math.Abs(xSpeed) < 10)
                         {
                             int tempSpeed;
@@ -87,6 +97,7 @@ namespace BrickBreaker
                                 xSpeed = tempSpeed;
                             }
                         }
+                        //*/
                     }
 
                     //but really I should think of how to change the angle that the ball is travelling at
