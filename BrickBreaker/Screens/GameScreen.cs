@@ -260,7 +260,6 @@ namespace BrickBreaker
         {
             
                 gameTimer.Enabled = false;
-
                 level++;
                 switch (level)
                 {
