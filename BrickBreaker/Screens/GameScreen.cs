@@ -143,7 +143,7 @@ namespace BrickBreaker
 
             if (leftArrowDown && onPaddle)
             {
-                if (ballStartSpeedX > -8 && ballStartX <= 0)
+                if (ballStartSpeedX > -8 && ballStartSpeedX <= 0)
                 {
                     ballStartSpeedX--;
                     ballStartSpeedY++;
@@ -158,7 +158,7 @@ namespace BrickBreaker
 
             if (rightArrowDown && onPaddle)
             {
-                if (ballStartSpeedX < 8 && ballStartX >= 0)
+                if (ballStartSpeedX < 8 && ballStartSpeedX >= 0)
                 {
                     ballStartSpeedX++;
                     ballStartSpeedY++;
@@ -201,6 +201,7 @@ namespace BrickBreaker
 
                     // Moves the ball back to origin
                     onPaddle = true;
+                    paddle.x = paddleStartX;
                     balls[0].xSpeed = 0;
                     balls[0].ySpeed = 0;
                     b.x = ((paddle.x - (b.size / 2)) + (paddle.width / 2));
