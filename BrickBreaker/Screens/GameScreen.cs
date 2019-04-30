@@ -264,14 +264,6 @@ namespace BrickBreaker
             Refresh();
         }
 
-        public void OnDeath ()
-        {
-            ball.x = ballStartX;
-            ball.y = ballStartY;
-            paddle.x = paddleStartX;
-            balls[0].xSpeed = 0;
-            balls[0].ySpeed = 0;
-        }
 
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
@@ -295,11 +287,9 @@ namespace BrickBreaker
                         drawBrush.Color = Color.Green;
                         break;
                 }
-                e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.width, b.height);
-               // e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
                 e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height); 
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-                e.Graphics.FillRectangle(blockBrush2, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
+                e.Graphics.FillRectangle(drawBrush, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
             }
             
             var g = e.Graphics;
@@ -373,6 +363,15 @@ namespace BrickBreaker
                 //TODO set ball and paddle to starting position
             
 
+        }
+        
+        public void OnDeath ()
+        {
+            ball.x = ballStartX;
+            ball.y = ballStartY;
+            paddle.x = paddleStartX;
+            balls[0].xSpeed = 0;
+            balls[0].ySpeed = 0;
         }
 
         public void LoadLevel(string level)
