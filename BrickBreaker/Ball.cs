@@ -130,6 +130,14 @@ namespace BrickBreaker
             {
                 ySpeed = Math.Abs(ySpeed);
             }
+            //Checks for bottom wall collsion if two player
+            if(GameScreen.Twoplayer == true)
+            {
+                if (y >= UC.Height - size)
+                {
+                    ySpeed *= -1;
+                }
+            }            
         }
 
         public bool BottomCollision(UserControl UC)

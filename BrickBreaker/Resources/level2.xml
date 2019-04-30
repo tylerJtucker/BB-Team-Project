@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <level>
-  
+
   <Brick>
     <x>337</x>
     <y> 42</y>
@@ -18,55 +18,55 @@
     <y>74</y>
     <hp>2</hp>
   </Brick>
-  
+
   <Brick>
     <x>46</x>
     <y>125</y>
     <hp>1</hp>
   </Brick>
-  
+
   <Brick>
     <x>157</x>
     <y>125</y>
     <hp>1</hp>
   </Brick>
-  
+
   <Brick>
     <x>262</x>
     <y>125</y>
     <hp>1</hp>
   </Brick>
-  
-  <Brick>    
+
+  <Brick>
     <x>337</x>
     <y>125</y>
     <hp>1</hp>
   </Brick>
-  
+
   <Brick>
     <x>405</x>
     <y>125</y>
     <hp>1</hp>
   </Brick>
-  
+
   <Brick>
     <x>470</x>
     <y>125</y>
     <hp>1</hp>
   </Brick>
-  
+
   <Brick>
     <x>526</x>
     <y>125</y>
     <hp>1</hp>
   </Brick>
-  
+
   <Brick>
     <x>582</x>
     <y>125</y>
     <hp> 1</hp>
   </Brick>
-  
+
   <Brick>
     <x> 638</x>
     <y> 125</y>
@@ -132,5 +132,5 @@
     <y> 156</y>
     <hp> 3</hp>
   </Brick>
-  
+
 </level>
