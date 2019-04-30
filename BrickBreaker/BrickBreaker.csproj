@@ -137,7 +137,21 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\SMALLBALL.png" />
+    <None Include="Resources\SMALLPADDLE2.png" />
+    <None Include="Resources\SMALLPADDLE.png" />
+    <None Include="Resources\SMALLBRICK2.png" />
+    <None Include="Resources\SMALLBRICK.png" />
+    <None Include="Resources\Background.jpg" />
+    <None Include="Resources\PauseScreen.jpg" />
+    <None Include="Resources\Paddle.png" />
+    <None Include="Resources\MainScreen.jpg" />
+    <None Include="Resources\BrickLvl3.png" />
+    <None Include="Resources\BrickLvl2.png" />
+    <None Include="Resources\BrickLvl1.png" />
+    <None Include="Resources\ball.png" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\level1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -156,6 +170,12 @@
     </Content>
     <Content Include="Resources\twoplayerlevel1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="level3.xml" />
+    <Content Include="level7.xml">
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
