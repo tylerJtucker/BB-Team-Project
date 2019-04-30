@@ -265,24 +265,19 @@ namespace BrickBreaker
             // Check if ball has collided with any blocks
             foreach (Block b in blocks)
             {// trying to get it where if it's less than 1hp, go oppsite direction
-                 if (b.hp > 1 && ball.BlockCollision(b))
-                {                   
-                    b.hp += -1;                  
-                }
                     if (ball.BlockCollision(b)&& b.hp <= 1)
                 {
-                    score += b.hp * 100;
                     blocks.Remove(b);
                     bricksBroken++;
 
-                    if (blocks.Count == 0)
+                    if (blocks.Count == 0|| lives == 0)
                     {
                         if(lives == 0)
                         {
                             gameTimer.Enabled = false;
                             OnEnd();                           
                         }
-                        NickDoingStuffCauseHesBored();  
+                        LoadLevels();  
                     }   
                     
                     break;
@@ -295,7 +290,7 @@ namespace BrickBreaker
 
 
 
-        public void NickDoingStuffCauseHesBored()
+        public void LoadLevels()
         {       // Loads diffrent levels when there are no more blocks and player is alive
                 if (lives > 0 && blocks.Count == 0 && Twoplayer == false)
                 {
@@ -303,11 +298,10 @@ namespace BrickBreaker
                 switch (b)
                 {
                     case 2:
-                        LoadLevel("Resources/level2.xml");
-                        b++;
+                        LoadLevel("Resources/level2.xml");                        
                         break;
                     case 3:
-                        //    LoadLevel("Resources/level3.xml");
+                        LoadLevel("Resources/level3.xml");
                         break;
                     case 4:
                         LoadLevel("Resources/level4.xml");
@@ -319,7 +313,7 @@ namespace BrickBreaker
                         LoadLevel("Resources/level6.xml");
                         break;
                     case 7:
-                        //LoadLevel("Resources/level7.xml");
+                        LoadLevel("Resources/level7.xml");
                         break;
                 }
             }
