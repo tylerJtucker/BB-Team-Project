@@ -84,6 +84,7 @@ namespace BrickBreaker
 
             //loads current level
             LoadLevel("Resources/level5.xml");
+            loadScore();
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -304,25 +305,49 @@ namespace BrickBreaker
                 paddle.width = PADDLESPEED;
             }
             #endregion      
-
+         
         public void saveScore()
         {
             highscores.Add(score);
+            highscores.Sort();
 
             XmlWriter writer = XmlWriter.Create("Resources/scores.xml", null);
 
             writer.WriteStartElement("scores");
 
-            for (int i = 0; i < highscores.Count(); i++)
+            for (int i = 0; i < 10; i++)
             {
-                writer.WriteStartElement("score");
-                writer.WriteElementString("s", highscores[i].ToString());
-
-                writer.WriteEndElement();
+                writer.WriteElementString("score", highscores[i].ToString());
             }
             writer.WriteEndElement();
 
             writer.Close();
+
+        }
+
+        public void loadScore()
+        {
+            string newScore;
+            int intScore;
+
+            XmlReader reader = XmlReader.Create("Resources/scores.xml");
+
+            for (int i = 0; i < 10; i++)
+            {
+                reader.ReadToFollowing("score");
+                newScore = reader.ReadString();
+
+                if (newScore != "")
+                {
+                    intScore = Convert.ToInt16(newScore);
+                    highscores.Add(intScore);
+                }
+                else
+                {
+                    break;
+                }               
+            }
+            reader.Close();
         }
     }
 }

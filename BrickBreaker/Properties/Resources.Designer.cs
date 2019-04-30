@@ -149,7 +149,7 @@ namespace BrickBreaker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;scores&gt;&lt;score&gt;&lt;s&gt;750&lt;/s&gt;&lt;/score&gt;&lt;/scores&gt;.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string scores {
             get {
