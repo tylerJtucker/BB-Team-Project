@@ -50,57 +50,24 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(paddleRec))
             {
+                ballRec.X -= xSpeed;
+                ballRec.Y -= ySpeed;
+
                 string side = CollisionSide(paddleRec);
+
                 if (side == "top")
                 {
                     /*
                     if (pMovingLeft)
-                        xSpeed = -Math.Abs(xSpeed);
-                    else if (pMovingRight)
-                        xSpeed = Math.Abs(xSpeed);
-                        //*/
-
-                    if (pMovingLeft || pMovingRight == true)
                     {
-                        int tempSpeed = xSpeed;
-
-                        if (Math.Abs(xSpeed) < 10)
-                        {
-                            xSpeed = xSpeed - p.speed / 4;
-                        }
-                        else
-                        {
-                            xSpeed = tempSpeed;
-                        }
-
-                        //find relative velocity to the paddle. Bounce it adding or subtracting, but never add too much to xSpeed
-
-                        #region Eh
-                        //ySpeed = Convert.ToInt16(xSpeed * tan);
-
-                        //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
-
-                        //I have to develop the logic here
-                        /*
-                        if (Math.Abs(xSpeed) < 10)
-                        {
-                            int tempSpeed;
-
-                            if (pMovingLeft)
-                                tempSpeed = xSpeed - (p.speed - xSpeed);
-                            else if (pMovingRight)
-                                tempSpeed = xSpeed + (p.speed + xSpeed);
-                            else
-                                tempSpeed = xSpeed;
-
-
-                            if (tempSpeed < 10)
-                            {
-                                xSpeed = tempSpeed;
-                            }
-                        }
-                        //*/
+                        xSpeed = -Math.Abs(xSpeed);
                     }
+                    else if (pMovingRight)
+                    {
+                        xSpeed = Math.Abs(xSpeed);
+                    }
+                    //*/
+
 
                     //but really I should think of how to change the angle that the ball is travelling at
                     /*
@@ -109,8 +76,44 @@ namespace BrickBreaker
                      * deve essere sottratta la velocita della superfice per creare un microsistema in cui la paletta e ferma e la palla si muove
                      * Per mantenere le cose stabili la velocita y della palla dovra aumentare se la x diminuisce. Utilizza la tangente per fare i conti
                      * */
+                    int resultSpeed = 0;
+
+                    if (pMovingLeft)
+                    {
+                        if (xSpeed > 0)
+                        {
+                            resultSpeed = -p.speed + xSpeed;
+                        }
+                        else if (xSpeed == 0)
+                        {
+                            resultSpeed -= p.speed / 4;
+                        }
+                        else
+                        {
+                            resultSpeed = xSpeed;
+                        }
+                    }
+
+                    else if (pMovingRight)
+                    {
+                        if (xSpeed > 0)
+                        {
+                            resultSpeed = xSpeed;
+                        }
+                        else if (xSpeed == 0)
+                        {
+                            resultSpeed = p.speed / 4;
+                        }
+                        else
+                        {
+                            resultSpeed = -p.speed + xSpeed;
+                        }
+                    }
+
+                    xSpeed = resultSpeed;
+
                 }
-            }             
+            }
         }
 
         public void WallCollision(UserControl UC)
