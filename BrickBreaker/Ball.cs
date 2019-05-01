@@ -75,7 +75,7 @@ namespace BrickBreaker
 
                         //find relative velocity to the paddle. Bounce it adding or subtracting, but never add too much to xSpeed
 
-                        #region Eh
+                        //#region Eh
                         //ySpeed = Convert.ToInt16(xSpeed * tan);
 
                         //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
