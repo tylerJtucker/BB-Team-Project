@@ -98,7 +98,7 @@ namespace BrickBreaker
             balls.Add(ball);
 
             //loads current level
-            LoadLevel("Resources/level5.xml");
+            LoadLevel("Resources/level2.xml");
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -291,21 +291,12 @@ namespace BrickBreaker
                         break;
                 }
                 e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.width, b.height);
-               // e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
                 e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height); 
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
                 e.Graphics.FillRectangle(blockBrush2, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
             }
             
-            var g = e.Graphics;
-
-            // Draws paddle
-            //yeet
-
-            paddleBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
-            e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-            e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
             
             // Draws blocks
 
