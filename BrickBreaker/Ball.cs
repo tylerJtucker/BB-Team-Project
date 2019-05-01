@@ -60,16 +60,28 @@ namespace BrickBreaker
                         xSpeed = Math.Abs(xSpeed);
                         //*/
 
-                    if (pMovingLeft || pMovingRight == true && Math.Abs(xSpeed) < 10)
+                    if (pMovingLeft || pMovingRight == true)
                     {
-                        //int velocity = Convert.ToInt16(Math.Sqrt(xSpeed * xSpeed + ySpeed * ySpeed));
+                        int tempSpeed = xSpeed;
 
-                        //xSpeed =  xSpeed - p.speed / 4;
+                        if (Math.Abs(xSpeed) < 10)
+                        {
+                            xSpeed = xSpeed - p.speed / 4;
+                        }
+                        else
+                        {
+                            xSpeed = tempSpeed;
+                        }
+
+                        //find relative velocity to the paddle. Bounce it adding or subtracting, but never add too much to xSpeed
+
+                        #region Eh
                         //ySpeed = Convert.ToInt16(xSpeed * tan);
 
                         //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
 
                         //I have to develop the logic here
+                        /*
                         if (Math.Abs(xSpeed) < 10)
                         {
                             int tempSpeed;
@@ -87,6 +99,7 @@ namespace BrickBreaker
                                 xSpeed = tempSpeed;
                             }
                         }
+                        //*/
                     }
 
                     //but really I should think of how to change the angle that the ball is travelling at
@@ -117,6 +130,14 @@ namespace BrickBreaker
             {
                 ySpeed = Math.Abs(ySpeed);
             }
+            //Checks for bottom wall collsion if two player
+            if(GameScreen.Twoplayer == true)
+            {
+                if (y >= UC.Height - size)
+                {
+                    ySpeed *= -1;
+                }
+            }            
         }
 
         public bool BottomCollision(UserControl UC)
