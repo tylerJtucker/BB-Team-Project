@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace BrickBreaker
 {
     public class PowerUps 
     {
-        int x;
-        int y;
-        string name;
+        public int x;
+        public int y;
+        public string name;
 
         public PowerUps(int _x, int _y, string _name)
         {
@@ -18,17 +19,22 @@ namespace BrickBreaker
             y = _y;
             name = _name;
         }
-        public void tick(Paddle p)
+        public void Move ()
         {
-            //move
 
 
-            //check if colliding with paddle p
-            
+            y += 5;
+        }
+        public bool Collision (Paddle p)
+        {
+            Rectangle a = new Rectangle(x, y, 5, 5);
+            Rectangle b = new Rectangle(p.x, p.y, p.width, p.height);
 
-
-            //if colliding call collide method
-
+            if (a.IntersectsWith(b))
+            {
+                return true;
+            }
+            return false;
 
         }
         public void collide(Paddle p)
@@ -71,39 +77,7 @@ namespace BrickBreaker
     public class blankClass
     {
 
-        public PowerUps randomGenBoi(int _x, int _y)
-        {
-            Random rnd = new Random();
-
-            int randomNumber = rnd.Next(1, 106);
-
-            if (randomNumber <= 10)
-            {
-                return new PowerUps(_x, _y, "mutliBoi");
-            }
-            else if (randomNumber <= 20)
-            {
-                return new PowerUps(_x, _y, "fastBoi");
-            }
-            else if (randomNumber <= 35)
-            {
-                return new PowerUps(_x, _y, "slowBoi");
-            }
-            else if (randomNumber <= 55)
-            {
-                return new PowerUps(_x, _y, "smallBoi");
-            }
-            else if (randomNumber <= 80)
-            {
-                return new PowerUps(_x, _y, "enlargedBoi");
-            }
-            else   // if its lower than 105
-            {
-                return new PowerUps(_x, _y, "lifeBoi");
-            }
-            
-        
-        }
+       
     }
 
    
