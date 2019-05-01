@@ -27,6 +27,8 @@ namespace BrickBreaker
         int ballStartX, ballStartY, paddleStartX, paddleStartY, ballStartSpeedX = 0, ballStartSpeedY = -10;
         static int bbucks = 0;
 
+        Random rng = new Random();
+
         // constants
         const int BALLSPEED = 6;
         const int PADDLESPEED = 8;
@@ -39,6 +41,7 @@ namespace BrickBreaker
         // list of all blocks for current level
         List<Block> blocks = new List<Block>();
         static List<Ball> balls = new List<Ball>();
+        List<PowerUps> powerups = new List<PowerUps>();
 
         // Brushes
 
@@ -50,10 +53,7 @@ namespace BrickBreaker
         SolidBrush blockBrush = new SolidBrush(Color.Black);
         SolidBrush blockBrush2 = new SolidBrush(Color.White);
         SolidBrush shadowBrush = new SolidBrush(Color.LightGray);
-
-
-
-
+        SolidBrush powerBrush = new SolidBrush(Color.White);
         #endregion
 
         public GameScreen()
@@ -69,6 +69,7 @@ namespace BrickBreaker
           
             //set life counter
             lives = 3;
+            level = 1;
 
             //set all button presses to false.
             leftArrowDown = rightArrowDown = false;
@@ -88,17 +89,13 @@ namespace BrickBreaker
             ballStartY = this.Height - paddle.height - 85;
 
             // Creates a new ball
-
-            int xSpeed = -6;
-            int ySpeed = -6;
-
             int ballSize = 20;
             ball = new Ball(ballStartX, ballStartY, 0, 0, ballSize);
             balls.Clear();
             balls.Add(ball);
 
             //loads current level
-            LoadLevel("Resources/level5.xml");
+            LoadLevel("Resources/level2.xml");
 
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -150,8 +147,6 @@ namespace BrickBreaker
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-           
-           
             // Move the paddle
             if (upArrowDown == true && onPaddle == true)
             {
@@ -249,22 +244,40 @@ namespace BrickBreaker
                     {
                         blocks.Remove(b);
                         score += 50;
+                        if (rng.Next(1, 9) == 7)
+                        powerups.Add(randomGenBoi(b.x, b.y));
                         break;
                     }
+
                     //if all blocks are broken go to next level
                     if (blocks.Count == 0)
                     {
-                        gameTimer.Enabled = false;
                         NextLevel();
                     }
+                }
+            }
+
+            foreach (PowerUps p in powerups)
+            {
+                p.Move();
+                if (p.y > this.Height)
+                {
+
+                }
+            }
+
+            foreach (PowerUps p in powerups)
+            {
+                if (p.Collision(paddle))
+                {
+                    //do some weird shit
                 }
             }
 
             //redraw the screen
             Refresh();
         }
-
-
+        
         public void GameScreen_Paint(object sender, PaintEventArgs e)
         {
             // Draws paddle
@@ -291,11 +304,11 @@ namespace BrickBreaker
                 e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
                 e.Graphics.FillRectangle(drawBrush, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
             }
-            
-            var g = e.Graphics;
 
-            // Draws paddle
-            //yeet
+            foreach (PowerUps p in powerups)
+            {
+                e.Graphics.FillEllipse(powerBrush, p.x, p.y, 25, 25);
+            }
 
             paddleBrush.Color = paddle.colour;
             e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
@@ -330,39 +343,44 @@ namespace BrickBreaker
 
         public void NextLevel()
         {
-            
-                gameTimer.Enabled = false;
-                level++;
+               level++;
                 switch (level)
                 {
-                    case 2:
-                        LoadLevel("");
-                        break;
-                    default:
+                case 2:
+                    LoadLevel("Resources/level2.xml");
+                    break;
+                case 3:
+                    LoadLevel("Resources / level3.xml");
+                    break;
+                case 4:
+                    LoadLevel("Resources / level4.xml");
+                    break;
+                case 5:
+                    LoadLevel("Resources / level5.xml");
+                    break;
+                case 6:
+                    LoadLevel("Resources / level6.xml");
+                    break;
+                case 7:
+                    LoadLevel("Resources / level7.xml");
+                    break;
+                default:
                         OnEnd();
                         break;
-
                 }
 
-
-
             paddle.x = paddleStartX; paddle.y = paddleStartY;
-
+            onPaddle = true;
             balls.Clear();
             ball = new Ball(ballStartX, ballStartY, 6, 6, 20);
             balls.Add(ball);
-
-
+            
                 /*
                 // Draws ball
                 e.Graphics.FillEllipse(shadowBrush, ball.x + 3, ball.y + 3, ball.size, ball.size);
                 e.Graphics.FillEllipse(blockBrush, ball.x, ball.y, ball.size, ball.size);
                 e.Graphics.FillEllipse(blockBrush2, ball.x + 1, ball.y + 1, ball.size - 2, ball.size - 2);
                 */
-
-                //TODO set ball and paddle to starting position
-            
-
         }
         
         public void OnDeath ()
@@ -407,6 +425,38 @@ namespace BrickBreaker
                 }
             }
 
+        }
+
+        public PowerUps randomGenBoi (int _x, int _y)
+        {
+            Random rnd = new Random();
+
+            int randomNumber = rnd.Next(1, 106);
+
+            if (randomNumber <= 10)
+            {
+                return new PowerUps(_x, _y, "mutliBoi");
+            }
+            else if (randomNumber <= 20)
+            {
+                return new PowerUps(_x, _y, "fastBoi");
+            }
+            else if (randomNumber <= 35)
+            {
+                return new PowerUps(_x, _y, "slowBoi");
+            }
+            else if (randomNumber <= 55)
+            {
+                return new PowerUps(_x, _y, "smallBoi");
+            }
+            else if (randomNumber <= 80)
+            {
+                return new PowerUps(_x, _y, "enlargedBoi");
+            }
+            else   // if its lower than 105
+            {
+                return new PowerUps(_x, _y, "lifeBoi");
+            }
         }
 
         #region change value functions
