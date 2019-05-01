@@ -92,10 +92,24 @@ namespace BrickBreaker
                         {
                             resultSpeed = xSpeed;
                         }
+
                     }
                     else if (pMovingRight)
                     {
                         if (xSpeed > 0)
+
+
+                        //find relative velocity to the paddle. Bounce it adding or subtracting, but never add too much to xSpeed
+
+                       // #region Eh
+                        //ySpeed = Convert.ToInt16(xSpeed * tan);
+
+                        //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
+
+                        //I have to develop the logic here
+                        /*
+                        if (Math.Abs(xSpeed) < 10)
+
                         {
                             resultSpeed = xSpeed;
                         }
@@ -137,6 +151,14 @@ namespace BrickBreaker
             {
                 ySpeed = Math.Abs(ySpeed);
             }
+            //Checks for bottom wall collsion if two player
+            if(GameScreen.Twoplayer == true)
+            {
+                if (y >= UC.Height - size)
+                {
+                    ySpeed *= -1;
+                }
+            }            
         }
 
         public bool BottomCollision(UserControl UC)
