@@ -157,6 +157,7 @@ namespace BrickBreaker
             }
         }
 
+
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             // Move the paddle
@@ -403,9 +404,8 @@ namespace BrickBreaker
         
         public void OnDeath ()
         {
-            ball.x = ballStartX;
+            ball.x = paddle.x + PADDLEWIDTH/2 ;
             ball.y = ballStartY;
-            paddle.x = paddleStartX;
             balls[0].xSpeed = 0;
             balls[0].ySpeed = 0;
         }
