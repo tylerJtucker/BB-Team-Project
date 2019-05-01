@@ -49,9 +49,13 @@ namespace BrickBreaker
         // list of all blocks and paddles for current level
         List<Block> blocks = new List<Block>();
 
+        //list for highscores
+        List<int> highscores = new List<int>();
+
         List<Paddle> paddles = new List<Paddle>();
 
         static List<Ball> balls = new List<Ball>();
+
 
 
         // Brushes
@@ -169,6 +173,11 @@ namespace BrickBreaker
             balls.Clear();
             balls.Add(ball);
 
+
+            //loads current level
+            //LoadLevel("Resources/level5.xml");
+            loadScore();
+
             //loads current level based on whether it's one or two player
             if (Twoplayer == false)
             {
@@ -177,6 +186,7 @@ namespace BrickBreaker
             else 
             {
                 LoadLevel("Resources/twoplayerlevel1.xml");
+
 
             }
             // start the game engine loop
@@ -305,6 +315,7 @@ namespace BrickBreaker
 
             if (pauseArrowDown)
             {
+
                 PauseScreen ps = new PauseScreen();
                 Form form = this.FindForm();
 
@@ -511,6 +522,8 @@ namespace BrickBreaker
 
             form.Controls.Add(ps);
             form.Controls.Remove(this);
+
+            saveScore();
         }
 
 
@@ -616,54 +629,102 @@ namespace BrickBreaker
                 }
             }
 
+
         }
 
 
         #region change value functions
-        public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
+        
+            public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
+            {
+                if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
+                else { ball.xSpeed += xSpeed; }
+
+                if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
+                else { ball.ySpeed += ySpeed; }
+
+
+                paddle.speed += paddleSpeed;
+            }
+
+            public static void ChangePaddle(int width)
+            {
+                paddle.width += width;
+            }
+
+            public static void ChangeLives(int number)
+            {
+                lives += number;
+            }
+
+            public void ReturnSpeeds()
+            {
+                if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
+                else { ball.xSpeed = BALLSPEED; }      
+
+                if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
+                else { ball.ySpeed = BALLSPEED; }
+
+                paddle.speed = PADDLESPEED;
+            }
+
+            public static void ReturnPaddle()
+            {
+                paddle.width = PADDLESPEED;
+            }
+            #endregion      
+         
+        public void saveScore()
         {
-            if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
-            else { ball.xSpeed += xSpeed; }
+            highscores.Add(score);
+            highscores.Sort();
 
-            if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
-            else { ball.ySpeed += ySpeed; }
+            XmlWriter writer = XmlWriter.Create("Resources/scores.xml", null);
 
-            paddle.speed += paddleSpeed;
+            writer.WriteStartElement("scores");
+
+            for (int i = 0; i < 10; i++)
+            {
+                writer.WriteElementString("score", highscores[i].ToString());
+            }
+            writer.WriteEndElement();
+
+            writer.Close();
+
         }
 
-        public static void ChangePaddle(int width)
-
+        public void loadScore()
         {
-            paddle.width += width;
+            string newScore;
+            int intScore;
+
+            XmlReader reader = XmlReader.Create("Resources/scores.xml");
+
+            for (int i = 0; i < 10; i++)
+            {
+                reader.ReadToFollowing("score");
+                newScore = reader.ReadString();
+
+                if (newScore != "")
+                {
+                    intScore = Convert.ToInt16(newScore);
+                    highscores.Add(intScore);
+                }
+                else
+                {
+                    break;
+                }               
+            }
+            reader.Close();
         }
 
-        public static void ChangeLives(int number)
-        {
-
-            lives += number;
-        }
-
-        public void ReturnSpeeds()
-        {
-            if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
-            else { ball.xSpeed = BALLSPEED; }
-
-            if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
-            else { ball.ySpeed = BALLSPEED; }
-
-            paddle.speed = PADDLESPEED;
-        }
-
-        public static void ReturnPaddle()
-        {
-            paddle.width = PADDLESPEED;
-        }
 
         public static void GiveBBuck (int bigmonies)
         {
             bbucks += bigmonies;
         }
         #endregion
+
     }
 
 }
