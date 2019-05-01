@@ -20,7 +20,7 @@ namespace BrickBreaker
 
         Boolean leftArrowDown, rightArrowDown, pauseArrowDown, aLetterDown, dLetterDown;
 
-        Boolean leftArrowDown, rightArrowDown, pauseArrowDown, upArrowDown, onPaddle = true;
+        Boolean upArrowDown, onPaddle = true;
 
 
         // Game values
@@ -34,6 +34,7 @@ namespace BrickBreaker
         int level = 1;
         int ballStartX, ballStartY, paddleStartX, paddleStartY, ballStartSpeedX = 0, ballStartSpeedY = -10;
         static int bbucks = 0;
+        int bricksBroken;
 
 
         // constants
@@ -78,43 +79,10 @@ namespace BrickBreaker
         {
             InitializeComponent();
             OnStart();
+            
         
         }
-        #region 
-        public void LoadLevel(string level)
-        {
-            //creates variables and xml reader needed
-            XmlReader reader = XmlReader.Create(level);
-            string blockX;
-            string blockY;
-            string blockHP;
-            int intX;
-            int intY;
-            int intHP;
-
-            //Grabs all the blocks for the current level and adds them to the list
-            while (reader.Read())
-            {
-                reader.ReadToFollowing("x");
-                blockX = reader.ReadString();
-                reader.ReadToFollowing("y");
-                blockY = reader.ReadString();
-                reader.ReadToFollowing("hp");
-                blockHP = reader.ReadString();
-
-                if (blockX != "")
-                {
-                    intX = Convert.ToInt16(blockX);
-                    intY = Convert.ToInt16(blockY);
-                    intHP = Convert.ToInt16(blockHP);
-
-                    Block b = new Block(intX, intY, intHP);
-
-                    blocks.Add(b);
-                }
-            }
-        }
-        #endregion
+        
 
         public void OnStart()
         {
@@ -128,7 +96,9 @@ namespace BrickBreaker
             // setup starting paddle values and create paddle object
             int paddleWidth = 80;
             int paddleBoostY = 60;
-            int paddleX = ((this.Width / 2) - (paddleWidth / 2));      
+            int paddleX = ((this.Width / 2) - (paddleWidth / 2));
+            int paddleHeight = 20;
+            int paddleSpeed = 8;
             //set Diffrent Starting Height for P1 Paddle
             if (Twoplayer == true)
             {
@@ -140,7 +110,7 @@ namespace BrickBreaker
             }
             int paddleY = (this.Height - paddleHeight) - paddleBoostY;
             int paddleY2 = (this.Height - this.Height + paddleHeight + 60);
-            int paddleSpeed = 8;
+        
             //creates Paddle and Adds to List
             paddle = new Paddle(paddleX, paddleY, paddleWidth, paddleHeight, paddleSpeed, Color.Purple);
             paddles.Add(paddle);
@@ -150,10 +120,10 @@ namespace BrickBreaker
             int ballX = this.Width / 2 - 10;
             int ballY = paddle.y - (paddleWidth / 2);
 
-            int paddleHeight = 20;
+            
             paddleStartX = ((this.Width / 2) - (paddleWidth / 2));
             paddleStartY = (this.Height - paddleHeight) - 60;
-            int paddleSpeed = 8;
+            
 
             paddle = new Paddle(paddleStartX, paddleStartY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
@@ -241,7 +211,7 @@ namespace BrickBreaker
                     break;
                 case Keys.D:
                     dLetterDown = false;
-
+                    break;
                 case Keys.Up:
                     upArrowDown = false;
 
@@ -293,7 +263,7 @@ namespace BrickBreaker
                 paddle2.Move("right");
             }
             //pause Screen
-            if (pauseArrowDown)
+            //if (pauseArrowDown)
 
             else if (leftArrowDown && paddle.x > 0) { paddle.Move("left"); }
 
@@ -359,11 +329,12 @@ namespace BrickBreaker
                         OnEnd();
                     }
                 }
-                else if (b.BottomCollision(this)
+                else if (b.BottomCollision(this))
                 {
                     balls.Remove(b);
                     break;
                 }//Ignores Bottom Wall Collsion from Single Player
+            }
            /* else
             {
                 ball.WallCollision(this);
@@ -534,7 +505,7 @@ namespace BrickBreaker
            if(Twoplayer == false)
             {               
                 paddleBrush.Color = paddle.colour;
-                e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+                //e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             }
            //Draws two paddle in two player
            /*
@@ -677,6 +648,7 @@ namespace BrickBreaker
         public void saveScore()
         {
             highscores.Add(score);
+            
             highscores.Sort();
 
             XmlWriter writer = XmlWriter.Create("Resources/scores.xml", null);
@@ -723,7 +695,7 @@ namespace BrickBreaker
         {
             bbucks += bigmonies;
         }
-        #endregion
+        //#endregion
 
     }
 
