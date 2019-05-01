@@ -93,7 +93,6 @@ namespace BrickBreaker
                             resultSpeed = xSpeed;
                         }
                     }
-
                     else if (pMovingRight)
                     {
                         if (xSpeed > 0)
