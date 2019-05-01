@@ -281,7 +281,8 @@ namespace BrickBreaker
                 p.Move();
                 if (p.y > this.Height)
                 {
-
+                    powerups.Remove(p);
+                    break;
                 }
             }
 
@@ -290,6 +291,8 @@ namespace BrickBreaker
                 if (p.Collision(paddle))
                 {
                     //do some weird shit
+                    powerups.Remove(p);
+                    break;
                 }
             }
 
