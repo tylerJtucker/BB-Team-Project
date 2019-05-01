@@ -50,6 +50,7 @@ namespace BrickBreaker
         // list of all blocks and paddles for current level
         List<Block> blocks = new List<Block>();
 
+
         //list for highscores
         List<int> highscores = new List<int>();
 
@@ -57,6 +58,7 @@ namespace BrickBreaker
 
         static List<Ball> balls = new List<Ball>();
         List<PowerUps> powerups = new List<PowerUps>();
+
 
 
 
