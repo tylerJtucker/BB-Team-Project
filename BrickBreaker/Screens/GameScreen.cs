@@ -17,7 +17,7 @@ namespace BrickBreaker
     {
         #region global values
         //player1 button control keys - DO NOT CHANGE
-        Boolean leftArrowDown, rightArrowDown, pauseArrowDown, upArrowDown, onPaddle = true;
+        Boolean leftArrowDown, rightArrowDown, pauseArrowDown, upArrowDown, onPaddle = true, aKeyDown, dKeyDown;
 
         // Game values
         static int lives;
@@ -118,6 +118,12 @@ namespace BrickBreaker
                 case Keys.Up:
                     upArrowDown = true;
                     break;
+                case Keys.A:
+                    aKeyDown = true;
+                    break;
+                case Keys.D:
+                    dKeyDown = true;
+                    break;
                 default:
                     break;
             }
@@ -140,6 +146,12 @@ namespace BrickBreaker
                 case Keys.Up:
                     upArrowDown = false;
                     break;
+                case Keys.A:
+                    aKeyDown = false;
+                    break;
+                case Keys.D:
+                    dKeyDown = false;
+                    break;
                 default:
                     break;
             }
@@ -148,42 +160,21 @@ namespace BrickBreaker
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             // Move the paddle
-            if (upArrowDown == true && onPaddle == true)
+            if (upArrowDown && onPaddle)
             {
                 balls[0].xSpeed = ballStartSpeedX;
                 balls[0].ySpeed = ballStartSpeedY;
                 onPaddle = false;
             }
 
-            if (leftArrowDown && onPaddle)
+            if (onPaddle)
             {
-                if (ballStartSpeedX > -8 && ballStartSpeedX <= 0)
-                {
-                    ballStartSpeedX--;
-                    ballStartSpeedY++;
-                }
-                else if (ballStartSpeedX > -8 && ballStartSpeedX > 0)
-                {
-                    ballStartSpeedX--;
-                    ballStartSpeedY--;
-                }
+                balls[0].x = paddle.x + PADDLEWIDTH / 2;
             }
-            else if (leftArrowDown && paddle.x > 0) { paddle.Move("left"); }
 
-            if (rightArrowDown && onPaddle)
-            {
-                if (ballStartSpeedX < 8 && ballStartSpeedX >= 0)
-                {
-                    ballStartSpeedX++;
-                    ballStartSpeedY++;
-                }
-                else if (ballStartSpeedX < 8 && ballStartSpeedX < 0)
-                {
-                    ballStartSpeedX++;
-                    ballStartSpeedY--;
-                }
-            }
-            else if (rightArrowDown && paddle.x < (this.Width - paddle.width)) { paddle.Move("right"); }
+            if (leftArrowDown && paddle.x > 0) { paddle.Move("left"); }
+
+            if (rightArrowDown && paddle.x < (this.Width - paddle.width)) { paddle.Move("right"); }
 
             if (pauseArrowDown)
             {
@@ -196,6 +187,33 @@ namespace BrickBreaker
                 form.Controls.Remove(this);
 
                 ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+            }
+
+            if (aKeyDown && onPaddle)
+            {
+                if (ballStartSpeedX > -8 && ballStartSpeedX <= 0)
+                {
+                    ballStartSpeedX--;
+                    ballStartSpeedY++;
+                }
+                else if (ballStartSpeedX > -8 && ballStartSpeedX > 0)
+                {
+                    ballStartSpeedX--;
+                    ballStartSpeedY--;
+                }
+            }
+            if (dKeyDown && onPaddle)
+            {
+                if (ballStartSpeedX < 8 && ballStartSpeedX >= 0)
+                {
+                    ballStartSpeedX++;
+                    ballStartSpeedY++;
+                }
+                else if (ballStartSpeedX < 8 && ballStartSpeedX < 0)
+                {
+                    ballStartSpeedX++;
+                    ballStartSpeedY--;
+                }
             }
            
 
