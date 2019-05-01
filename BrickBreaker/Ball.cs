@@ -18,7 +18,6 @@ namespace BrickBreaker
             xSpeed = _xSpeed;
             ySpeed = _ySpeed;
             size = _ballSize;
-               
         }
 
         public void Move()
@@ -34,29 +33,84 @@ namespace BrickBreaker
 
             if (ballRec.IntersectsWith(blockRec))
             {
-                ySpeed *= -1;
+                string side = CollisionSide(blockRec);
             }
 
-            return blockRec.IntersectsWith(ballRec);         
+            return blockRec.IntersectsWith(ballRec);
         }
 
         public void PaddleCollision(Paddle p, bool pMovingLeft, bool pMovingRight)
         {
+            //make sure to develop the physics behind this stuff
+            //so angles and such
+            //this should change the angle at which the ball is travelling
+
             Rectangle ballRec = new Rectangle(x, y, size, size);
             Rectangle paddleRec = new Rectangle(p.x, p.y, p.width, p.height);
 
             if (ballRec.IntersectsWith(paddleRec))
             {
-                if (y + size >= p.y)
+                string side = CollisionSide(paddleRec);
+                if (side == "top")
                 {
-                    ySpeed *= -1;
-                }
+                    /*
+                    if (pMovingLeft)
+                        xSpeed = -Math.Abs(xSpeed);
+                    else if (pMovingRight)
+                        xSpeed = Math.Abs(xSpeed);
+                        //*/
 
-                if (pMovingLeft)
-                    xSpeed = -Math.Abs(xSpeed);
-                else if (pMovingRight)
-                    xSpeed = Math.Abs(xSpeed);
-            }
+                    if (pMovingLeft || pMovingRight == true)
+                    {
+                        int tempSpeed = xSpeed;
+
+                        if (Math.Abs(xSpeed) < 10)
+                        {
+                            xSpeed = xSpeed - p.speed / 4;
+                        }
+                        else
+                        {
+                            xSpeed = tempSpeed;
+                        }
+
+                        //find relative velocity to the paddle. Bounce it adding or subtracting, but never add too much to xSpeed
+
+                        #region Eh
+                        //ySpeed = Convert.ToInt16(xSpeed * tan);
+
+                        //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
+
+                        //I have to develop the logic here
+                        /*
+                        if (Math.Abs(xSpeed) < 10)
+                        {
+                            int tempSpeed;
+
+                            if (pMovingLeft)
+                                tempSpeed = xSpeed - (p.speed - xSpeed);
+                            else if (pMovingRight)
+                                tempSpeed = xSpeed + (p.speed + xSpeed);
+                            else
+                                tempSpeed = xSpeed;
+
+
+                            if (tempSpeed < 10)
+                            {
+                                xSpeed = tempSpeed;
+                            }
+                        }
+                        //*/
+                    }
+
+                    //but really I should think of how to change the angle that the ball is travelling at
+                    /*
+                     * Dal punto di vista fisico si deve considerare la velocita relativa ti un'oggetto con l'altro.
+                     * Se la paletta sta viaggiando a destra con velocita 30, alla componente x della velocita della palla
+                     * deve essere sottratta la velocita della superfice per creare un microsistema in cui la paletta e ferma e la palla si muove
+                     * Per mantenere le cose stabili la velocita y della palla dovra aumentare se la x diminuisce. Utilizza la tangente per fare i conti
+                     * */
+                }
+            }             
         }
 
         public void WallCollision(UserControl UC)
@@ -64,18 +118,26 @@ namespace BrickBreaker
             // Collision with left wall
             if (x <= 0)
             {
-                xSpeed *= -1;
+                xSpeed = Math.Abs(xSpeed);
             }
             // Collision with right wall
             if (x >= (UC.Width - size))
             {
-                xSpeed *= -1;
+                xSpeed = Math.Abs(xSpeed) * -1;
             }
             // Collision with top wall
             if (y <= 2)
             {
-                ySpeed *= -1;
+                ySpeed = Math.Abs(ySpeed);
             }
+            //Checks for bottom wall collsion if two player
+            if(GameScreen.Twoplayer == true)
+            {
+                if (y >= UC.Height - size)
+                {
+                    ySpeed *= -1;
+                }
+            }            
         }
 
         public bool BottomCollision(UserControl UC)
@@ -90,5 +152,62 @@ namespace BrickBreaker
             return didCollide;
         }
 
+        /// <summary>
+        /// Given the colliding rectangle finds which sides are colliding
+        /// </summary>
+        /// <param name="r">Colliding rectangle</param>
+        /// <returns>Side as a string</returns>
+        public string CollisionSide(Rectangle r)
+        {            
+            //this algorothm is also known as the Minkowski sum
+            //manage collision on all sides
+
+            string side = null;
+
+            Point centreBall = new Point(x + size / 2, y + size / 2);
+            Point centreRect = new Point(r.X + r.Width / 2, r.Y + r.Height / 2);
+
+            float w = (size + r.Width) / 2;
+            float h = (size + r.Height) / 2;
+
+            float dX = centreRect.X - centreBall.X;
+            float dY = centreRect.Y - centreBall.Y;
+
+            float wy = w * dY;
+            float hx = h * dX;
+
+            if (wy > hx)
+            {
+                if (wy > -hx)
+                // collision at the top 
+                {
+                    ySpeed *= -1;
+                    side = "top";
+                }
+                else
+                // on the right
+                {
+                    xSpeed *= -1;
+                    side = "right";
+                }
+            }
+            else
+            {
+                if (wy > -hx)
+                // on the left
+                {
+                    xSpeed *= -1;
+                    side = "left";
+                }
+                else
+                // at the bottom
+                {
+                    ySpeed *= -1;
+                    side = "bottom";
+                }
+            }
+
+            return side;
+        }
     }
 }
