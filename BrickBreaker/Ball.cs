@@ -57,25 +57,6 @@ namespace BrickBreaker
 
                 if (side == "top")
                 {
-                    /*
-                    if (pMovingLeft)
-                    {
-                        xSpeed = -Math.Abs(xSpeed);
-                    }
-                    else if (pMovingRight)
-                    {
-                        xSpeed = Math.Abs(xSpeed);
-                    }
-                    //*/
-
-
-                    //but really I should think of how to change the angle that the ball is travelling at
-                    /*
-                     * Dal punto di vista fisico si deve considerare la velocita relativa ti un'oggetto con l'altro.
-                     * Se la paletta sta viaggiando a destra con velocita 30, alla componente x della velocita della palla
-                     * deve essere sottratta la velocita della superfice per creare un microsistema in cui la paletta e ferma e la palla si muove
-                     * Per mantenere le cose stabili la velocita y della palla dovra aumentare se la x diminuisce. Utilizza la tangente per fare i conti
-                     * */
                     int resultSpeed = 0;
 
                     if (pMovingLeft)
@@ -97,21 +78,6 @@ namespace BrickBreaker
                     else if (pMovingRight)
                     {
                         if (xSpeed > 0)
-
-
-                        //find relative velocity to the paddle. Bounce it adding or subtracting, but never add too much to xSpeed
-
-
-                       // #region Eh
-
-                        //ySpeed = Convert.ToInt16(xSpeed * tan);
-
-                        //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
-
-                        //I have to develop the logic here
-                        /*
-                        if (Math.Abs(xSpeed) < 10)
-
                         {
                             resultSpeed = xSpeed;
                         }
