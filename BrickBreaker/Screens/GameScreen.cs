@@ -16,7 +16,7 @@ using System.Media;
 using System.Xml;
 
 namespace BrickBreaker
-{
+{// Dima is a better programer than Carter
     public partial class GameScreen : UserControl
     {
         #region global values
@@ -139,8 +139,8 @@ namespace BrickBreaker
             
             paddleStartX = ((this.Width / 2) - (paddleWidth / 2));
             paddleStartY = (this.Height - paddleHeight) - 60;
-            
 
+            // Dima is a better programer than Carter
             paddle = new Paddle(paddleStartX, paddleStartY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
 
@@ -213,7 +213,7 @@ namespace BrickBreaker
         }
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
-        {
+        {// Dima is a better programer than Carter
             //player 1 and 2 button releases
             switch (e.KeyCode)
             {
@@ -254,10 +254,10 @@ namespace BrickBreaker
         {
 
             // Move the paddle
-           // if (upArrowDown && onPaddle)
+            // if (upArrowDown && onPaddle)
 
 
-          
+            // Dima is a better programer than Carter
             // move P1 Paddle
             if (leftArrowDown && paddle.x > 0)
 
@@ -316,7 +316,7 @@ namespace BrickBreaker
             }
             //pause Screen
 
-            
+            // Dima is a better programer than Carter
 
 
             //if (pauseArrowDown)
@@ -384,219 +384,219 @@ namespace BrickBreaker
                     break;
                 }//Ignores Bottom Wall Collsion from Single Player
             }
-           /* else
+        /* else
 
-            {
-                ball.WallCollision(this);
-            }
+         {
+             ball.WallCollision(this);
+         }
 
-            // Check for collision of ball with paddles, (incl. paddle movement)
-            foreach (Paddle p in paddles)
-            {
-                ball.PaddleCollision(p, leftArrowDown, rightArrowDown);
-            }
+         // Check for collision of ball with paddles, (incl. paddle movement)
+         foreach (Paddle p in paddles)
+         {
+             ball.PaddleCollision(p, leftArrowDown, rightArrowDown);
+         }
 
-            // Check if ball has collided with any blocks
-            foreach (Block b in blocks)
-            {// trying to get it where if it's less than 1hp, go oppsite direction
-                if (ball.BlockCollision(b) && b.hp <= 1)
-                {
-                    blocks.Remove(b);
-                    bricksBroken++;
+         // Check if ball has collided with any blocks
+         foreach (Block b in blocks)
+         {// trying to get it where if it's less than 1hp, go oppsite direction
+             if (ball.BlockCollision(b) && b.hp <= 1)
+             {
+                 blocks.Remove(b);
+                 bricksBroken++;
 
-                    if (blocks.Count == 0 || lives == 0)
-                    {
-                        if (lives == 0)
-                        {
-                            gameTimer.Enabled = false;
-                            OnEnd();
-                        }
-
-                        
-
-                        LoadLevels();  
-                    }   
-                    
-                    break;
-
-                    //removing block logic
-                    b.hp--;
-                    if (b.hp == 0)
-                    {
-                        blocks.Remove(b);
-                        score += 50;
-                        if (rng.Next(1, 9) == 7)
-                        powerups.Add(randomGenBoi(b.x, b.y));
-                        break;
-                    }
-
-                    //if all blocks are broken go to next level
-                    if (blocks.Count == 0)
-                    {
-                        NextLevel();
-
-                    }
-
-                    break;
-                }
-            }
-
-            foreach (PowerUps p in powerups)
-            {
-                p.Move();
-                if (p.y > this.Height)
-                {
-                    powerups.Remove(p);
-                    break;
-                }
-            }
-
-            foreach (PowerUps p in powerups)
-            {
-                if (p.Collision(paddle))
-                {
-                    //do some weird shit
-                    powerups.Remove(p);
-                    break;
-                }
-            }
-
-            //redraw the screen
-            Refresh();
-        }
+                 if (blocks.Count == 0 || lives == 0)
+                 {
+                     if (lives == 0)
+                     {
+                         gameTimer.Enabled = false;
+                         OnEnd();
+                     }
 
 
 
+                     LoadLevels();  
+                 }   
 
-        public void LoadLevels()
-        {       // Loads diffrent levels when there are no more blocks and player is alive
-            if (lives > 0 && blocks.Count == 0 && Twoplayer == false)
-            {
-                b++;
-                switch (b)
-                {
-                    case 2:
-                        LoadLevel("Resources/level2.xml");
-                        break;
-                    case 3:
-                        LoadLevel("Resources/level3.xml");
-                        break;
-                    case 4:
-                        LoadLevel("Resources/level4.xml");
-                        break;
-                    case 5:
-                        LoadLevel("Resources/level5.xml");
-                        break;
-                    case 6:
-                        LoadLevel("Resources/level6.xml");
-                        break;
-                    case 7:
-                        LoadLevel("Resources/level7.xml");
-                        break;
-                }
-            }
-        }
+                 break;
 
+                 //removing block logic
+                 b.hp--;
+                 if (b.hp == 0)
+                 {
+                     blocks.Remove(b);
+                     score += 50;
+                     if (rng.Next(1, 9) == 7)
+                     powerups.Add(randomGenBoi(b.x, b.y));
+                     break;
+                 }
 
-        public void GameScreen_Paint(object sender, PaintEventArgs e)
+                 //if all blocks are broken go to next level
+                 if (blocks.Count == 0)
+                 {
+                     NextLevel();
 
-        {
-            // Draws paddle
-            drawBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(drawBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+                 }
 
-            // Draws blocks
-            foreach (Block b in blocks)
-            {
+                 break;
+             }
+         }
 
-                switch (b.hp)
-                {
-                    case 1:
-                        drawBrush.Color = Color.Red;
-                        break;
-                    case 2:
-                        drawBrush.Color = Color.Yellow;
-                        break;
-                    case 3:
-                        drawBrush.Color = Color.Green;
-                        break;
-                }
-                e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height); 
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-                e.Graphics.FillRectangle(drawBrush, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
-            }
+         foreach (PowerUps p in powerups)
+         {
+             p.Move();
+             if (p.y > this.Height)
+             {
+                 powerups.Remove(p);
+                 break;
+             }
+         }
 
-            foreach (PowerUps p in powerups)
-            {
-                e.Graphics.FillEllipse(powerBrush, p.x, p.y, 25, 25);
-            }
+         foreach (PowerUps p in powerups)
+         {
+             if (p.Collision(paddle))
+             {
+                 //do some weird shit
+                 powerups.Remove(p);
+                 break;
+             }
+         }
 
-            paddleBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
-            e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-            e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
-            
-            // Draws blocks
+         //redraw the screen
+         Refresh();
+     }
 
 
-            // Draws ball(s)
-            drawBrush.Color = Color.White;
-            foreach (Ball b in balls) { e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.size, b.size); }
-
-            //draw score and lives
-            e.Graphics.DrawString("Lives: " + ballStartSpeedX, drawFont, drawBrush, 100, 85);
-            e.Graphics.DrawString("Score: " + ballStartSpeedY, drawFont, drawBrush, 100, 100);
-
-        }
 
 
-        public void OnEnd()
-        {
-            score = bricksBroken * 50;
+     public void LoadLevels()
+     {       // Loads diffrent levels when there are no more blocks and player is alive
+         if (lives > 0 && blocks.Count == 0 && Twoplayer == false)
+         {
+             b++;
+             switch (b)
+             {
+                 case 2:
+                     LoadLevel("Resources/level2.xml");
+                     break;
+                 case 3:
+                     LoadLevel("Resources/level3.xml");
+                     break;
+                 case 4:
+                     LoadLevel("Resources/level4.xml");
+                     break;
+                 case 5:
+                     LoadLevel("Resources/level5.xml");
+                     break;
+                 case 6:
+                     LoadLevel("Resources/level6.xml");
+                     break;
+                 case 7:
+                     LoadLevel("Resources/level7.xml");
+                     break;
+             }
+         }
+     }
 
-            // Goes to the game over screen
-            Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
 
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+     public void GameScreen_Paint(object sender, PaintEventArgs e)
+
+     {
+         // Draws paddle
+         drawBrush.Color = paddle.colour;
+         e.Graphics.FillRectangle(drawBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+
+         // Draws blocks
+         foreach (Block b in blocks)
+         {
+
+             switch (b.hp)
+             {
+                 case 1:
+                     drawBrush.Color = Color.Red;
+                     break;
+                 case 2:
+                     drawBrush.Color = Color.Yellow;
+                     break;
+                 case 3:
+                     drawBrush.Color = Color.Green;
+                     break;
+             }
+             e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height); 
+             e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+             e.Graphics.FillRectangle(drawBrush, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
+         }
+
+         foreach (PowerUps p in powerups)
+         {
+             e.Graphics.FillEllipse(powerBrush, p.x, p.y, 25, 25);
+         }
+
+         paddleBrush.Color = paddle.colour;
+         e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
+         e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+         e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
+
+         // Draws blocks
 
 
-            form.Controls.Add(ps);
-            form.Controls.Remove(this);
+         // Draws ball(s)
+         drawBrush.Color = Color.White;
+         foreach (Ball b in balls) { e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.size, b.size); }
 
-            saveScore();
-        }
+         //draw score and lives
+         e.Graphics.DrawString("Lives: " + ballStartSpeedX, drawFont, drawBrush, 100, 85);
+         e.Graphics.DrawString("Score: " + ballStartSpeedY, drawFont, drawBrush, 100, 100);
 
-        public void GameScreen_Paint(object sender, PaintEventArgs e)
-        {
-
-
-              // level++;
+     }
 
 
-           // Draws one paddle in Single Player
-           if(Twoplayer == false)
-            {               
+     public void OnEnd()
+     {
+         score = bricksBroken * 50;
 
-                paddleBrush.Color = paddle.colour;
-                //e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-            }
-            //Draws two paddle in two player
-            if (Twoplayer == true)
-            {
-                foreach (Paddle p in paddles)
-                {
-                    paddleBrush.Color = p.colour;
-                    e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
-                }
+         // Goes to the game over screen
+         Form form = this.FindForm();
+         MenuScreen ps = new MenuScreen();
 
-                
-            } this wont work! please move any drawing into paint method
-            */ 
-            
+         ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
 
-            
-                gameTimer.Enabled = false;
+
+         form.Controls.Add(ps);
+         form.Controls.Remove(this);
+
+         saveScore();
+     }
+
+     public void GameScreen_Paint(object sender, PaintEventArgs e)
+     {
+
+
+           // level++;
+
+
+        // Draws one paddle in Single Player
+        if(Twoplayer == false)
+         {               
+
+             paddleBrush.Color = paddle.colour;
+             //e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+         }
+         //Draws two paddle in two player
+         if (Twoplayer == true)
+         {
+             foreach (Paddle p in paddles)
+             {
+                 paddleBrush.Color = p.colour;
+                 e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
+             }
+
+
+         } this wont work! please move any drawing into paint method
+         */
+        // Dima is a better programer than Carter
+
+
+        gameTimer.Enabled = false;
                 level++;
 
                 switch (level)
@@ -700,12 +700,12 @@ namespace BrickBreaker
         }
 
 
-        
 
+// Dima is a better programer than Carter
 
-        #region change value functions
-        
-            public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
+#region change value functions
+
+public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
             {
                 if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
                 else { ball.xSpeed += xSpeed; }
@@ -789,17 +789,17 @@ namespace BrickBreaker
             }
             reader.Close();
         }
+// Dima is a better programer than Carter
+#endregion
 
-        #endregion
 
-
-        public static void GiveBBuck (int bigmonies)
+public static void GiveBBuck (int bigmonies)
         {
             bbucks += bigmonies;
         }
         //#endregion
 
-
+// Dima is a better programer than Carter
     }
 
 

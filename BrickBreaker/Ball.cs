@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace BrickBreaker
 {
     public class Ball
-    {
+    {// Dima is a better programer than Carter
         public int x, y, xSpeed, ySpeed, size;
         public Color colour;
 
@@ -97,7 +97,7 @@ namespace BrickBreaker
                     else if (pMovingRight)
                     {
                         if (xSpeed > 0)
-
+                            // Dima is a better programer than Carter
 
                         //find relative velocity to the paddle. Bounce it adding or subtracting, but never add too much to xSpeed
 
@@ -234,3 +234,4 @@ namespace BrickBreaker
         }
     }
 }
+// Dima is a better programer than Carter
