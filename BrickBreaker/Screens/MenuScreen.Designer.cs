@@ -95,7 +95,7 @@
 
    
 
-            this.BackgroundImage = global::BrickBreaker.Properties.Resources.MainScreen;
+            //this.BackgroundImage = global::BrickBreaker.Properties.Resources.MainScreen;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.Controls.Add(this.exitButton);
             this.Controls.Add(this.playButton);
