@@ -39,7 +39,7 @@ namespace BrickBreaker
         int level = 1;
         int ballStartX, ballStartY, paddleStartX, paddleStartY, ballStartSpeedX = 0, ballStartSpeedY = -10;
         static int bbucks = 0;
-        int bricksBroken;
+
 
 
         Random rng = new Random();
@@ -181,12 +181,7 @@ namespace BrickBreaker
             //player 1 and 2 button presses
             switch (e.KeyCode)
             {
-                case Keys.A:
-                    aLetterDown = true;
-                    break;
-                case Keys.D:
-                    dLetterDown = true;
-                    break;
+                
                 case Keys.Left:
                     leftArrowDown = true;
                     break;
@@ -227,10 +222,10 @@ namespace BrickBreaker
                     pauseArrowDown = false;
                     break;
                 case Keys.A:
-                    aLetterDown = false;
+                    aKeyDown = false;
                     break;
                 case Keys.D:
-                    dLetterDown = false;
+                    dKeyDown = false;
 
                     break;
                 case Keys.Up:
@@ -238,12 +233,7 @@ namespace BrickBreaker
 
 
                     break;
-                case Keys.A:
-                    aKeyDown = false;
-                    break;
-                case Keys.D:
-                    dKeyDown = false;
-                    break;
+
                 default:
                     break;
             }
@@ -306,11 +296,11 @@ namespace BrickBreaker
 
 
             //move P2 Paddle
-            if (aLetterDown && paddle2.x > 0)
+            if (aKeyDown && paddle2.x > 0)
             {
                 paddle2.Move("left");
             }
-            if (dLetterDown && paddle2.x < (this.Width - paddle2.width))
+            if (dKeyDown && paddle2.x < (this.Width - paddle2.width))
             {
                 paddle2.Move("right");
             }
@@ -566,6 +556,42 @@ namespace BrickBreaker
 
          saveScore();
      }
+     */
+     public void GameScreen_Paint(object sender, PaintEventArgs e)
+     {
+            /*
+
+           // level++;
+
+
+        // Draws one paddle in Single Player
+        if(Twoplayer == false)
+         {               
+
+             paddleBrush.Color = paddle.colour;
+             //e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+         }
+         //Draws two paddle in two player
+         if (Twoplayer == true)
+         {
+             foreach (Paddle p in paddles)
+             {
+                 paddleBrush.Color = p.colour;
+                 e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
+             }
+
+
+         ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+
+         } this wont work! please move any drawing into paint method
+         */
+
+         form.Controls.Add(ps);
+         form.Controls.Remove(this);
+
+
+         saveScore();
+     }
 
      public void GameScreen_Paint(object sender, PaintEventArgs e)
      {
@@ -597,6 +623,9 @@ namespace BrickBreaker
 
 
         gameTimer.Enabled = false;
+
+    
+
                 level++;
 
                 switch (level)
@@ -646,7 +675,7 @@ public void OnDeath()
     balls[0].ySpeed = 0;
 }
 
-
+        /* this code is spliced from somewhere, please find it
             }
 
             // Draws blocks
@@ -658,7 +687,7 @@ public void OnDeath()
 
             // Draws ball
             //e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
-        }
+        }*/
 
 
 
@@ -790,6 +819,7 @@ public void LoadLevel(string level)
         }
     }
 
+
 }
 public void saveScore()
 {
@@ -817,6 +847,7 @@ public void loadScore()
     int intScore;
 
     XmlReader reader = XmlReader.Create("Resources/scores.xml");
+
 
     for (int i = 0; i < 10; i++)
     {
