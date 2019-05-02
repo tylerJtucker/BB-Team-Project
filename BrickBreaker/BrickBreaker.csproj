@@ -73,9 +73,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
-
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-
     </Compile>
     <Compile Include="Screens\PauseScreen.cs">
       <SubType>UserControl</SubType>
@@ -107,10 +104,8 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\MenuScreen.resx">
       <DependentUpon>MenuScreen.cs</DependentUpon>
@@ -159,6 +154,7 @@
     <None Include="Resources\ball.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\Resources\level5.xml" />
     <Content Include="Resources\level1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -167,6 +163,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="Resources\level3.xml" />
     <Content Include="Resources\level4.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -174,27 +171,20 @@
     <Content Include="Resources\level6.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\level7.xml" />
     <Content Include="Resources\twoplayerlevel1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-
     <None Include="bin\Debug\Resources\scores.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <Content Include="level1.xml" />
     <None Include="Resources\scores.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="scores.xml" />
-
-    <Content Include="level3.xml" />
-    <Content Include="level7.xml">
-      <SubType>Designer</SubType>
-    </Content>
-
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
