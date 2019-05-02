@@ -55,7 +55,6 @@ namespace BrickBreaker
             OnStart();
         }
 
-
         public void OnStart()
         {
             //set life counter
@@ -322,7 +321,6 @@ namespace BrickBreaker
             writer.WriteEndElement();
 
             writer.Close();
-
         }
 
         public void loadScore()

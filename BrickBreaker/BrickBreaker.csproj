@@ -153,6 +153,7 @@
     <Content Include="level1.xml" />
     <None Include="Resources\scores.xml">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="scores.xml" />
   </ItemGroup>
