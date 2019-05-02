@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace BrickBreaker
 {
     public class PowerUps 
     {
-        int x;
-        int y;
-        string name;
+        public int x;
+        public int y;
+        public string name;
 
         public PowerUps(int _x, int _y, string _name)
         {
@@ -18,23 +19,33 @@ namespace BrickBreaker
             y = _y;
             name = _name;
         }
-        public void tick(Paddle p)
+        public void Move ()
         {
-            //move
-            //check if colliding with paddle p
-            //if colliding call collide method
+
+
+            y += 5;
+        }
+        public bool Collision (Paddle p)
+        {
+            Rectangle a = new Rectangle(x, y, 5, 5);
+            Rectangle b = new Rectangle(p.x, p.y, p.width, p.height);
+
+            if (a.IntersectsWith(b))
+            {
+                return true;
+            }
+            return false;
+
         }
         public void collide(Paddle p)
         {
             //use switch statement to check which powerup is colliding and do stuff
             switch (name)
             {
-                case "catchyBoi":
-
-                    break;
-
+                
                 case "multiBoi":
-                   // GameScreen.Ball
+                    GameScreen.balls.Add(new Ball(GameScreen.balls[0].x + 10, GameScreen.balls[0].y, Math.Abs(GameScreen.balls[0].xSpeed), Math.Abs(GameScreen.balls[0].ySpeed), GameScreen.balls[0].size));
+                    GameScreen.balls.Add(new Ball(GameScreen.balls[0].x - 10, GameScreen.balls[0].y, Math.Abs(GameScreen.balls[0].xSpeed), Math.Abs(GameScreen.balls[0].ySpeed), GameScreen.balls[0].size));
                     break;
 
                 case "lifeBoi":
@@ -42,7 +53,7 @@ namespace BrickBreaker
                     break;
 
                 case "smallBoi":
-                    GameScreen.ChangePaddle(-20);
+                    GameScreen.ChangePaddle(-20); //
                     break;
 
                 case "enlargedBoi":
@@ -66,100 +77,10 @@ namespace BrickBreaker
     public class blankClass
     {
 
-        public PowerUps randomGenBoi(int _x, int _y)
-        {
-            Random rnd = new Random();
-
-            int randomNumber = rnd.Next(1, 106);
-
-            if (randomNumber <= 10)
-            {
-                return new PowerUps(_x, _y, "mutliBoi");
-            }
-            else if (randomNumber <= 20)
-            {
-                return new PowerUps(_x, _y, "fastBoi");
-            }
-            else if (randomNumber <= 35)
-            {
-                return new PowerUps(_x, _y, "slowBoi");
-            }
-            else if (randomNumber <= 55)
-            {
-                return new PowerUps(_x, _y, "smallBoi");
-            }
-            else if (randomNumber <= 80)
-            {
-                return new PowerUps(_x, _y, "enlargedBoi");
-            }
-            else   // if its lower than 105
-            {
-                return new PowerUps(_x, _y, "lifeBoi");
-            }
-            
-        
-        }
+       
     }
 
-    //public class extraLife : PowerUps
-    //{
-        
-    //    public extraLife(int _x, int _y)
-    //    {
-    //        GameScreen.ChangeLives(1);
-
-    //    }
-
-    //}
-
-    //public class ballCatch
-    //{
-
-    //    public ballCatch(int _x, int _y)
-    //    {
-
-    //    }
-
-    //}
-    // public class multiBall
-    //{
-
-    //    public multiBall()
-    //    {
-
-    //    }
-           
-    //}
-
-
-    //public class paddleBig
-    //{
-
-    //    public paddleBig()
-    //    {
-    //        GameScreen.ChangePaddle(10); // stretch paddle by 10 pixels
-    //    }
-
-    //}
-
-    //public class paddleSmall
-    //{
-
-    //    public paddleSmall()
-    //    {
-    //        GameScreen.ChangePaddle(-10); // shrink paddle by 10 pixels
-    //    }
-
-    //}
-
-    //public class slowDown
-    //{
-
-    //    public slowDown()
-    //    {
-    //        GameScreen.ChangeSpeeds(-1, -1, -1);  // -1 for testing    (xSpeed, ySpeed, paddleSpeed)
-
-    //    }
-
-    //}
+   
+    
+    
 }
