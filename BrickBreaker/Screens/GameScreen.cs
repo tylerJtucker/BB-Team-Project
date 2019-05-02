@@ -31,7 +31,6 @@ namespace BrickBreaker
         static int lives;
         int bricksBroken;
         int score;
-        int b = 1;
         public static Boolean Twoplayer = false;
 
 
@@ -65,8 +64,8 @@ namespace BrickBreaker
 
         List<Paddle> paddles = new List<Paddle>();
 
-        static List<Ball> balls = new List<Ball>();
-        List<PowerUps> powerups = new List<PowerUps>();
+        public static List<Ball> balls = new List<Ball>();
+        public static List<PowerUps> powerups = new List<PowerUps>();
 
 
 
@@ -181,7 +180,7 @@ namespace BrickBreaker
             //player 1 and 2 button presses
             switch (e.KeyCode)
             {
-                
+
                 case Keys.Left:
                     leftArrowDown = true;
                     break;
@@ -368,11 +367,13 @@ namespace BrickBreaker
                     OnEnd();
                 }
             }
+            /*
             else if (b.BottomCollision(this))
             {
                 balls.Remove(b);
                 break;
             }//Ignores Bottom Wall Collsion from Single Player
+            */
         }
         /* else
 
@@ -539,141 +540,118 @@ namespace BrickBreaker
 
      }
 
+*/
+        public void OnEnd()
+        {
+            score = bricksBroken * 50;
 
-     public void OnEnd()
-     {
-         score = bricksBroken * 50;
+            // Goes to the game over screen
+            Form form = this.FindForm();
+            MenuScreen ps = new MenuScreen();
 
-         // Goes to the game over screen
-         Form form = this.FindForm();
-         MenuScreen ps = new MenuScreen();
-
-         ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
 
 
-         form.Controls.Add(ps);
-         form.Controls.Remove(this);
+            form.Controls.Add(ps);
+            form.Controls.Remove(this);
 
-         saveScore();
-     }
+            saveScore();
+        }
+
+
+        /*
+
+       // level++;
+
+
+     this wont work! please move any drawing into paint method
      */
-     public void GameScreen_Paint(object sender, PaintEventArgs e)
-     {
-            /*
-
-           // level++;
-
-
-        // Draws one paddle in Single Player
-        if(Twoplayer == false)
-         {               
-
-             paddleBrush.Color = paddle.colour;
-             //e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-         }
-         //Draws two paddle in two player
-         if (Twoplayer == true)
-         {
-             foreach (Paddle p in paddles)
-             {
-                 paddleBrush.Color = p.colour;
-                 e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
-             }
-
-
-         ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
-
-         } this wont work! please move any drawing into paint method
-         */
-
-         form.Controls.Add(ps);
-         form.Controls.Remove(this);
-
-
-         saveScore();
-     }
-
-     public void GameScreen_Paint(object sender, PaintEventArgs e)
-     {
-
-
-           // level++;
-
-
-        // Draws one paddle in Single Player
-        if(Twoplayer == false)
-         {               
-
-             paddleBrush.Color = paddle.colour;
-             //e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-         }
-         //Draws two paddle in two player
-         if (Twoplayer == true)
-         {
-             foreach (Paddle p in paddles)
-             {
-                 paddleBrush.Color = p.colour;
-                 e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
-             }
-
-
-         } this wont work! please move any drawing into paint method
-         */
 
 
 
-        gameTimer.Enabled = false;
 
-    
 
-                level++;
+        public void GameScreen_Paint(object sender, PaintEventArgs e)
+        {
 
-                switch (level)
+
+            // level++;
+
+
+            // Draws one paddle in Single Player
+            if (Twoplayer == false)
+            {
+
+                paddleBrush.Color = paddle.colour;
+                e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            }
+            //Draws two paddle in two player
+            if (Twoplayer == true)
+            {
+                foreach (Paddle p in paddles)
                 {
-                case 2:
-                    LoadLevel("Resources/level2.xml");
-                    break;
-                case 3:
-                    LoadLevel("Resources / level3.xml");
-                    break;
-                case 4:
-                    LoadLevel("Resources / level4.xml");
-                    break;
-                case 5:
-                    LoadLevel("Resources / level5.xml");
-                    break;
-                case 6:
-                    LoadLevel("Resources / level6.xml");
-                    break;
-                case 7:
-                    LoadLevel("Resources / level7.xml");
-                    break;
-                default:
-                        OnEnd();
-                        break;
+                    paddleBrush.Color = p.colour;
+                    e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
                 }
 
-    paddle.x = paddleStartX; paddle.y = paddleStartY;
+
+            }
+
+
+
+
+            //gameTimer.Enabled = false;
+
+
+
+            /*level++;
+
+            switch (level)
+            {
+            case 2:
+                LoadLevel("Resources/level2.xml");
+                break;
+            case 3:
+                LoadLevel("Resources / level3.xml");
+                break;
+            case 4:
+                LoadLevel("Resources / level4.xml");
+                break;
+            case 5:
+                LoadLevel("Resources / level5.xml");
+                break;
+            case 6:
+                LoadLevel("Resources / level6.xml");
+                break;
+            case 7:
+                LoadLevel("Resources / level7.xml");
+                break;
+            default:
+                    OnEnd();
+                    break;
+            }
+            */
+            paddle.x = paddleStartX; paddle.y = paddleStartY;
             onPaddle = true;
             balls.Clear();
             ball = new Ball(ballStartX, ballStartY, 6, 6, 20);
-    balls.Add(ball);
+            balls.Add(ball);
 
-                /*
-                // Draws ball
-                e.Graphics.FillEllipse(shadowBrush, ball.x + 3, ball.y + 3, ball.size, ball.size);
-                e.Graphics.FillEllipse(blockBrush, ball.x, ball.y, ball.size, ball.size);
-                e.Graphics.FillEllipse(blockBrush2, ball.x + 1, ball.y + 1, ball.size - 2, ball.size - 2);
-                */
+            /*
+            // Draws ball
+            e.Graphics.FillEllipse(shadowBrush, ball.x + 3, ball.y + 3, ball.size, ball.size);
+            e.Graphics.FillEllipse(blockBrush, ball.x, ball.y, ball.size, ball.size);
+            e.Graphics.FillEllipse(blockBrush2, ball.x + 1, ball.y + 1, ball.size - 2, ball.size - 2);
+            */
         }
 
-public void OnDeath()
-{
-    ball.x = paddle.x + PADDLEWIDTH / 2;
-    ball.y = ballStartY;
-    balls[0].xSpeed = 0;
-    balls[0].ySpeed = 0;
-}
+        public void OnDeath()
+        {
+            ball.x = paddle.x + PADDLEWIDTH / 2;
+            ball.y = ballStartY;
+            balls[0].xSpeed = 0;
+            balls[0].ySpeed = 0;
+        }
 
         /* this code is spliced from somewhere, please find it
             }
@@ -692,188 +670,178 @@ public void OnDeath()
 
 
 
-        
+
 
 
         public PowerUps randomGenBoi(int _x, int _y)
 
-{
-    Random rnd = new Random();
-
-    int randomNumber = rnd.Next(1, 106);
-
-    if (randomNumber <= 10)
-    {
-        return new PowerUps(_x, _y, "mutliBoi");
-    }
-    else if (randomNumber <= 20)
-    {
-        return new PowerUps(_x, _y, "fastBoi");
-    }
-    else if (randomNumber <= 35)
-    {
-        return new PowerUps(_x, _y, "slowBoi");
-    }
-    else if (randomNumber <= 55)
-    {
-        return new PowerUps(_x, _y, "smallBoi");
-    }
-    else if (randomNumber <= 80)
-    {
-        return new PowerUps(_x, _y, "enlargedBoi");
-    }
-    else   // if its lower than 105
-    {
-        return new PowerUps(_x, _y, "lifeBoi");
-    }
-}
-
-public void OnEnd()
-{
-    // Goes to the game over screen
-    Form form = this.FindForm();
-    MenuScreen ps = new MenuScreen();
-
-    ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
-
-    form.Controls.Add(ps);
-    form.Controls.Remove(this);
-}
-
-
-
-#region change value functions
-
-public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
-{
-    if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
-    else { ball.xSpeed += xSpeed; }
-
-    if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
-    else { ball.ySpeed += ySpeed; }
-
-
-
-    paddle.speed += paddleSpeed;
-}
-
-public static void ChangePaddle(int width)
-{
-    paddle.width += width;
-}
-
-public static void ChangeLives(int number)
-{
-    lives += number;
-}
-
-public void ReturnSpeeds()
-{
-    if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
-    else { ball.xSpeed = BALLSPEED; }
-
-    if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
-    else { ball.ySpeed = BALLSPEED; }
-
-    paddle.speed = PADDLESPEED;
-}
-
-public static void ReturnPaddle()
-{
-    paddle.width = PADDLESPEED;
-}
-#endregion
-
-
-
-public void LoadLevel(string level)
-{
-    //creates variables and xml reader needed
-    XmlReader reader = XmlReader.Create(level);
-    string blockX;
-    string blockY;
-    string blockHP;
-    int intX;
-    int intY;
-    int intHP;
-
-    //Grabs all the blocks for the current level and adds them to the list
-    while (reader.Read())
-    {
-        reader.ReadToFollowing("x");
-        blockX = reader.ReadString();
-        reader.ReadToFollowing("y");
-        blockY = reader.ReadString();
-        reader.ReadToFollowing("hp");
-        blockHP = reader.ReadString();
-
-        if (blockX != "")
         {
-            intX = Convert.ToInt16(blockX);
-            intY = Convert.ToInt16(blockY);
-            intHP = Convert.ToInt16(blockHP);
+            Random rnd = new Random();
 
-            Block b = new Block(intX, intY, intHP);
+            int randomNumber = rnd.Next(1, 106);
 
-            blocks.Add(b);
+            if (randomNumber <= 10)
+            {
+                return new PowerUps(_x, _y, "mutliBoi");
+            }
+            else if (randomNumber <= 20)
+            {
+                return new PowerUps(_x, _y, "fastBoi");
+            }
+            else if (randomNumber <= 35)
+            {
+                return new PowerUps(_x, _y, "slowBoi");
+            }
+            else if (randomNumber <= 55)
+            {
+                return new PowerUps(_x, _y, "smallBoi");
+            }
+            else if (randomNumber <= 80)
+            {
+                return new PowerUps(_x, _y, "enlargedBoi");
+            }
+            else   // if its lower than 105
+            {
+                return new PowerUps(_x, _y, "lifeBoi");
+            }
         }
-    }
 
 
-}
-public void saveScore()
-{
-    highscores.Add(score);
-
-    highscores.Sort();
-
-    XmlWriter writer = XmlWriter.Create("Resources/scores.xml", null);
-
-    writer.WriteStartElement("scores");
-
-    for (int i = 0; i < 10; i++)
-    {
-        writer.WriteElementString("score", highscores[i].ToString());
-    }
-    writer.WriteEndElement();
-
-    writer.Close();
-
-}
-
-public void loadScore()
-{
-    string newScore;
-    int intScore;
-
-    XmlReader reader = XmlReader.Create("Resources/scores.xml");
 
 
-    for (int i = 0; i < 10; i++)
-    {
-        reader.ReadToFollowing("score");
-        newScore = reader.ReadString();
 
-        if (newScore != "")
+        #region change value functions
+
+        public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
         {
-            intScore = Convert.ToInt16(newScore);
-            highscores.Add(intScore);
+            if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
+            else { ball.xSpeed += xSpeed; }
+
+            if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
+            else { ball.ySpeed += ySpeed; }
+
+
+
+            paddle.speed += paddleSpeed;
         }
-        else
+
+        public static void ChangePaddle(int width)
         {
-            break;
+            paddle.width += width;
         }
-    }
-    reader.Close();
-}
 
-#endregion
+        public static void ChangeLives(int number)
+        {
+            lives += number;
+        }
+
+        public void ReturnSpeeds()
+        {
+            if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
+            else { ball.xSpeed = BALLSPEED; }
+
+            if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
+            else { ball.ySpeed = BALLSPEED; }
+
+            paddle.speed = PADDLESPEED;
+        }
+
+        public static void ReturnPaddle()
+        {
+            paddle.width = PADDLESPEED;
+        }
+        #endregion
 
 
-public static void GiveBBuck(int bigmonies)
-{
-    bbucks += bigmonies;
-}
+
+        public void LoadLevel(string level)
+        {
+            //creates variables and xml reader needed
+            XmlReader reader = XmlReader.Create(level);
+            string blockX;
+            string blockY;
+            string blockHP;
+            int intX;
+            int intY;
+            int intHP;
+
+            //Grabs all the blocks for the current level and adds them to the list
+            while (reader.Read())
+            {
+                reader.ReadToFollowing("x");
+                blockX = reader.ReadString();
+                reader.ReadToFollowing("y");
+                blockY = reader.ReadString();
+                reader.ReadToFollowing("hp");
+                blockHP = reader.ReadString();
+
+                if (blockX != "")
+                {
+                    intX = Convert.ToInt16(blockX);
+                    intY = Convert.ToInt16(blockY);
+                    intHP = Convert.ToInt16(blockHP);
+
+                    Block b = new Block(intX, intY, intHP);
+
+                    blocks.Add(b);
+                }
+            }
+
+
+        }
+        public void saveScore()
+        {
+            highscores.Add(score);
+
+            highscores.Sort();
+
+            XmlWriter writer = XmlWriter.Create("Resources/scores.xml", null);
+
+            writer.WriteStartElement("scores");
+
+            for (int i = 0; i < 10; i++)
+            {
+                writer.WriteElementString("score", highscores[i].ToString());
+            }
+            writer.WriteEndElement();
+
+            writer.Close();
+
+        }
+
+        public void loadScore()
+        {
+            string newScore;
+            int intScore;
+
+            XmlReader reader = XmlReader.Create("Resources/scores.xml");
+
+
+            for (int i = 0; i < 10; i++)
+            {
+                reader.ReadToFollowing("score");
+                newScore = reader.ReadString();
+
+                if (newScore != "")
+                {
+                    intScore = Convert.ToInt16(newScore);
+                    highscores.Add(intScore);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            reader.Close();
+        }
+
+
+
+
+        public static void GiveBBuck(int bigmonies)
+        {
+            bbucks += bigmonies;
+        }
         //#endregion
 
 
