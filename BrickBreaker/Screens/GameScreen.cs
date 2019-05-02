@@ -248,18 +248,15 @@ namespace BrickBreaker
 
 
             // move P1 Paddle
-            if (leftArrowDown && paddle.x > 0)
+            
+
+
+            // Move the paddle
+            if (upArrowDown == true && onPaddle == true)
 
 
 
-                // Move the paddle
-                if (upArrowDown == true && onPaddle == true)
-
-
-
-                {
-                    paddle.Move("left");
-                }
+                
 
 
             if (onPaddle)
@@ -374,96 +371,99 @@ namespace BrickBreaker
                 break;
             }//Ignores Bottom Wall Collsion from Single Player
             */
+            foreach (Paddle p in paddles)
+            {
+                ball.PaddleCollision(p, leftArrowDown, rightArrowDown);
+                
+            }
+
+            // Check if ball has collided with any blocks
+            foreach (Block b in blocks)
+            {// trying to get it where if it's less than 1hp, go oppsite direction
+                if (ball.BlockCollision(b) && b.hp <= 1)
+                {
+                    blocks.Remove(b);
+                    bricksBroken++;
+
+                    if (blocks.Count == 0 || lives == 0)
+                    {
+                        if (lives == 0)
+                        {
+                            gameTimer.Enabled = false;
+                            OnEnd();
+                        }
+
+
+
+                        
+                    }
+
+                    
+
+                    //removing block logic
+                    b.hp--;
+                    if (b.hp == 0)
+                    {
+                        blocks.Remove(b);
+                        score += 50;
+                        if (rng.Next(1, 9) == 7)
+                            powerups.Add(randomGenBoi(b.x, b.y));
+                        break;
+                    }
+
+                    //if all blocks are broken go to next level
+                    if (blocks.Count == 0)
+                    {
+                        level++;
+                        //LoadLevel();
+                        break;
+                    }
+
+                    
+                }
+            }
+
+            foreach (PowerUps p in powerups)
+            {
+                p.Move();
+                if (p.y > this.Height)
+                {
+                    powerups.Remove(p);
+                    break;
+                }
+            }
+
+            foreach (PowerUps p in powerups)
+            {
+                if (p.Collision(paddle))
+                {
+                    //do some weird shit
+                    powerups.Remove(p);
+                    break;
+                }
+            }
+
+            //redraw the screen
+            Refresh();
         }
         /* else
 
          {
              ball.WallCollision(this);
          }
-
+         */
          // Check for collision of ball with paddles, (incl. paddle movement)
-         foreach (Paddle p in paddles)
-         {
-             ball.PaddleCollision(p, leftArrowDown, rightArrowDown);
-         }
-
-         // Check if ball has collided with any blocks
-         foreach (Block b in blocks)
-         {// trying to get it where if it's less than 1hp, go oppsite direction
-             if (ball.BlockCollision(b) && b.hp <= 1)
-             {
-                 blocks.Remove(b);
-                 bricksBroken++;
-
-                 if (blocks.Count == 0 || lives == 0)
-                 {
-                     if (lives == 0)
-                     {
-                         gameTimer.Enabled = false;
-                         OnEnd();
-                     }
+         
+     
 
 
 
-                     LoadLevels();  
-                 }   
-
-                 break;
-
-                 //removing block logic
-                 b.hp--;
-                 if (b.hp == 0)
-                 {
-                     blocks.Remove(b);
-                     score += 50;
-                     if (rng.Next(1, 9) == 7)
-                     powerups.Add(randomGenBoi(b.x, b.y));
-                     break;
-                 }
-
-                 //if all blocks are broken go to next level
-                 if (blocks.Count == 0)
-                 {
-                     NextLevel();
-
-                 }
-
-                 break;
-             }
-         }
-
-         foreach (PowerUps p in powerups)
-         {
-             p.Move();
-             if (p.y > this.Height)
-             {
-                 powerups.Remove(p);
-                 break;
-             }
-         }
-
-         foreach (PowerUps p in powerups)
-         {
-             if (p.Collision(paddle))
-             {
-                 //do some weird shit
-                 powerups.Remove(p);
-                 break;
-             }
-         }
-
-         //redraw the screen
-         Refresh();
-     }
-
-
-
-
+/*
      public void LoadLevels()
      {       // Loads diffrent levels when there are no more blocks and player is alive
          if (lives > 0 && blocks.Count == 0 && Twoplayer == false)
          {
-             b++;
+             level++;
              switch (b)
              {
                  case 2:
@@ -576,6 +576,51 @@ namespace BrickBreaker
 
 
             // level++;
+            // Draws paddle
+            drawBrush.Color = paddle.colour;
+            e.Graphics.FillRectangle(drawBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+
+            // Draws blocks
+            foreach (Block b in blocks)
+            {
+
+                switch (b.hp)
+                {
+                    case 1:
+                        drawBrush.Color = Color.Red;
+                        break;
+                    case 2:
+                        drawBrush.Color = Color.Yellow;
+                        break;
+                    case 3:
+                        drawBrush.Color = Color.Green;
+                        break;
+                }
+                e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height);
+                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
+                e.Graphics.FillRectangle(drawBrush, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
+            }
+
+            foreach (PowerUps p in powerups)
+            {
+                e.Graphics.FillEllipse(powerBrush, p.x, p.y, 25, 25);
+            }
+
+            paddleBrush.Color = paddle.colour;
+            e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
+            e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+            e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
+
+            // Draws blocks
+
+
+            // Draws ball(s)
+            drawBrush.Color = Color.White;
+            foreach (Ball b in balls) { e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.size, b.size); }
+
+            //draw score and lives
+            e.Graphics.DrawString("Lives: " + ballStartSpeedX, drawFont, drawBrush, 100, 85);
+            e.Graphics.DrawString("Score: " + ballStartSpeedY, drawFont, drawBrush, 100, 100);
 
 
             // Draws one paddle in Single Player
