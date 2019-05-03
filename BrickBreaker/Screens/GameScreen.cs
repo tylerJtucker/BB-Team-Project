@@ -131,16 +131,9 @@ namespace BrickBreaker
 
 
             // Creates a new ball
-
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
-
-
-            //loads current level
-
-            //LoadLevel("Resources/level5.xml");
-            loadScore();
-
+            
             //loads current level based on whether it's one or two player
             if (Twoplayer == false)
             {
@@ -149,9 +142,6 @@ namespace BrickBreaker
             else
             {
                 LoadLevel("Resources/twoplayerlevel1.xml");
-
-
-
             }
             // start the game engine loop
             gameTimer.Enabled = true;
