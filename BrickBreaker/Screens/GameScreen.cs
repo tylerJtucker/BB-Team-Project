@@ -16,7 +16,7 @@ using System.Media;
 using System.Xml;
 
 namespace BrickBreaker
-{// Dima is a better programer than Carter
+{
     public partial class GameScreen : UserControl
     {
         #region global values
@@ -90,7 +90,6 @@ namespace BrickBreaker
 
         }
         
-
         public void OnStart()
         {
             //set life counter
