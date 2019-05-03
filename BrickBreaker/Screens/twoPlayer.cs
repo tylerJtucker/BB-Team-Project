@@ -65,6 +65,23 @@ paddles.Add(paddle2);
             e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
             e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
             e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
+
+            //Draws two paddle in two player
+            if (Twoplayer == true)
+            {
+                foreach (Paddle p in paddles)
+                {
+                    paddleBrush.Color = p.colour;
+                    e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
+                }
+
+            }
+
+             // Draws ball
+            e.Graphics.FillEllipse(shadowBrush, ball.x + 3, ball.y + 3, ball.size, ball.size);
+            e.Graphics.FillEllipse(blockBrush, ball.x, ball.y, ball.size, ball.size);
+            e.Graphics.FillEllipse(blockBrush2, ball.x + 1, ball.y + 1, ball.size - 2, ball.size - 2);
+
             */
         }
     }

@@ -155,7 +155,6 @@ namespace BrickBreaker
             }
         }
 
-
         private void gameTimer_Tick(object sender, EventArgs e)
         {
             //shoot ball off paddle
@@ -346,167 +345,7 @@ namespace BrickBreaker
             e.Graphics.DrawString("Score: " + ballStartSpeedY, drawFont, drawBrush, 100, 100);
         }
 
-        public void OnEnd()
-        {
-            // Goes to the game over screen
-            Form form = this.FindForm();
-            MenuScreen ps = new MenuScreen();
-
-            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
-
-
-            form.Controls.Add(ps);
-            form.Controls.Remove(this);
-
-            saveScore();
-        }
-
-
-
-
-        public void GameScreen_Paint(object sender, PaintEventArgs e)
-        {
-            // Draws paddle
-            drawBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(drawBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-
-            // Draws blocks
-            foreach (Block b in blocks)
-            {
-
-                switch (b.hp)
-                {
-                    case 1:
-                        drawBrush.Color = Color.Red;
-                        break;
-                    case 2:
-                        drawBrush.Color = Color.Yellow;
-                        break;
-                    case 3:
-                        drawBrush.Color = Color.Green;
-                        break;
-                }
-                e.Graphics.FillRectangle(shadowBrush, b.x + 3, b.y + 3, b.width, b.height);
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-                e.Graphics.FillRectangle(drawBrush, b.x + 1, b.y + 1, b.width - 2, b.height - 2);
-            }
-
-            foreach (PowerUps p in powerups)
-            {
-                e.Graphics.FillEllipse(powerBrush, p.x, p.y, 25, 25);
-            }
-
-            paddleBrush.Color = paddle.colour;
-            e.Graphics.FillRectangle(shadowBrush, paddle.x + 3, paddle.y + 3, paddle.width, paddle.height);
-            e.Graphics.FillRectangle(blockBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-            e.Graphics.FillRectangle(blockBrush2, paddle.x + 1, paddle.y + 1, paddle.width - 2, paddle.height - 2);
-
-            // Draws blocks
-
-
-            // Draws ball(s)
-            drawBrush.Color = Color.White;
-            foreach (Ball b in balls) { e.Graphics.FillRectangle(drawBrush, b.x, b.y, b.size, b.size); }
-
-            //draw score and lives
-            e.Graphics.DrawString("Lives: " + ballStartSpeedX, drawFont, drawBrush, 100, 85);
-            e.Graphics.DrawString("Score: " + ballStartSpeedY, drawFont, drawBrush, 100, 100);
-
-
-            // Draws one paddle in Single Player
-            if (Twoplayer == false)
-            {
-
-                paddleBrush.Color = paddle.colour;
-                e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
-            }
-
-            //Draws two paddle in two player
-            if (Twoplayer == true)
-            {
-                foreach (Paddle p in paddles)
-                {
-                    paddleBrush.Color = p.colour;
-                    e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
-                }
-
-
-            }
-
-
-
-
-            //gameTimer.Enabled = false;
-
-
-
-            /*level++;
-
-            switch (level)
-            {
-            case 2:
-                LoadLevel("Resources/level2.xml");
-                break;
-            case 3:
-                LoadLevel("Resources / level3.xml");
-                break;
-            case 4:
-                LoadLevel("Resources / level4.xml");
-                break;
-            case 5:
-                LoadLevel("Resources / level5.xml");
-                break;
-            case 6:
-                LoadLevel("Resources / level6.xml");
-                break;
-            case 7:
-                LoadLevel("Resources / level7.xml");
-                break;
-            default:
-                    OnEnd();
-                    break;
-            }
-            */
-            
-
-            /*
-            // Draws ball
-            e.Graphics.FillEllipse(shadowBrush, ball.x + 3, ball.y + 3, ball.size, ball.size);
-            e.Graphics.FillEllipse(blockBrush, ball.x, ball.y, ball.size, ball.size);
-            e.Graphics.FillEllipse(blockBrush2, ball.x + 1, ball.y + 1, ball.size - 2, ball.size - 2);
-            */
-        }
-
-        public void OnDeath()
-        {
-            ball.x = paddle.x + PADDLEWIDTH / 2;
-            ball.y = ballStartY;
-            balls[0].xSpeed = 0;
-            balls[0].ySpeed = 0;
-        }
-
-        /* this code is spliced from somewhere, please find it
-            }
-
-            // Draws blocks
-            foreach (Block b in blocks)
-            {
-                e.Graphics.FillRectangle(blockBrush, b.x, b.y, b.width, b.height);
-            }
-
-
-            // Draws ball
-            //e.Graphics.FillRectangle(ballBrush, ball.x, ball.y, ball.size, ball.size);
-        }*/
-
-
-
-
-
-
-
         public PowerUps randomGenBoi(int _x, int _y)
-
         {
             Random rnd = new Random();
 
@@ -538,54 +377,61 @@ namespace BrickBreaker
             }
         }
 
-
-
-
-
-        #region change value functions
-
-        public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
+        #region Death and moving on
+        public void NextLevel ()
         {
-            if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
-            else { ball.xSpeed += xSpeed; }
+           level++;
 
-            if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
-            else { ball.ySpeed += ySpeed; }
-
-
-
-            paddle.speed += paddleSpeed;
+            switch (level)
+            {
+            case 2:
+                LoadLevel("Resources/level2.xml");
+                break;
+            case 3:
+                LoadLevel("Resources / level3.xml");
+                break;
+            case 4:
+                LoadLevel("Resources / level4.xml");
+                break;
+            case 5:
+                LoadLevel("Resources / level5.xml");
+                break;
+            case 6:
+                LoadLevel("Resources / level6.xml");
+                break;
+            case 7:
+                LoadLevel("Resources / level7.xml");
+                break;
+            default:
+                    OnEnd();
+                    break;
+            } 
         }
-
-        public static void ChangePaddle(int width)
+        
+        public void OnEnd()
         {
-            paddle.width += width;
+            saveScore();
+
+            // Goes to the game over screen
+            Form form = this.FindForm();
+            MenuScreen ps = new MenuScreen();
+
+            ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+
+            form.Controls.Add(ps);
+            form.Controls.Remove(this);
         }
-
-        public static void ChangeLives(int number)
+       
+        public void OnDeath()
         {
-            lives += number;
-        }
-
-        public void ReturnSpeeds()
-        {
-            if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
-            else { ball.xSpeed = BALLSPEED; }
-
-            if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
-            else { ball.ySpeed = BALLSPEED; }
-
-            paddle.speed = PADDLESPEED;
-        }
-
-        public static void ReturnPaddle()
-        {
-            paddle.width = PADDLESPEED;
+            ball.x = paddle.x + PADDLEWIDTH / 2 - ball.size /2;
+            ball.y = ballStartY;
+            balls[0].xSpeed = 0;
+            balls[0].ySpeed = 0;
         }
         #endregion
 
-
-
+        #region Levels and Scores
         public void LoadLevel(string level)
         {
             //creates variables and xml reader needed
@@ -621,6 +467,7 @@ namespace BrickBreaker
 
 
         }
+
         public void saveScore()
         {
             highscores.Add(score);
@@ -666,18 +513,45 @@ namespace BrickBreaker
             }
             reader.Close();
         }
+        #endregion
 
-
-
-
-        public static void GiveBBuck(int bigmonies)
+        #region change value functions
+        public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
         {
-            bbucks += bigmonies;
+            if (ball.xSpeed < 0) { ball.xSpeed -= xSpeed; }
+            else { ball.xSpeed += xSpeed; }
+
+            if (ball.ySpeed < 0) { ball.ySpeed -= ySpeed; }
+            else { ball.ySpeed += ySpeed; }
+
+            paddle.speed += paddleSpeed;
         }
-        //#endregion
 
+        public static void ChangePaddle(int width)
+        {
+            paddle.width += width;
+        }
 
+        public static void ChangeLives(int number)
+        {
+            lives += number;
+        }
+
+        public void ReturnSpeeds()
+        {
+            if (ball.xSpeed < 0) { ball.xSpeed = -BALLSPEED; }
+            else { ball.xSpeed = BALLSPEED; }
+
+            if (ball.ySpeed < 0) { ball.ySpeed = -BALLSPEED; }
+            else { ball.ySpeed = BALLSPEED; }
+
+            paddle.speed = PADDLESPEED;
+        }
+
+        public static void ReturnPaddle()
+        {
+            paddle.width = PADDLEWIDTH;
+        }
+        #endregion
     }
-
-
 }
