@@ -95,6 +95,12 @@
     <Compile Include="Screens\GameScreen.Designer.cs">
       <DependentUpon>GameScreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\twoPlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Screens\twoPlayer.Designer.cs">
+      <DependentUpon>twoPlayer.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
