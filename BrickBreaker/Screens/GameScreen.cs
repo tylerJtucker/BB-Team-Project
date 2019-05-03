@@ -21,15 +21,10 @@ namespace BrickBreaker
     {
         #region global values
         //player1 button control keys - DO NOT CHANGE
-
-
         Boolean leftArrowDown, rightArrowDown, pauseArrowDown, upArrowDown, onPaddle = true, aKeyDown, dKeyDown;
-
-
 
         // Game values
         static int lives;
-        int bricksBroken;
         int score;
         int b = 1;
         public static Boolean Twoplayer = false;
