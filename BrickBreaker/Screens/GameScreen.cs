@@ -21,34 +21,24 @@ namespace BrickBreaker
     {
         #region global values
         //player1 button control keys - DO NOT CHANGE
-
-
         Boolean leftArrowDown, rightArrowDown, pauseArrowDown, upArrowDown, onPaddle = true, aKeyDown, dKeyDown;
-
-
 
         // Game values
         static int lives;
-        int bricksBroken;
         int score;
         public static Boolean Twoplayer = false;
-
-
-
         int level = 1;
         int ballStartX, ballStartY, paddleStartX, paddleStartY, ballStartSpeedX = 0, ballStartSpeedY = -10;
         static int bbucks = 0;
 
-
-
         Random rng = new Random();
-
 
         // constants
         const int BALLSPEED = 6;
         const int PADDLESPEED = 8;
         const int PADDLEWIDTH = 80;
         public static int paddleHeight = 20;
+
         // Paddle and Ball objects
         static Paddle paddle;
         static Paddle paddle2;
@@ -56,29 +46,22 @@ namespace BrickBreaker
 
         // list of all blocks and paddles for current level
         List<Block> blocks = new List<Block>();
-
-
-
         //list for highscores
-        List<int> highscores = new List<int>();
-
+        public static List<int> highscores = new List<int>();
         List<Paddle> paddles = new List<Paddle>();
-
         public static List<Ball> balls = new List<Ball>();
         public static List<PowerUps> powerups = new List<PowerUps>();
 
-
-
-
-
         // Brushes
+        SolidBrush drawBrush = new SolidBrush(Color.Tan);
         SolidBrush paddleBrush = new SolidBrush(Color.White);
         SolidBrush ballBrush = new SolidBrush(Color.White);
-
         SolidBrush blockBrush = new SolidBrush(Color.Black);
         SolidBrush blockBrush2 = new SolidBrush(Color.White);
         SolidBrush shadowBrush = new SolidBrush(Color.LightGray);
         SolidBrush powerBrush = new SolidBrush(Color.White);
+
+        Font drawFont = new Font("Arial", 12);
 
         #endregion
 
@@ -86,20 +69,19 @@ namespace BrickBreaker
         {
             InitializeComponent();
             OnStart();
-
         }
-
 
         public void OnStart()
         {
             //set life counter
-
             lives = 3;
             level = 1;
 
+            //load score
+            //loadScore();
 
             //set all button presses to false.
-            leftArrowDown = rightArrowDown = false;
+            leftArrowDown = rightArrowDown = aKeyDown = dKeyDown = false;
 
             // setup starting paddle values and create paddle object
             int paddleWidth = 80;
@@ -149,16 +131,9 @@ namespace BrickBreaker
 
 
             // Creates a new ball
-
             int ballSize = 20;
             ball = new Ball(ballX, ballY, xSpeed, ySpeed, ballSize);
-
-
-            //loads current level
-
-            //LoadLevel("Resources/level5.xml");
-            loadScore();
-
+            
             //loads current level based on whether it's one or two player
             if (Twoplayer == false)
             {
@@ -167,9 +142,6 @@ namespace BrickBreaker
             else
             {
                 LoadLevel("Resources/twoplayerlevel1.xml");
-
-
-
             }
             // start the game engine loop
             gameTimer.Enabled = true;
@@ -383,7 +355,6 @@ namespace BrickBreaker
                 if (ball.BlockCollision(b) && b.hp <= 1)
                 {
                     blocks.Remove(b);
-                    bricksBroken++;
 
                     if (blocks.Count == 0 || lives == 0)
                     {
@@ -543,8 +514,6 @@ namespace BrickBreaker
 */
         public void OnEnd()
         {
-            score = bricksBroken * 50;
-
             // Goes to the game over screen
             Form form = this.FindForm();
             MenuScreen ps = new MenuScreen();
