@@ -38,13 +38,13 @@ namespace BrickBreaker
         const int PADDLESPEED = 8;
         const int PADDLEWIDTH = 80; const int PADDLEHEIGHT = 20;
         // Paddle and Ball objects
-        Paddle paddle; Ball ball;
+        public static Paddle paddle; public static Ball ball;
 
         // list of all blocks and paddles for current level
         List<Block> blocks = new List<Block>();
         public static List<int> highscores = new List<int>();
-        List<Paddle> paddles = new List<Paddle>();
-        List<Ball> balls = new List<Ball>();
+        public static List<Paddle> paddles = new List<Paddle>();
+        public static List<Ball> balls = new List<Ball>();
         List<PowerUps> powerups = new List<PowerUps>();
 
         // Brushes
@@ -55,7 +55,6 @@ namespace BrickBreaker
         SolidBrush blockBrush2 = new SolidBrush(Color.White);
         SolidBrush shadowBrush = new SolidBrush(Color.LightGray);
         SolidBrush powerBrush = new SolidBrush(Color.White);
-
         Font drawFont = new Font("Arial", 12);
 
         #endregion
@@ -86,11 +85,11 @@ namespace BrickBreaker
             ballStartY = this.Height - paddle.height - 85;
             int ballSize = 20;
             balls.Clear();
-            ball = new Ball(ballStartX, ballStartY, 0, 0, ballSize);
+            ball = new Ball (ballStartX, ballStartY, 0, 0, ballSize);
             balls.Add(ball);
 
             //load score
-            loadScore();
+            //loadScore();
             LoadLevel("Resources/level1.xml");
 
             // start the game engine loop
