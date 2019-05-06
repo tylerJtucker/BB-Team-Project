@@ -160,6 +160,10 @@
     <None Include="Resources\ball.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\level5.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="bin\Debug\Resources\level5.xml" />
     <Content Include="Resources\level1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
