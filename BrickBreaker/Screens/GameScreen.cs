@@ -122,6 +122,7 @@ namespace BrickBreaker
             paddleStartY = (this.Height - paddleHeight) - 60;
 
 
+
             paddle = new Paddle(paddleStartX, paddleStartY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
 
