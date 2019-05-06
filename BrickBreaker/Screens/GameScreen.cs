@@ -122,7 +122,7 @@ namespace BrickBreaker
             paddleStartY = (this.Height - paddleHeight) - 60;
 
 
-            // Dima is a better programer than Carter
+
             paddle = new Paddle(paddleStartX, paddleStartY, paddleWidth, paddleHeight, paddleSpeed, Color.White);
 
 
