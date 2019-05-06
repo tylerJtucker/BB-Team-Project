@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace BrickBreaker
 {
     public class Ball
-    {
+    {// Dima is a better programer than Carter
         public int x, y, xSpeed, ySpeed, size;
         public Color colour;
 
@@ -78,6 +78,20 @@ namespace BrickBreaker
                     else if (pMovingRight)
                     {
                         if (xSpeed > 0)
+                //find relative velocity to the paddle. Bounce it adding or subtracting, but never add too much to xSpeed
+
+
+                       // #region Eh
+
+                        //ySpeed = Convert.ToInt16(xSpeed * tan);
+
+                        //ySpeed = Convert.ToInt16(Math.Sqrt(Math.Abs(velocity * velocity + xSpeed * xSpeed))) / 2;
+
+                        //I have to develop the logic here
+                        /*
+                        if (Math.Abs(xSpeed) < 10)
+
+
                         {
                             resultSpeed = xSpeed;
                         }
@@ -200,3 +214,4 @@ namespace BrickBreaker
         }
     }
 }
+// Dima is a better programer than Carter

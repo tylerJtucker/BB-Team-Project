@@ -180,7 +180,7 @@ namespace BrickBreaker
         }
 
         private void GameScreen_KeyUp(object sender, KeyEventArgs e)
-        {
+        {// Dima is a better programer than Carter
             //player 1 and 2 button releases
             switch (e.KeyCode)
             {
@@ -217,8 +217,6 @@ namespace BrickBreaker
 
             // Move the paddle
             // if (upArrowDown && onPaddle)
-
-
 
             // move P1 Paddle
             
@@ -337,6 +335,7 @@ namespace BrickBreaker
                     OnEnd();
                 }
             }
+
             /*
             else if (b.BottomCollision(this))
             {
@@ -418,11 +417,92 @@ namespace BrickBreaker
             //redraw the screen
             Refresh();
         }
+
         /* else
 
          {
              ball.WallCollision(this);
          }
+
+         // Check for collision of ball with paddles, (incl. paddle movement)
+         foreach (Paddle p in paddles)
+         {
+             ball.PaddleCollision(p, leftArrowDown, rightArrowDown);
+         }
+
+         // Check if ball has collided with any blocks
+         foreach (Block b in blocks)
+         {// trying to get it where if it's less than 1hp, go oppsite direction
+             if (ball.BlockCollision(b) && b.hp <= 1)
+             {
+                 blocks.Remove(b);
+                 bricksBroken++;
+
+                 if (blocks.Count == 0 || lives == 0)
+                 {
+                     if (lives == 0)
+                     {
+                         gameTimer.Enabled = false;
+                         OnEnd();
+                     }
+
+
+
+                     LoadLevels();  
+                 }   
+
+                 break;
+
+                 //removing block logic
+                 b.hp--;
+                 if (b.hp == 0)
+                 {
+                     blocks.Remove(b);
+                     score += 50;
+                     if (rng.Next(1, 9) == 7)
+                     powerups.Add(randomGenBoi(b.x, b.y));
+                     break;
+                 }
+
+                 //if all blocks are broken go to next level
+                 if (blocks.Count == 0)
+                 {
+                     NextLevel();
+
+                 }
+
+                 break;
+             }
+         }
+
+         foreach (PowerUps p in powerups)
+         {
+             p.Move();
+             if (p.y > this.Height)
+             {
+                 powerups.Remove(p);
+                 break;
+             }
+         }
+
+         foreach (PowerUps p in powerups)
+         {
+             if (p.Collision(paddle))
+             {
+                 //do some weird shit
+                 powerups.Remove(p);
+                 break;
+             }
+         }
+
+         //redraw the screen
+         Refresh();
+     }
+
+
+
+
+
          */
          // Check for collision of ball with paddles, (incl. paddle movement)
          
@@ -431,11 +511,16 @@ namespace BrickBreaker
 
 
 /*
+
      public void LoadLevels()
      {       // Loads diffrent levels when there are no more blocks and player is alive
          if (lives > 0 && blocks.Count == 0 && Twoplayer == false)
          {
+
+             b++;
+
              level++;
+
              switch (b)
              {
                  case 2:
@@ -512,6 +597,18 @@ namespace BrickBreaker
 
      }
 
+
+
+     public void OnEnd()
+     {
+         score = bricksBroken * 50;
+
+         // Goes to the game over screen
+         Form form = this.FindForm();
+         MenuScreen ps = new MenuScreen();
+
+         ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
+
 */
         public void OnEnd()
         {
@@ -521,6 +618,34 @@ namespace BrickBreaker
 
             ps.Location = new Point((form.Width - ps.Width) / 2, (form.Height - ps.Height) / 2);
 
+         form.Controls.Add(ps);
+         form.Controls.Remove(this);
+         saveScore();
+     }
+
+     public void GameScreen_Paint(object sender, PaintEventArgs e)
+     {
+
+
+           // level++;
+
+
+        // Draws one paddle in Single Player
+        if(Twoplayer == false)
+         {               
+
+             paddleBrush.Color = paddle.colour;
+             //e.Graphics.FillRectangle(paddleBrush, paddle.x, paddle.y, paddle.width, paddle.height);
+         }
+         //Draws two paddle in two player
+         if (Twoplayer == true)
+         {
+             foreach (Paddle p in paddles)
+             {
+                 paddleBrush.Color = p.colour;
+                 e.Graphics.FillRectangle(paddleBrush, p.x, p.y, p.width, p.height);
+             }
+
 
             form.Controls.Add(ps);
             form.Controls.Remove(this);
@@ -528,6 +653,15 @@ namespace BrickBreaker
             saveScore();
         }
 
+
+         } this wont work! please move any drawing into paint method
+         */
+        // Dima is a better programer than Carter
+
+
+
+        gameTimer.Enabled = false;
+                level++;
 
         /*
 
@@ -723,9 +857,10 @@ namespace BrickBreaker
 
 
 
-
+// Dima is a better programer than Carter
 
         #region change value functions
+
 
         public static void ChangeSpeeds(int xSpeed, int ySpeed, int paddleSpeed)
         {
@@ -850,16 +985,24 @@ namespace BrickBreaker
             reader.Close();
         }
 
+// Dima is a better programer than Carter
+#endregion
+
+
+public static void GiveBBuck (int bigmonies)
+
+
 
 
 
         public static void GiveBBuck(int bigmonies)
+
         {
             bbucks += bigmonies;
         }
         //#endregion
 
-
+// Dima is a better programer than Carter
     }
 
 
