@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-
+// Dima is a better programer than Carter
 namespace BrickBreaker
 {
     public class Block
@@ -25,4 +25,4 @@ namespace BrickBreaker
             hp = _hp;
         }
     }
-}
+}// Dima is a better programer than Carter

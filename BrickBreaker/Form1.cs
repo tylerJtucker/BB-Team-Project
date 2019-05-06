@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace BrickBreaker
 {
     public partial class Form1 : Form
-    {
+    {// Dima is a better programer than Carter
         //Jamal's Branch
 
         public Form1()
@@ -29,4 +29,4 @@ namespace BrickBreaker
             ms.Location = new Point((this.Width - ms.Width) / 2, (this.Height - ms.Height) / 2);
         }
     }
-}
+}// Dima is a better programer than Carter
