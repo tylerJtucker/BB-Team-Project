@@ -74,6 +74,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Screens\highscoreScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Screens\highscoreScreen.Designer.cs">
+      <DependentUpon>highscoreScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\PauseScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\highscoreScreen.resx">
+      <DependentUpon>highscoreScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\PauseScreen.resx">
       <DependentUpon>PauseScreen.cs</DependentUpon>
